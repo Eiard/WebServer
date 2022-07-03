@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ytz.web.mapper.OrdersMapper">
+
+    <resultMap id="BaseResultMap" type="com.ytz.web.domain.Orders">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="order_id" column="order_id" jdbcType="VARCHAR"/>
+            <result property="order_type" column="order_type" jdbcType="INTEGER"/>
+            <result property="start_point" column="start_point" jdbcType="INTEGER"/>
+            <result property="start_address" column="start_address" jdbcType="VARCHAR"/>
+            <result property="end_point" column="end_point" jdbcType="INTEGER"/>
+            <result property="end_address" column="end_address" jdbcType="VARCHAR"/>
+            <result property="consignor" column="consignor" jdbcType="VARCHAR"/>
+            <result property="consignor_phone" column="consignor_phone" jdbcType="VARCHAR"/>
+            <result property="recipient" column="recipient" jdbcType="VARCHAR"/>
+            <result property="recipient_phone" column="recipient_phone" jdbcType="VARCHAR"/>
+            <result property="recipient_address" column="recipient_address" jdbcType="VARCHAR"/>
+            <result property="notes" column="notes" jdbcType="VARCHAR"/>
+            <result property="order_status" column="order_status" jdbcType="TINYINT"/>
+            <result property="sender_id" column="sender_id" jdbcType="INTEGER"/>
+            <result property="sender_name" column="sender_name" jdbcType="VARCHAR"/>
+            <result property="sender_phone" column="sender_phone" jdbcType="VARCHAR"/>
+            <result property="is_delete" column="is_delete" jdbcType="TINYINT"/>
+            <result property="create_date" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="update_date" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_id,order_type,
+        start_point,start_address,end_point,
+        end_address,consignor,consignor_phone,
+        recipient,recipient_phone,recipient_address,
+        notes,order_status,sender_id,
+        sender_name,sender_phone,is_delete,
+        create_date,update_date
+    </sql>
+</mapper>
