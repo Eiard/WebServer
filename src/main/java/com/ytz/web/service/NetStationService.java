@@ -1,8 +1,8 @@
 package com.ytz.web.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.Enum.service.NetStationServiceEnum;
 import com.ytz.web.domain.NetStation;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * -*- coding:utf-8 -*-
@@ -19,13 +19,18 @@ public interface NetStationService extends IService<NetStation> {
 
     /**
      * @MethodName: Login
-     * @Description: TODO
+     * @Description: DONE : 实现网点管理员登录判断
      * @Author: 30671
-     * @date: 2022/7/4 
-     * @param: adminUsername
-     * @param: adminPassword
+     * @date: 2022/7/4
+     * @param: adminUsername  账号
+     * @param: adminPassword  密码
      * @return: com.ytz.web.Enum.service.NetStationServiceEnum
      */
     NetStationServiceEnum login(String adminUsername, String adminPassword);
+
+
+    //NetStationServiceEnum sign();
+
+
 }
 

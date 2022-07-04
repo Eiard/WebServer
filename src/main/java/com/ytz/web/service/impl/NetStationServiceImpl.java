@@ -1,6 +1,6 @@
 package com.ytz.web.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.Enum.service.NetStationServiceEnum;
 import com.ytz.web.domain.NetStation;
@@ -8,44 +8,41 @@ import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.service.NetStationService;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 
 /**
- * @author 30671
- * @description 针对表【net_station】的数据库操作Service实现
- * @createDate 2022-07-04 19:51:46
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.service.impl
+ * @className: NetStationServiceImpl
+ * @author: 30671
+ * @description: TODO : 针对表【net_station】的数据库操作Service
+ * @date: 2022/7/4
+ * @version: 1.0
  */
 @Service
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
 
-    @Resource
-    private NetStationMapper netStationMapper;
-
     @Override
     public NetStationServiceEnum login(String adminUsername, String adminPassword) {
 
-        LambdaQueryWrapper<NetStation> wrapper = new LambdaQueryWrapper();
-        wrapper.eq(NetStation::getAdminName, adminUsername);
+        QueryWrapper<NetStation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("is_pass").eq("admin_username", adminUsername).eq("admin_password", adminPassword);
 
-        if (wrapper.isEmptyOfEntity()) {
-            // 账号不存在
+        NetStation netStation = getOne(queryWrapper);
+
+        // 账号和密码有误
+        if (netStation == null) {
             return NetStationServiceEnum.LOGIN_FAILED;
         }
-
-        NetStation netStation = baseMapper.selectOne(wrapper);
-
+        // 未审核
         if (netStation.getIsPass() == 0) {
-            // 未审核
             return NetStationServiceEnum.LOGIN_UNVERIFIED;
         }
 
-        if (netStation.getAdminPassword().equals(adminPassword)) {
-            // 登陆成功
-            return NetStationServiceEnum.LOGIN_SUCCESS;
-        }
-        // 密码错误
-        return NetStationServiceEnum.LOGIN_FAILED;
+        // 登录成功
+        return NetStationServiceEnum.LOGIN_SUCCESS;
     }
 
 
