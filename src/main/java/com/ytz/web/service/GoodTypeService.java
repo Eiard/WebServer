@@ -4,10 +4,16 @@ import com.ytz.web.domain.GoodType;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
-* @author 30671
-* @description 针对表【good_type】的数据库操作Service
-* @createDate 2022-07-04 19:51:46
-*/
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.domain
+ * @className: GoodTypeService
+ * @author: 30671
+ * @description: TODO : 针对表【good_type】的数据库操作Service
+ * @date: 2022/7/4
+ * @version: 1.0
+ */
 public interface GoodTypeService extends IService<GoodType> {
 
 }
