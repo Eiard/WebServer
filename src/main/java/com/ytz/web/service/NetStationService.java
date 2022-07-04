@@ -1,5 +1,6 @@
 package com.ytz.web.service;
 
+import com.ytz.web.Enum.service.NetStationServiceEnum;
 import com.ytz.web.domain.NetStation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,4 +17,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface NetStationService extends IService<NetStation> {
 
+    /**
+     * @MethodName: Login
+     * @Description: TODO
+     * @Author: 30671
+     * @date: 2022/7/4 
+     * @param: adminUsername
+     * @param: adminPassword
+     * @return: com.ytz.web.Enum.service.NetStationServiceEnum
+     */
+    NetStationServiceEnum login(String adminUsername, String adminPassword);
 }
+

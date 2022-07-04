@@ -2,6 +2,7 @@ package com.ytz.web.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ytz.web.domain.EmployeePosition;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * -*- coding:utf-8 -*-
@@ -15,6 +16,7 @@ import com.ytz.web.domain.EmployeePosition;
  * @Entity com.ytz.web.domain.EmployeePosition
  * @version: 1.0
  */
+@Mapper
 public interface EmployeePositionMapper extends BaseMapper<EmployeePosition> {
 
 }

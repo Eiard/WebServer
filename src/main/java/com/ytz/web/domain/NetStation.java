@@ -25,8 +25,6 @@ import java.time.LocalDateTime;
  */
 @TableName(value = "net_station")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class NetStation implements Serializable {
     /**
      * 网点ID 等价于 网点管理员ID

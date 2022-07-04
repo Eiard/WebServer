@@ -25,8 +25,6 @@ import java.time.LocalDateTime;
  */
 @TableName(value = "user")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements Serializable {
     /**
      * 用户ID

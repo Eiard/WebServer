@@ -2,6 +2,7 @@ package com.ytz.web.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ytz.web.domain.GoodType;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * -*- coding:utf-8 -*-
@@ -15,6 +16,7 @@ import com.ytz.web.domain.GoodType;
  * @Entity com.ytz.web.domain.GoodType
  * @version: 1.0
  */
+@Mapper
 public interface GoodTypeMapper extends BaseMapper<GoodType> {
 
 }

@@ -1,10 +1,13 @@
 package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ytz.web.Enum.service.NetStationServiceEnum;
 import com.ytz.web.domain.EmployeePosition;
-import com.ytz.web.service.EmployeePositionService;
 import com.ytz.web.mapper.EmployeePositionMapper;
+import com.ytz.web.service.EmployeePositionService;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -20,7 +23,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EmployeePositionServiceImpl extends ServiceImpl<EmployeePositionMapper, EmployeePosition>
-    implements EmployeePositionService{
+        implements EmployeePositionService {
+
+
 
 }
 

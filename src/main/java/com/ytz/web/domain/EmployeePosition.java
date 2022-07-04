@@ -25,8 +25,6 @@ import lombok.NoArgsConstructor;
  */
 @TableName(value ="employee_position")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EmployeePosition implements Serializable {
     /**
      *  员工职位ID

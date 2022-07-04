@@ -25,8 +25,6 @@ import lombok.NoArgsConstructor;
  */
 @TableName(value ="employee")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Employee implements Serializable {
     /**
      * 员工工号

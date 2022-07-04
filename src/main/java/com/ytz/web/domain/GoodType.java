@@ -25,8 +25,6 @@ import java.time.LocalDateTime;
  */
 @TableName(value = "good_type")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class GoodType implements Serializable {
     /**
      * 货物类型Id

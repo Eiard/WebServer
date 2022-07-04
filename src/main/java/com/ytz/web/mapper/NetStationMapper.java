@@ -2,6 +2,7 @@ package com.ytz.web.mapper;
 
 import com.ytz.web.domain.NetStation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * -*- coding:utf-8 -*-
@@ -15,6 +16,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @Entity com.ytz.web.domain.NetStation
  * @version: 1.0
  */
+@Mapper
 public interface NetStationMapper extends BaseMapper<NetStation> {
 
 }

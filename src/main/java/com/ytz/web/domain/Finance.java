@@ -25,8 +25,6 @@ import lombok.NoArgsConstructor;
  */
 @TableName(value ="finance")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Finance implements Serializable {
     /**
      * 员工ID
