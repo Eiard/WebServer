@@ -13,4 +13,17 @@ package com.ytz.web.Enum.service;
  */
 
 public enum NetStationServiceEnum {
+    /**
+     * 登录状态
+     *      成功
+     *      失败
+     */
+    LOGIN_SUCCESS,
+    LOGIN_FAILED,
+    /**
+     * 修改状态
+     *      成功
+     *      失败
+     */
+
 }
