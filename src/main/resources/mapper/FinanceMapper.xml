@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ytz.web.mapper.FinanceMapper">
+
+    <resultMap id="BaseResultMap" type="com.ytz.web.domain.Finance">
+            <result property="employeeId" column="employee_id" jdbcType="INTEGER"/>
+            <result property="employeeName" column="employee_name" jdbcType="VARCHAR"/>
+            <result property="salary" column="salary" jdbcType="DOUBLE"/>
+            <result property="orderAmount" column="order_amount" jdbcType="INTEGER"/>
+            <result property="totalSalary" column="total_salary" jdbcType="DOUBLE"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        employee_id,employee_name,salary,
+        order_amount,total_salary,create_date,
+        update_date
+    </sql>
+</mapper>

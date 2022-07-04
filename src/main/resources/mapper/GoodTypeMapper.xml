@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ytz.web.mapper.GoodTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.ytz.web.domain.GoodType">
+            <id property="typeId" column="type_id" jdbcType="INTEGER"/>
+            <result property="goodType" column="good_type" jdbcType="VARCHAR"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        type_id,good_type,create_date,
+        update_date
+    </sql>
+</mapper>
