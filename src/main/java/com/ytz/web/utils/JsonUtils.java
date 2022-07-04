@@ -22,7 +22,7 @@ import java.util.Map;
  * @version: 1.0
  */
 
-public class FastJsonUtils {
+public class JsonUtils {
     private static final SerializeConfig config;
     /**
      * 输出空值字段
@@ -50,7 +50,7 @@ public class FastJsonUtils {
     /**
      * 避免实例化
      */
-    private FastJsonUtils() {
+    private JsonUtils() {
 
     }
 

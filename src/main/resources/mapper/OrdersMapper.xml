@@ -5,13 +5,15 @@
 <mapper namespace="com.ytz.web.mapper.OrdersMapper">
 
     <resultMap id="BaseResultMap" type="com.ytz.web.domain.Orders">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="order_id" column="order_id" jdbcType="VARCHAR"/>
-            <result property="order_type" column="order_type" jdbcType="INTEGER"/>
+            <id property="order_id" column="order_id" jdbcType="INTEGER"/>
+            <result property="order_number" column="order_number" jdbcType="VARCHAR"/>
             <result property="start_point" column="start_point" jdbcType="INTEGER"/>
             <result property="start_address" column="start_address" jdbcType="VARCHAR"/>
             <result property="end_point" column="end_point" jdbcType="INTEGER"/>
             <result property="end_address" column="end_address" jdbcType="VARCHAR"/>
+            <result property="good_weight" column="good_weight" jdbcType="DOUBLE"/>
+            <result property="good_type" column="good_type" jdbcType="INTEGER"/>
+            <result property="order_price" column="order_price" jdbcType="DOUBLE"/>
             <result property="consignor" column="consignor" jdbcType="VARCHAR"/>
             <result property="consignor_phone" column="consignor_phone" jdbcType="VARCHAR"/>
             <result property="recipient" column="recipient" jdbcType="VARCHAR"/>
@@ -22,18 +24,19 @@
             <result property="sender_id" column="sender_id" jdbcType="INTEGER"/>
             <result property="sender_name" column="sender_name" jdbcType="VARCHAR"/>
             <result property="sender_phone" column="sender_phone" jdbcType="VARCHAR"/>
-            <result property="is_delete" column="is_delete" jdbcType="TINYINT"/>
+            <result property="is_deleted" column="is_deleted" jdbcType="TINYINT"/>
             <result property="create_date" column="create_date" jdbcType="TIMESTAMP"/>
             <result property="update_date" column="update_date" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,order_id,order_type,
-        start_point,start_address,end_point,
-        end_address,consignor,consignor_phone,
-        recipient,recipient_phone,recipient_address,
-        notes,order_status,sender_id,
-        sender_name,sender_phone,is_delete,
-        create_date,update_date
+        order_id,order_number,start_point,
+        start_address,end_point,end_address,
+        good_weight,good_type,order_price,
+        consignor,consignor_phone,recipient,
+        recipient_phone,recipient_address,notes,
+        order_status,sender_id,sender_name,
+        sender_phone,is_deleted,create_date,
+        update_date
     </sql>
 </mapper>

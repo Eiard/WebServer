@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
 * @author 30671
 * @description 针对表【orders】的数据库操作Service
-* @createDate 2022-07-03 00:19:43
+* @createDate 2022-07-04 19:01:36
 */
 public interface OrdersService extends IService<Orders> {
 
