@@ -1,14 +1,20 @@
 package com.ytz.web.mapper;
 
-import com.ytz.web.domain.GoodType;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ytz.web.domain.GoodType;
 
 /**
-* @author 30671
-* @description 针对表【good_type】的数据库操作Mapper
-* @createDate 2022-07-04 19:51:46
-* @Entity com.ytz.web.domain.GoodType
-*/
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.mapper
+ * @className: FinanceMapper
+ * @author: 30671
+ * @description: DONE : 针对表【good_type】的数据库操作Mapper
+ * @date: 2022/7/4
+ * @Entity com.ytz.web.domain.GoodType
+ * @version: 1.0
+ */
 public interface GoodTypeMapper extends BaseMapper<GoodType> {
 
 }

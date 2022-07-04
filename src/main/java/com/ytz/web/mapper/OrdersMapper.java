@@ -4,11 +4,17 @@ import com.ytz.web.domain.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
-* @author 30671
-* @description 针对表【orders】的数据库操作Mapper
-* @createDate 2022-07-04 20:06:47
-* @Entity com.ytz.web.domain.Orders
-*/
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.mapper
+ * @className: FinanceMapper
+ * @author: 30671
+ * @description: DONE : 针对表【orders】的数据库操作Mapper
+ * @date: 2022/7/4
+ * @Entity com.ytz.web.domain.Orders
+ * @version: 1.0
+ */
 public interface OrdersMapper extends BaseMapper<Orders> {
 
 }
