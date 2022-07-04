@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -14,6 +16,8 @@ import lombok.Data;
  */
 @TableName(value ="net_station")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class NetStation implements Serializable {
     /**
      * 网点ID 等价于 网点管理员ID

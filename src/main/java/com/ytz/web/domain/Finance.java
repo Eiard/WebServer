@@ -6,14 +6,26 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * 
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.domain
+ * @className: Finance
+ * @author: 30671
+ * @description: DONE : 员工实例化对象
+ * @date: 2022/7/4
  * @TableName finance
+ * @version: 1.0
  */
 @TableName(value ="finance")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Finance implements Serializable {
     /**
      * 员工ID

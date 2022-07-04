@@ -14,6 +14,8 @@ import lombok.Data;
  */
 @TableName(value ="root")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Root implements Serializable {
     /**
      * 系统管理员ID(自动)

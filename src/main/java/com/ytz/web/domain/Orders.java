@@ -14,6 +14,8 @@ import lombok.Data;
  */
 @TableName(value ="orders")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Orders implements Serializable {
     /**
      * 主键id

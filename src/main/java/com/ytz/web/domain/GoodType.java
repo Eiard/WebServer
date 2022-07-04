@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -14,6 +16,8 @@ import lombok.Data;
  */
 @TableName(value ="good_type")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class GoodType implements Serializable {
     /**
      * 货物类型Id
