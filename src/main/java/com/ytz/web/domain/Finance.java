@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * -*- coding:utf-8 -*-
@@ -17,7 +18,7 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: Finance
  * @author: 30671
- * @description: DONE : 员工实例化对象
+ * @description: DONE : 工资
  * @date: 2022/7/4
  * @TableName finance
  * @version: 1.0

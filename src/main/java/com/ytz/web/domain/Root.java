@@ -6,13 +6,24 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.domain
+ * @className: Root
+ * @author: 30671
+ * @description: DONE : 系统管理员
+ * @date: 2022/7/4
  * @TableName root
+ * @version: 1.0
  */
-@TableName(value ="root")
+@TableName(value = "root")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -87,14 +98,14 @@ public class Root implements Serializable {
         }
         Root other = (Root) that;
         return (this.getRootId() == null ? other.getRootId() == null : this.getRootId().equals(other.getRootId()))
-            && (this.getRootName() == null ? other.getRootName() == null : this.getRootName().equals(other.getRootName()))
-            && (this.getRootUsername() == null ? other.getRootUsername() == null : this.getRootUsername().equals(other.getRootUsername()))
-            && (this.getRootPassword() == null ? other.getRootPassword() == null : this.getRootPassword().equals(other.getRootPassword()))
-            && (this.getRootPhone() == null ? other.getRootPhone() == null : this.getRootPhone().equals(other.getRootPhone()))
-            && (this.getRootSex() == null ? other.getRootSex() == null : this.getRootSex().equals(other.getRootSex()))
-            && (this.getRootType() == null ? other.getRootType() == null : this.getRootType().equals(other.getRootType()))
-            && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
-            && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
+                && (this.getRootName() == null ? other.getRootName() == null : this.getRootName().equals(other.getRootName()))
+                && (this.getRootUsername() == null ? other.getRootUsername() == null : this.getRootUsername().equals(other.getRootUsername()))
+                && (this.getRootPassword() == null ? other.getRootPassword() == null : this.getRootPassword().equals(other.getRootPassword()))
+                && (this.getRootPhone() == null ? other.getRootPhone() == null : this.getRootPhone().equals(other.getRootPhone()))
+                && (this.getRootSex() == null ? other.getRootSex() == null : this.getRootSex().equals(other.getRootSex()))
+                && (this.getRootType() == null ? other.getRootType() == null : this.getRootType().equals(other.getRootType()))
+                && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
+                && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
     }
 
     @Override

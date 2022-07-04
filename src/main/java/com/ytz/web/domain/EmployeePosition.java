@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  * @package: com.ytz.web.domain
  * @className: EmployeePosition
  * @author: 30671
- * @description: DONE : 员工实例化对象
+ * @description: DONE : 员工类别
  * @date: 2022/7/4
  * @TableName employee_position
  * @version: 1.0
