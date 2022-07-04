@@ -7,7 +7,7 @@ import com.ytz.web.domain.Finance;
  * -*- coding:utf-8 -*-
  *
  * @projectName: web
- * @package: com.ytz.web.domain
+ * @package: com.ytz.web.service
  * @className: FinanceService
  * @author: 30671
  * @description: TODO : 针对表【finance】的数据库操作Service

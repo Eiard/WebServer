@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * -*- coding:utf-8 -*-
  *
  * @projectName: web
- * @package: com.ytz.web.domain
+ * @package: com.ytz.web.service
  * @className: GoodTypeService
  * @author: 30671
  * @description: TODO : 针对表【good_type】的数据库操作Service
