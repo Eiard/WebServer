@@ -1,8 +1,6 @@
 package com.ytz.web;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -12,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @package: ytz.team.web
  * @className: WebApplication
  * @author: 30671
- * @description: DONE
+ * @description: DONE : SpringBoot Main Class
  * @date: 2022/6/28
  * @version: 1.0
  */
