@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  *
  * @projectName: web
  * @package: com.ytz.web.mapper
- * @className: FinanceMapper
+ * @className: NetStationMapper
  * @author: 30671
  * @description: DONE : 针对表【net_station】的数据库操作Mapper
  * @date: 2022/7/4

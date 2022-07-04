@@ -8,7 +8,7 @@ import com.ytz.web.domain.GoodType;
  *
  * @projectName: web
  * @package: com.ytz.web.mapper
- * @className: FinanceMapper
+ * @className: GoodTypeMapper
  * @author: 30671
  * @description: DONE : 针对表【good_type】的数据库操作Mapper
  * @date: 2022/7/4

@@ -8,7 +8,7 @@ import com.ytz.web.domain.User;
  *
  * @projectName: web
  * @package: com.ytz.web.mapper
- * @className: FinanceMapper
+ * @className: UserMapper
  * @author: 30671
  * @description: DONE : 针对表【user】的数据库操作Mapper
  * @date: 2022/7/4

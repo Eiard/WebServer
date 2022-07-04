@@ -8,7 +8,7 @@ import com.ytz.web.domain.EmployeePosition;
  *
  * @projectName: web
  * @package: com.ytz.web.mapper
- * @className: EmployeeMapper
+ * @className: EmployeePositionMapper
  * @author: 30671
  * @description: DONE : 针对表【employee_position】的数据库操作Mapper
  * @date: 2022/7/4
