@@ -3,6 +3,7 @@ package com.ytz.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.Enum.service.NetStationServiceEnum;
 import com.ytz.web.domain.NetStation;
+import org.springframework.stereotype.Repository;
 
 /**
  * -*- coding:utf-8 -*-

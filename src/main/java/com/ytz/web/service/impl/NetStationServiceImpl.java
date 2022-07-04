@@ -6,6 +6,7 @@ import com.ytz.web.Enum.service.NetStationServiceEnum;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.service.NetStationService;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
  * @version: 1.0
  */
 @Service
+@Repository("netStationServiceImpl")
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
 
