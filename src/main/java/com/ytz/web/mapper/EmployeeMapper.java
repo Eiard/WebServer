@@ -3,6 +3,7 @@ package com.ytz.web.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ytz.web.domain.Employee;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * -*- coding:utf-8 -*-
