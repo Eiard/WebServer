@@ -62,8 +62,7 @@ public class NetStationController {
     }
 
     @PostMapping("/update")
-    String update(@RequestBody String netStation){
-
+    String update(@RequestBody String netStation) {
 
         return new ResultMap().toJson();
     }
