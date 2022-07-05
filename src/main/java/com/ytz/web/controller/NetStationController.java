@@ -1,13 +1,11 @@
 package com.ytz.web.controller;
 
+import com.alibaba.fastjson.TypeReference;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -31,19 +29,15 @@ public class NetStationController {
 
     @PostMapping("/login")
     String login(@RequestParam String adminUsername, @RequestParam String adminPassword) {
+
         return new ResultMap(netStationService.login(adminUsername, adminPassword)).toJson();
     }
 
     @PostMapping("/sign")
-    String sign(@RequestParam NetStation netStation) {
-        return new ResultMap(netStationService.sign(netStation)).toJson();
-    }
+    String sign(@RequestBody String netStation) {
 
-    @PostMapping("/tx")
-    String tx(){
-
-        System.out.println(JsonUtils.objectToJson(netStationService.getById(1)));
-        return JsonUtils.objectToJson(netStationService.getById(1));
+        return new ResultMap(netStationService.sign(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+        }))).toJson();
     }
 
 }
