@@ -1,8 +1,7 @@
 package com.ytz.web.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ytz.web.Enum.service.NetStationServiceEnum;
+import com.ytz.web.Enum.service.NetStationEnum;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.service.NetStationService;
@@ -27,22 +26,22 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         implements NetStationService {
 
     @Override
-    public NetStationServiceEnum login(String adminUsername, String adminPassword) {
+    public NetStationEnum login(String adminUsername, String adminPassword) {
 
         lambdaQuery().select(NetStation::getIsPass).eq(NetStation::getAdminName, adminUsername).eq(NetStation::getAdminName, adminPassword);
         NetStation netStation = lambdaQuery().one();
 
         // 账号和密码有误
         if (netStation == null) {
-            return NetStationServiceEnum.LOGIN_FAILED;
+            return NetStationEnum.LOGIN_FAILED;
         }
         // 未审核
         if (netStation.getIsPass() == 0) {
-            return NetStationServiceEnum.LOGIN_UNVERIFIED;
+            return NetStationEnum.LOGIN_UNVERIFIED;
         }
 
         // 登录成功
-        return NetStationServiceEnum.LOGIN_SUCCESS;
+        return NetStationEnum.LOGIN_SUCCESS;
     }
 
 

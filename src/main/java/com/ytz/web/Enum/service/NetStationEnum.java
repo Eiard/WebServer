@@ -12,7 +12,7 @@ package com.ytz.web.Enum.service;
  * @version: 1.0
  */
 
-public enum NetStationServiceEnum {
+public enum NetStationEnum {
     /**
      * 登录状态
      *      成功:

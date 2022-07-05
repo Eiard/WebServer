@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
  * @TableName user
  * @version: 1.0
  */
+@Deprecated
 @TableName(value = "user")
 @Data
 public class User implements Serializable {

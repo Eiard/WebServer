@@ -1,9 +1,8 @@
 package com.ytz.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ytz.web.Enum.service.NetStationServiceEnum;
+import com.ytz.web.Enum.service.NetStationEnum;
 import com.ytz.web.domain.NetStation;
-import org.springframework.stereotype.Repository;
 
 /**
  * -*- coding:utf-8 -*-
@@ -27,7 +26,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: adminPassword  密码
      * @return: com.ytz.web.Enum.service.NetStationServiceEnum
      */
-    NetStationServiceEnum login(String adminUsername, String adminPassword);
+    NetStationEnum login(String adminUsername, String adminPassword);
 
 
     //NetStationServiceEnum sign();
