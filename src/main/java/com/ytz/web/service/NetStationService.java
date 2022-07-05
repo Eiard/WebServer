@@ -41,6 +41,16 @@ public interface NetStationService extends IService<NetStation> {
     NetStationEnum sign(NetStation netStation);
 
     /**
+     * @MethodName: update
+     * @Description: DONE : 账号更新信息
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: netStation  网点信息
+     * @return: com.ytz.web.model.NetStationServiceEnum
+     */
+    public NetStationEnum update(NetStation netStation);
+
+    /**
      * @MethodName: queryByIdNameAddress
      * @Description: DONE : 通过 stationId stationName stationAddress 模糊查询
      * @Author: 30671

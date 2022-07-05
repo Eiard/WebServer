@@ -62,6 +62,12 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
+    public NetStationEnum update(NetStation netStation) {
+
+        return NetStationEnum.CHANGE_SUCCESS;
+    }
+
+    @Override
     public List<NetStation> queryByIdNameAddress(Integer stationId, String stationName, String stationAddress) {
         if (stationId == null) {
             return lambdaQuery().like(NetStation::getStationName, stationName).like(NetStation::getStationAddress, stationAddress).list();
