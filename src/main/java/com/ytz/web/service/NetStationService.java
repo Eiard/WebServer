@@ -33,11 +33,10 @@ public interface NetStationService extends IService<NetStation> {
      * @Description: TODO : 账号预注册
      * @Author: 30671
      * @date: 2022/7/4
-     * @param: adminUsername  账号
-     * @param: adminPassword  密码
+     * @param: netStation  网点信息
      * @return: com.ytz.web.Enum.service.NetStationServiceEnum
      */
-    NetStationEnum sign();
+    public NetStationEnum sign(NetStation netStation);
 
 
 }

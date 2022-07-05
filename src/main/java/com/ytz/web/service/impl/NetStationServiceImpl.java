@@ -42,8 +42,18 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public NetStationEnum sign() {
-        return null;
+    public NetStationEnum sign(NetStation netStation) {
+
+
+
+
+
+
+
+
+
+
+        return NetStationEnum.PRE_SIGN_SUCCESS;
     }
 
 }
