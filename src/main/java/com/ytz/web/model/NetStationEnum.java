@@ -41,7 +41,7 @@ public enum NetStationEnum {
      * 修改网点信息状态
      *      成功:
      *          信息修改成功
-     *      失败
+     *      失败:
      *          电话号码已被使用
      */
     CHANGE_SUCCESS,
@@ -54,9 +54,21 @@ public enum NetStationEnum {
      */
     LOGOFF_REQUEST,
 
+    /**
+     * 查询网点信息
+     *      成功:
+     *          查询成功
+     *      失败:
+     *          Id int 格式问题
+     */
+    QUERY_SUCCESS,
+
+
 
     /**
      * 未知错误
+     * 格式错误
      */
     UNKNOWN_ERROR,
+    FORMAT_ERROR,
 }

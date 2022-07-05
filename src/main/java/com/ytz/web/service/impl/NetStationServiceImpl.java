@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -53,11 +54,19 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         if (adminUsernameIsExist(netStation.getAdminUsername())) {
             return NetStationEnum.PRE_SIGN_USERNAME_USED;
         }
-        if (commonService.phoneIsExist(netStation.getAdminPhone())){
+        if (commonService.phoneIsExist(netStation.getAdminPhone())) {
             return NetStationEnum.PRE_SIGN_PHONE_USED;
         }
         save(netStation);
         return NetStationEnum.PRE_SIGN_SUCCESS;
+    }
+
+    @Override
+    public List<NetStation> queryByIdNameAddress(Integer stationId, String stationName, String stationAddress) {
+        if (stationId == null) {
+            return lambdaQuery().like(NetStation::getStationName, stationName).like(NetStation::getStationAddress, stationAddress).list();
+        }
+        return lambdaQuery().eq(NetStation::getStationId, stationId).list();
     }
 
     @Override

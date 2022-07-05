@@ -2,6 +2,7 @@ package com.ytz.web.controller;
 
 import com.alibaba.fastjson.TypeReference;
 import com.ytz.web.domain.NetStation;
+import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
@@ -40,9 +41,23 @@ public class NetStationController {
         }))).toJson();
     }
 
-    @PostMapping("/query")
-    String query(@RequestParam String adminUsername, @RequestParam String stationAddress) {
+    @PostMapping("/queryByIdNameAddress")
+    String queryByIdNameAddress(@RequestParam String stationId, @RequestParam String stationName, @RequestParam String stationAddress) {
 
-        return "1";
+        ResultMap resultMap = new ResultMap(NetStationEnum.FORMAT_ERROR);
+
+        try {
+            if (stationId.equals("")) {
+                resultMap.setData(netStationService.queryByIdNameAddress(null, stationName, stationAddress));
+            } else {
+                resultMap.setData(netStationService.queryByIdNameAddress(Integer.parseInt(stationId), stationName, stationAddress));
+            }
+
+            resultMap.setEnum(NetStationEnum.QUERY_SUCCESS);
+        } catch (Exception e) {
+            return resultMap.toJson();
+        }
+
+        return resultMap.toJson();
     }
 }

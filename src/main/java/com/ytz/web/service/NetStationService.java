@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
 
+import java.util.List;
+
 /**
  * -*- coding:utf-8 -*-
  *
@@ -37,6 +39,18 @@ public interface NetStationService extends IService<NetStation> {
      * @return: com.ytz.web.model.NetStationServiceEnum
      */
     NetStationEnum sign(NetStation netStation);
+
+    /**
+     * @MethodName: queryByIdNameAddress
+     * @Description: DONE : 通过 stationId stationName stationAddress 模糊查询
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: stationId  网点Id
+     * @param: stationName  网点名称
+     * @param: stationAddress  网点地址
+     * @return: List<NetStation>
+     */
+    List<NetStation> queryByIdNameAddress(Integer stationId, String stationName, String stationAddress);
 
     /**
      * @MethodName: phoneIsExist
