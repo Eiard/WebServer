@@ -13,4 +13,18 @@ package com.ytz.web.Enum.service;
  */
 
 public enum EmployeeEnum {
+    /**
+     * 登录状态
+     *      成功:
+     *          网点员工登陆成功
+     *      失败:
+     *          账号或密码错误
+     */
+    LOGIN_SUCCESS,
+    LOGIN_FAILED,
+
+
+
+
+
 }
