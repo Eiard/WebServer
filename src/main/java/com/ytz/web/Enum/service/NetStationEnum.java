@@ -26,6 +26,18 @@ public enum NetStationEnum {
     LOGIN_UNVERIFIED,
 
     /**
+     * 注册网点(预注册后需要让系统管理员审核) 审核完后激活
+     *      预注册成功:
+     *          等待审核
+     *      预注册失败:
+     *          网点管理员账号已被使用
+     *          网点管理员电话已被使用
+     */
+    PRE_SIGN_SUCCESS,
+    PRE_SIGN_USERNAME_USED,
+    PRE_SIGN_PHONE_USED,
+
+    /**
      * 修改网点信息状态
      *      成功:
      *          信息修改成功
@@ -42,17 +54,6 @@ public enum NetStationEnum {
      */
     LOGOFF_REQUEST,
 
-    /**
-     * 注册网点(预注册后需要让系统管理员审核) 审核完后激活
-     *      预注册成功:
-     *          等待审核
-     *      预注册失败:
-     *          网点管理员账号已被使用
-     *          网点管理员电话已被使用
-     */
-    PRE_SIGN_SUCCESS,
-    PRE_SIGN_USERNAME_USED,
-    PRE_SIGN_PHONE_USED,
 
     /**
      * 未知错误
