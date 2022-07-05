@@ -40,4 +40,9 @@ public class NetStationController {
         }))).toJson();
     }
 
+    @PostMapping("/query")
+    String query(@RequestParam String adminUsername, @RequestParam String stationAddress) {
+
+        return "1";
+    }
 }
