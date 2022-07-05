@@ -4,8 +4,8 @@ package com.ytz.web.model;
  * -*- coding:utf-8 -*-
  *
  * @projectName: web
- * @package: com.ytz.web.Enum.service
- * @className: NetStationServiceEnum
+ * @package: com.ytz.web.model
+ * @className: NetStationEnum
  * @author: 30671
  * @description: TODO : NetStation状态码
  * @date: 2022/7/4

@@ -4,7 +4,7 @@ package com.ytz.web.model;
  * -*- coding:utf-8 -*-
  *
  * @projectName: web
- * @package: com.ytz.web.Enum.service
+ * @package: com.ytz.web.model
  * @className: EmployeeEnum
  * @author: 30671
  * @description: TODO : Employee状态码

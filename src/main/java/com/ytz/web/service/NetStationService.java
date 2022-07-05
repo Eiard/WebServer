@@ -47,5 +47,15 @@ public interface NetStationService extends IService<NetStation> {
      * @return: boolean
      */
     boolean phoneIsExist(String phone);
+
+    /**
+     * @MethodName: adminUsernameIsExist
+     * @Description: DONE : 用户名存在
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: adminUsername  用户名
+     * @return: boolean
+     */
+    boolean adminUsernameIsExist(String adminUsername);
 }
 

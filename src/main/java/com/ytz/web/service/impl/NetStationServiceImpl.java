@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
 
+
     @Override
     public NetStationEnum login(String adminUsername, String adminPassword) {
         NetStation netStation = lambdaQuery().select(NetStation::getIsPass)
@@ -43,6 +44,11 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
 
     @Override
     public NetStationEnum sign(NetStation netStation) {
+        if (adminUsernameIsExist(netStation.getAdminUsername())) {
+            return NetStationEnum.PRE_SIGN_USERNAME_USED;
+        }
+        
+
 
 
         return NetStationEnum.PRE_SIGN_SUCCESS;
@@ -51,6 +57,11 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     @Override
     public boolean phoneIsExist(String phone) {
         return lambdaQuery().eq(NetStation::getAdminPhone, phone).exists();
+    }
+
+    @Override
+    public boolean adminUsernameIsExist(String adminUsername) {
+        return lambdaQuery().eq(NetStation::getAdminUsername, adminUsername).exists();
     }
 }
 
