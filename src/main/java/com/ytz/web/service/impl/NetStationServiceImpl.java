@@ -1,7 +1,7 @@
 package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ytz.web.Enum.service.NetStationEnum;
+import com.ytz.web.Enum.NetStationEnum;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.service.NetStationService;

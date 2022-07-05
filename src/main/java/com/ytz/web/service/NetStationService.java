@@ -1,7 +1,7 @@
 package com.ytz.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ytz.web.Enum.service.NetStationEnum;
+import com.ytz.web.Enum.NetStationEnum;
 import com.ytz.web.domain.NetStation;
 
 /**

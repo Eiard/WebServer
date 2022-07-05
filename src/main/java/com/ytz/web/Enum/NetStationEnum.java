@@ -1,4 +1,4 @@
-package com.ytz.web.Enum.service;
+package com.ytz.web.Enum;
 
 /**
  * -*- coding:utf-8 -*-

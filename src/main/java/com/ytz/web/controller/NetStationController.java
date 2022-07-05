@@ -1,6 +1,7 @@
 package com.ytz.web.controller;
 
 import com.ytz.web.service.NetStationService;
+import com.ytz.web.utils.ResultMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +30,9 @@ public class NetStationController {
     @PostMapping("/login")
     String login(@RequestParam String adminUsername, @RequestParam String adminPassword) {
 
+        ResultMap resultMap = new ResultMap(netStationService.login(adminUsername, adminPassword));
 
-        return netStationService.login(adminUsername, adminPassword).toString();
+        return resultMap.toJson();
     }
 
 }
