@@ -27,8 +27,10 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
 
     @Override
     public NetStationEnum login(String adminUsername, String adminPassword) {
-        lambdaQuery().select(NetStation::getIsPass).eq(NetStation::getAdminName, adminUsername).eq(NetStation::getAdminName, adminPassword);
-        NetStation netStation = lambdaQuery().one();
+        NetStation netStation = lambdaQuery().select(NetStation::getIsPass)
+                .eq(NetStation::getAdminUsername, adminUsername)
+                .eq(NetStation::getAdminPassword, adminPassword)
+                .one();
 
         if (netStation == null) {
             return NetStationEnum.LOGIN_FAILED;
