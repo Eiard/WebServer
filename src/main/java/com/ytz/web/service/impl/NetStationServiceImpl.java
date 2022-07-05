@@ -29,10 +29,8 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     @Override
     public NetStationServiceEnum login(String adminUsername, String adminPassword) {
 
-        QueryWrapper<NetStation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("is_pass").eq("admin_username", adminUsername).eq("admin_password", adminPassword);
-
-        NetStation netStation = getOne(queryWrapper);
+        lambdaQuery().select(NetStation::getIsPass).eq(NetStation::getAdminName, adminUsername).eq(NetStation::getAdminName, adminPassword);
+        NetStation netStation = lambdaQuery().one();
 
         // 账号和密码有误
         if (netStation == null) {

@@ -14,6 +14,7 @@ import com.ytz.web.domain.User;
  * @date: 2022/7/4
  * @version: 1.0
  */
+@Deprecated
 public interface UserService extends IService<User> {
 
 }

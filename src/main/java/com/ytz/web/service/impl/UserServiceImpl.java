@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
  * @date: 2022/7/4
  * @version: 1.0
  */
+@Deprecated
 @Service
 @Repository("userServiceImpl")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>

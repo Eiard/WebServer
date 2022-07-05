@@ -16,6 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Entity com.ytz.web.domain.User
  * @version: 1.0
  */
+@Deprecated
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
 
