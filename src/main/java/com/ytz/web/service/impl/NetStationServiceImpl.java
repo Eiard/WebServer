@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -25,6 +28,9 @@ import org.springframework.stereotype.Service;
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
 
+
+    @Resource(name = "commonServiceImpl")
+    private CommonService commonService;
 
     @Override
     public NetStationEnum login(String adminUsername, String adminPassword) {
@@ -47,10 +53,10 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         if (adminUsernameIsExist(netStation.getAdminUsername())) {
             return NetStationEnum.PRE_SIGN_USERNAME_USED;
         }
-        
-
-
-
+        if (commonService.phoneIsExist(netStation.getAdminPhone())){
+            return NetStationEnum.PRE_SIGN_PHONE_USED;
+        }
+        save(netStation);
         return NetStationEnum.PRE_SIGN_SUCCESS;
     }
 

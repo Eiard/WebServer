@@ -30,7 +30,7 @@ public interface NetStationService extends IService<NetStation> {
 
     /**
      * @MethodName: sign
-     * @Description: TODO : 账号预注册
+     * @Description: DONE : 账号预注册
      * @Author: 30671
      * @date: 2022/7/4
      * @param: netStation  网点信息
