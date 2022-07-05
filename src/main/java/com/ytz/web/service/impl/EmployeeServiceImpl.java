@@ -1,9 +1,10 @@
 package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.domain.Employee;
-import com.ytz.web.service.EmployeeService;
 import com.ytz.web.mapper.EmployeeMapper;
+import com.ytz.web.service.EmployeeService;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,17 @@ import org.springframework.stereotype.Service;
 @Service
 @Repository("employeeServiceImpl")
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
-    implements EmployeeService{
+        implements EmployeeService {
 
+    @Override
+    public EmployeeEnum login(String employeeUsername, String employeePassword) {
+        return null;
+    }
+
+    @Override
+    public boolean phoneIsExist(String phone) {
+        return lambdaQuery().eq(Employee::getEmployeePhone, phone).exists();
+    }
 }
 
 

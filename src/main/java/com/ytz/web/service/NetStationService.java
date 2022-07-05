@@ -1,8 +1,8 @@
 package com.ytz.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ytz.web.Enum.NetStationEnum;
 import com.ytz.web.domain.NetStation;
+import com.ytz.web.model.NetStationEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -18,13 +18,13 @@ import com.ytz.web.domain.NetStation;
 public interface NetStationService extends IService<NetStation> {
 
     /**
-     * @MethodName: Login
+     * @MethodName: login
      * @Description: DONE : 实现网点管理员登录判断
      * @Author: 30671
      * @date: 2022/7/4
      * @param: adminUsername  账号
      * @param: adminPassword  密码
-     * @return: com.ytz.web.Enum.service.NetStationServiceEnum
+     * @return: com.ytz.web.model.NetStationServiceEnum
      */
     NetStationEnum login(String adminUsername, String adminPassword);
 
@@ -34,10 +34,18 @@ public interface NetStationService extends IService<NetStation> {
      * @Author: 30671
      * @date: 2022/7/4
      * @param: netStation  网点信息
-     * @return: com.ytz.web.Enum.service.NetStationServiceEnum
+     * @return: com.ytz.web.model.NetStationServiceEnum
      */
-    public NetStationEnum sign(NetStation netStation);
+    NetStationEnum sign(NetStation netStation);
 
-
+    /**
+     * @MethodName: phoneIsExist
+     * @Description: DONE : 账号预注册
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: phone  手机号
+     * @return: boolean
+     */
+    boolean phoneIsExist(String phone);
 }
 

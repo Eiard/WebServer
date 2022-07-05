@@ -1,9 +1,9 @@
 package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ytz.web.Enum.NetStationEnum;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
+import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.NetStationService;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -45,17 +45,13 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     public NetStationEnum sign(NetStation netStation) {
 
 
-
-
-
-
-
-
-
-
         return NetStationEnum.PRE_SIGN_SUCCESS;
     }
 
+    @Override
+    public boolean phoneIsExist(String phone) {
+        return lambdaQuery().eq(NetStation::getAdminPhone, phone).exists();
+    }
 }
 
 
