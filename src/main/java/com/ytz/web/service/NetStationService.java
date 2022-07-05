@@ -28,8 +28,16 @@ public interface NetStationService extends IService<NetStation> {
      */
     NetStationEnum login(String adminUsername, String adminPassword);
 
-
-    //NetStationServiceEnum sign();
+    /**
+     * @MethodName: sign
+     * @Description: TODO : 账号预注册
+     * @Author: 30671
+     * @date: 2022/7/4
+     * @param: adminUsername  账号
+     * @param: adminPassword  密码
+     * @return: com.ytz.web.Enum.service.NetStationServiceEnum
+     */
+    NetStationEnum sign();
 
 
 }

@@ -39,6 +39,10 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         return NetStationEnum.LOGIN_SUCCESS;
     }
 
+    @Override
+    public NetStationEnum sign() {
+        return null;
+    }
 
 }
 
