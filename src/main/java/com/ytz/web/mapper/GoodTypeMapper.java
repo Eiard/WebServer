@@ -1,7 +1,7 @@
 package com.ytz.web.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ytz.web.domain.GoodType;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

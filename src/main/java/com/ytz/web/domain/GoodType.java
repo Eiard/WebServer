@@ -4,26 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
- * -*- coding:utf-8 -*-
- *
- * @projectName: web
- * @package: com.ytz.web.domain
- * @className: GoodType
- * @author: 30671
- * @description: DONE : 货物类别
- * @date: 2022/7/4
+ * 
  * @TableName good_type
- * @version: 1.0
  */
-@TableName(value = "good_type")
+@TableName(value ="good_type")
 @Data
 public class GoodType implements Serializable {
     /**
@@ -35,17 +24,23 @@ public class GoodType implements Serializable {
     /**
      * 货物类型
      */
-    @TableField(value = "good_type")
-    private String goodType;
+    @TableField(value = "type_name")
+    private String typeName;
 
     /**
-     * 货物类型创建日期(创建后不再更改)
+     * 货物类别逻辑删除:[0]启用 [1]删除
+     */
+    @TableField(value = "is_deleted")
+    private Integer isDeleted;
+
+    /**
+     * 创建日期
      */
     @TableField(value = "create_date")
     private LocalDateTime createDate;
 
     /**
-     * 货物类型更新日期
+     * 更新日期
      */
     @TableField(value = "update_date")
     private LocalDateTime updateDate;
@@ -66,9 +61,10 @@ public class GoodType implements Serializable {
         }
         GoodType other = (GoodType) that;
         return (this.getTypeId() == null ? other.getTypeId() == null : this.getTypeId().equals(other.getTypeId()))
-                && (this.getGoodType() == null ? other.getGoodType() == null : this.getGoodType().equals(other.getGoodType()))
-                && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
-                && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
+            && (this.getTypeName() == null ? other.getTypeName() == null : this.getTypeName().equals(other.getTypeName()))
+            && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()))
+            && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
+            && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
     }
 
     @Override
@@ -76,7 +72,8 @@ public class GoodType implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getTypeId() == null) ? 0 : getTypeId().hashCode());
-        result = prime * result + ((getGoodType() == null) ? 0 : getGoodType().hashCode());
+        result = prime * result + ((getTypeName() == null) ? 0 : getTypeName().hashCode());
+        result = prime * result + ((getIsDeleted() == null) ? 0 : getIsDeleted().hashCode());
         result = prime * result + ((getCreateDate() == null) ? 0 : getCreateDate().hashCode());
         result = prime * result + ((getUpdateDate() == null) ? 0 : getUpdateDate().hashCode());
         return result;
@@ -89,7 +86,8 @@ public class GoodType implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", typeId=").append(typeId);
-        sb.append(", goodType=").append(goodType);
+        sb.append(", typeName=").append(typeName);
+        sb.append(", isDeleted=").append(isDeleted);
         sb.append(", createDate=").append(createDate);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", serialVersionUID=").append(serialVersionUID);

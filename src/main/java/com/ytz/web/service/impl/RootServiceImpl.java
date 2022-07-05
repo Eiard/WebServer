@@ -24,6 +24,8 @@ public class RootServiceImpl extends ServiceImpl<RootMapper, Root>
         implements RootService {
     @Override
     public boolean phoneIsExist(String phone) {
+
+
         return lambdaQuery().eq(Root::getRootPhone, phone).exists();
     }
 }

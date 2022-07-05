@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
  *
  * @projectName: web
  * @package: com.ytz.web.service.impl
- * @className: GoodTypeServiceImpl
+ * @className: goodTypeServiceImpl
  * @author: 30671
- * @description: TODO : 针对表【good_type】的数据库操作Service实现
- * @date: 2022/7/5
+ * @description: TODO : 针对表【good_type】的数据库操作Service
+ * @date: 2022/7/4
  * @version: 1.0
  */
 @Service
