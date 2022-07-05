@@ -40,7 +40,7 @@ public interface NetStationService extends IService<NetStation> {
 
     /**
      * @MethodName: phoneIsExist
-     * @Description: DONE : 账号预注册
+     * @Description: DONE : 手机号存在
      * @Author: 30671
      * @date: 2022/7/5
      * @param: phone  手机号

@@ -16,4 +16,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RootService extends IService<Root> {
 
+    /**
+     * @MethodName: phoneIsExist
+     * @Description: DONE : 手机号存在
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: phone  手机号
+     * @return: boolean
+     */
+    boolean phoneIsExist(String phone);
 }

@@ -1,5 +1,6 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.core.injector.methods.SelectById;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
@@ -43,6 +44,8 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
 
     @Override
     public NetStationEnum sign(NetStation netStation) {
+
+        System.out.println(netStation.toString());
 
 
         return NetStationEnum.PRE_SIGN_SUCCESS;
