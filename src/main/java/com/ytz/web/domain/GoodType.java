@@ -40,6 +40,7 @@ public class GoodType implements Serializable {
      */
     @TableField(value = "is_deleted")
     private Integer isDeleted;
+    
 
     /**
      * 创建日期
