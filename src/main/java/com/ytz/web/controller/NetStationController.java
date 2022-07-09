@@ -37,33 +37,41 @@ public class NetStationController {
     @PostMapping("/sign")
     String sign(@RequestBody String netStation) {
 
-        return new ResultMap(netStationService.sign(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
-        }))).toJson();
-    }
-
-    @PostMapping("/queryByIdNameAddress")
-    String queryByIdNameAddress(@RequestParam String stationId, @RequestParam String stationName, @RequestParam String stationAddress) {
-
-        ResultMap resultMap = new ResultMap(NetStationEnum.FORMAT_ERROR);
+        ResultMap resultMap = new ResultMap();
 
         try {
-            if (stationId.equals("")) {
-                resultMap.setData(netStationService.queryByIdNameAddress(null, stationName, stationAddress));
-            } else {
-                resultMap.setData(netStationService.queryByIdNameAddress(Integer.parseInt(stationId), stationName, stationAddress));
-            }
-
-            resultMap.setEnum(NetStationEnum.QUERY_SUCCESS);
+            resultMap.setEnum(netStationService.sign(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+            })));
         } catch (Exception e) {
-            return resultMap.toJson();
+            resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
         }
 
         return resultMap.toJson();
     }
 
+    @PostMapping("/fuzzyQueryByStationInfo")
+    String fuzzyQueryByStationInfo(@RequestParam String stationInfo) {
+
+        return new ResultMap(NetStationEnum.QUERY_SUCCESS, netStationService.fuzzyQueryByStationInfo(stationInfo)).toJson();
+    }
+
+    @PostMapping("/queryAll")
+    String queryAll(@RequestParam String adminUsername){
+        netStationService.queryAll(adminUsername);
+        
+        return null;
+    }
+
     @PostMapping("/update")
     String update(@RequestBody String netStation) {
-
-        return new ResultMap().toJson();
+        ResultMap resultMap = new ResultMap();
+        try {
+            resultMap.setEnum(netStationService.update(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+            })));
+        } catch (Exception e) {
+            resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
+        }
+        return resultMap.toJson();
     }
+
 }

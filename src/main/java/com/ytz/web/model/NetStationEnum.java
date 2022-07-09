@@ -47,6 +47,7 @@ public enum NetStationEnum {
     CHANGE_SUCCESS,
     CHANGE_FAILED_PHONE_USED,
 
+
     /**
      * 注销网点
      *      请求:

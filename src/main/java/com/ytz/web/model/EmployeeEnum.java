@@ -19,12 +19,11 @@ public enum EmployeeEnum {
      *          网点员工登陆成功
      *      失败:
      *          账号或密码错误
+     *          员工未被审核
      */
     LOGIN_SUCCESS,
     LOGIN_FAILED,
-
-
-
+    LOGIN_UNVERIFIED,
 
 
 }

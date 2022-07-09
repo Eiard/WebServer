@@ -1,6 +1,8 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.mapper.EmployeeMapper;
@@ -26,8 +28,20 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
     @Override
     public EmployeeEnum login(String employeeUsername, String employeePassword) {
-        return null;
+        Employee employee = lambdaQuery().select(Employee::getIsPass)
+                .eq(Employee::getEmployeeUsername, employeeUsername)
+                .eq(Employee::getEmployeePassword, employeePassword)
+                .one();
+        if (employee == null) {
+            return EmployeeEnum.LOGIN_FAILED;
+        }
+        if (employee.getIsPass() == 0) {
+            return EmployeeEnum.LOGIN_UNVERIFIED;
+        }
+        return EmployeeEnum.LOGIN_SUCCESS;
     }
+
+
 
     @Override
     public boolean phoneIsExist(String phone) {
