@@ -26,8 +26,20 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
     @Override
     public EmployeeEnum login(String employeeUsername, String employeePassword) {
-        return null;
+        Employee employee = lambdaQuery().select(Employee::getIsPass)
+                .eq(Employee::getEmployeeUsername, employeeUsername)
+                .eq(Employee::getEmployeePassword, employeePassword)
+                .one();
+        if (employee == null) {
+            return EmployeeEnum.LOGIN_FAILED;
+        }
+        if (employee.getIsPass() == 0) {
+            return EmployeeEnum.LOGIN_UNVERIFIED;
+        }
+        return EmployeeEnum.LOGIN_SUCCESS;
     }
+
+
 
     @Override
     public boolean phoneIsExist(String phone) {

@@ -4,26 +4,23 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
  * -*- coding:utf-8 -*-
  *
  * @projectName: web
  * @package: com.ytz.web.domain
- * @className: NetStation
- * @author: 30671
- * @description: DONE : 网点(网点管理员)
- * @date: 2022/7/4
+ * @className: GoodType
+ * @author: Delmore
+ * @description: DONE : 网点管理员
+ * @date: 2022/7/5
  * @TableName net_station
  * @version: 1.0
  */
-@TableName(value = "net_station")
+@TableName(value ="net_station")
 @Data
 public class NetStation implements Serializable {
     /**
@@ -72,13 +69,13 @@ public class NetStation implements Serializable {
      * 员工性别 0 女 1 男
      */
     @TableField(value = "admin_sex")
-    private Integer adminSex;
+    private Boolean adminSex;
 
     /**
      * 默认为1 网点管理员
      */
     @TableField(value = "admin_type")
-    private Integer adminType;
+    private Boolean adminType;
 
     /**
      * 网点管理员完成的快递单数(月结)
@@ -87,19 +84,25 @@ public class NetStation implements Serializable {
     private Integer orderAmount;
 
     /**
-     * 审核标志位 未审核 [0] 审核通过 [1]
+     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 在职
      */
     @TableField(value = "is_pass")
     private Integer isPass;
 
     /**
-     * 网点信息创建日期(创建后不再更改)
+     * 辞职理由
+     */
+    @TableField(value = "resign_reason")
+    private String resignReason;
+
+    /**
+     * 创建日期
      */
     @TableField(value = "create_date")
     private LocalDateTime createDate;
 
     /**
-     * 网点信息更新日期
+     * 更新日期
      */
     @TableField(value = "update_date")
     private LocalDateTime updateDate;
@@ -120,18 +123,19 @@ public class NetStation implements Serializable {
         }
         NetStation other = (NetStation) that;
         return (this.getStationId() == null ? other.getStationId() == null : this.getStationId().equals(other.getStationId()))
-                && (this.getStationName() == null ? other.getStationName() == null : this.getStationName().equals(other.getStationName()))
-                && (this.getStationAddress() == null ? other.getStationAddress() == null : this.getStationAddress().equals(other.getStationAddress()))
-                && (this.getAdminName() == null ? other.getAdminName() == null : this.getAdminName().equals(other.getAdminName()))
-                && (this.getAdminUsername() == null ? other.getAdminUsername() == null : this.getAdminUsername().equals(other.getAdminUsername()))
-                && (this.getAdminPassword() == null ? other.getAdminPassword() == null : this.getAdminPassword().equals(other.getAdminPassword()))
-                && (this.getAdminPhone() == null ? other.getAdminPhone() == null : this.getAdminPhone().equals(other.getAdminPhone()))
-                && (this.getAdminSex() == null ? other.getAdminSex() == null : this.getAdminSex().equals(other.getAdminSex()))
-                && (this.getAdminType() == null ? other.getAdminType() == null : this.getAdminType().equals(other.getAdminType()))
-                && (this.getOrderAmount() == null ? other.getOrderAmount() == null : this.getOrderAmount().equals(other.getOrderAmount()))
-                && (this.getIsPass() == null ? other.getIsPass() == null : this.getIsPass().equals(other.getIsPass()))
-                && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
-                && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
+            && (this.getStationName() == null ? other.getStationName() == null : this.getStationName().equals(other.getStationName()))
+            && (this.getStationAddress() == null ? other.getStationAddress() == null : this.getStationAddress().equals(other.getStationAddress()))
+            && (this.getAdminName() == null ? other.getAdminName() == null : this.getAdminName().equals(other.getAdminName()))
+            && (this.getAdminUsername() == null ? other.getAdminUsername() == null : this.getAdminUsername().equals(other.getAdminUsername()))
+            && (this.getAdminPassword() == null ? other.getAdminPassword() == null : this.getAdminPassword().equals(other.getAdminPassword()))
+            && (this.getAdminPhone() == null ? other.getAdminPhone() == null : this.getAdminPhone().equals(other.getAdminPhone()))
+            && (this.getAdminSex() == null ? other.getAdminSex() == null : this.getAdminSex().equals(other.getAdminSex()))
+            && (this.getAdminType() == null ? other.getAdminType() == null : this.getAdminType().equals(other.getAdminType()))
+            && (this.getOrderAmount() == null ? other.getOrderAmount() == null : this.getOrderAmount().equals(other.getOrderAmount()))
+            && (this.getIsPass() == null ? other.getIsPass() == null : this.getIsPass().equals(other.getIsPass()))
+            && (this.getResignReason() == null ? other.getResignReason() == null : this.getResignReason().equals(other.getResignReason()))
+            && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
+            && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
     }
 
     @Override
@@ -149,6 +153,7 @@ public class NetStation implements Serializable {
         result = prime * result + ((getAdminType() == null) ? 0 : getAdminType().hashCode());
         result = prime * result + ((getOrderAmount() == null) ? 0 : getOrderAmount().hashCode());
         result = prime * result + ((getIsPass() == null) ? 0 : getIsPass().hashCode());
+        result = prime * result + ((getResignReason() == null) ? 0 : getResignReason().hashCode());
         result = prime * result + ((getCreateDate() == null) ? 0 : getCreateDate().hashCode());
         result = prime * result + ((getUpdateDate() == null) ? 0 : getUpdateDate().hashCode());
         return result;
@@ -171,6 +176,7 @@ public class NetStation implements Serializable {
         sb.append(", adminType=").append(adminType);
         sb.append(", orderAmount=").append(orderAmount);
         sb.append(", isPass=").append(isPass);
+        sb.append(", resignReason=").append(resignReason);
         sb.append(", createDate=").append(createDate);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", serialVersionUID=").append(serialVersionUID);

@@ -6,17 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * -*- coding:utf-8 -*-
  *
  * @projectName: web
  * @package: com.ytz.web.domain
- * @className: Employee
+ * @className: Orders
  * @author: 30671
  * @description: DONE : 员工
  * @date: 2022/7/4
@@ -31,6 +28,12 @@ public class Employee implements Serializable {
      */
     @TableId(value = "employee_id", type = IdType.AUTO)
     private Integer employeeId;
+
+    /**
+     * 员工姓名
+     */
+    @TableField(value = "employee_name")
+    private String employeeName;
 
     /**
      * 员工账号
@@ -48,7 +51,7 @@ public class Employee implements Serializable {
      * 员工性别 0 女 1 男
      */
     @TableField(value = "employee_sex")
-    private Integer employeeSex;
+    private Boolean employeeSex;
 
     /**
      * 员工电话
@@ -66,16 +69,22 @@ public class Employee implements Serializable {
      * 员工类型ID
      */
     @TableField(value = "employee_type")
-    private Integer employeeType;
+    private Boolean employeeType;
 
     /**
-     * 审核标志位 [0] 未通过 [1] 
+     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 离职 
      */
     @TableField(value = "is_pass")
     private Integer isPass;
 
     /**
-     * 更新日期
+     * 辞职理由
+     */
+    @TableField(value = "resign_reason")
+    private String resignReason;
+
+    /**
+     * 创建日期
      */
     @TableField(value = "create_date")
     private LocalDateTime createDate;
@@ -102,6 +111,7 @@ public class Employee implements Serializable {
         }
         Employee other = (Employee) that;
         return (this.getEmployeeId() == null ? other.getEmployeeId() == null : this.getEmployeeId().equals(other.getEmployeeId()))
+            && (this.getEmployeeName() == null ? other.getEmployeeName() == null : this.getEmployeeName().equals(other.getEmployeeName()))
             && (this.getEmployeeUsername() == null ? other.getEmployeeUsername() == null : this.getEmployeeUsername().equals(other.getEmployeeUsername()))
             && (this.getEmployeePassword() == null ? other.getEmployeePassword() == null : this.getEmployeePassword().equals(other.getEmployeePassword()))
             && (this.getEmployeeSex() == null ? other.getEmployeeSex() == null : this.getEmployeeSex().equals(other.getEmployeeSex()))
@@ -109,6 +119,7 @@ public class Employee implements Serializable {
             && (this.getStationId() == null ? other.getStationId() == null : this.getStationId().equals(other.getStationId()))
             && (this.getEmployeeType() == null ? other.getEmployeeType() == null : this.getEmployeeType().equals(other.getEmployeeType()))
             && (this.getIsPass() == null ? other.getIsPass() == null : this.getIsPass().equals(other.getIsPass()))
+            && (this.getResignReason() == null ? other.getResignReason() == null : this.getResignReason().equals(other.getResignReason()))
             && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
             && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
     }
@@ -118,6 +129,7 @@ public class Employee implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getEmployeeId() == null) ? 0 : getEmployeeId().hashCode());
+        result = prime * result + ((getEmployeeName() == null) ? 0 : getEmployeeName().hashCode());
         result = prime * result + ((getEmployeeUsername() == null) ? 0 : getEmployeeUsername().hashCode());
         result = prime * result + ((getEmployeePassword() == null) ? 0 : getEmployeePassword().hashCode());
         result = prime * result + ((getEmployeeSex() == null) ? 0 : getEmployeeSex().hashCode());
@@ -125,6 +137,7 @@ public class Employee implements Serializable {
         result = prime * result + ((getStationId() == null) ? 0 : getStationId().hashCode());
         result = prime * result + ((getEmployeeType() == null) ? 0 : getEmployeeType().hashCode());
         result = prime * result + ((getIsPass() == null) ? 0 : getIsPass().hashCode());
+        result = prime * result + ((getResignReason() == null) ? 0 : getResignReason().hashCode());
         result = prime * result + ((getCreateDate() == null) ? 0 : getCreateDate().hashCode());
         result = prime * result + ((getUpdateDate() == null) ? 0 : getUpdateDate().hashCode());
         return result;
@@ -137,6 +150,7 @@ public class Employee implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", employeeId=").append(employeeId);
+        sb.append(", employeeName=").append(employeeName);
         sb.append(", employeeUsername=").append(employeeUsername);
         sb.append(", employeePassword=").append(employeePassword);
         sb.append(", employeeSex=").append(employeeSex);
@@ -144,6 +158,7 @@ public class Employee implements Serializable {
         sb.append(", stationId=").append(stationId);
         sb.append(", employeeType=").append(employeeType);
         sb.append(", isPass=").append(isPass);
+        sb.append(", resignReason=").append(resignReason);
         sb.append(", createDate=").append(createDate);
         sb.append(", updateDate=").append(updateDate);
         sb.append(", serialVersionUID=").append(serialVersionUID);

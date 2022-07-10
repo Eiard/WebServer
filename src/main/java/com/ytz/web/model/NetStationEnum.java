@@ -42,10 +42,13 @@ public enum NetStationEnum {
      *      成功:
      *          信息修改成功
      *      失败:
+     *          密码输入错误
      *          电话号码已被使用
      */
     CHANGE_SUCCESS,
+    CHANCE_FAILED_PASSWORD_ERROR,
     CHANGE_FAILED_PHONE_USED,
+
 
     /**
      * 注销网点

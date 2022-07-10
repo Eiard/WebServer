@@ -3,6 +3,9 @@ package com.ytz.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.vo.FuzzyQueryStationInfo;
+import com.ytz.web.vo.QueryAllInfo;
+import com.ytz.web.vo.UpdateInfo;
 
 import java.util.List;
 
@@ -40,28 +43,35 @@ public interface NetStationService extends IService<NetStation> {
      */
     NetStationEnum sign(NetStation netStation);
 
+
     /**
      * @MethodName: update
-     * @Description: TODO : 账号更新信息
-     * @Author: 30671
+     * @Description: DONE : 账号更新信息
+     * @Author: Delmore
      * @date: 2022/7/5
      * @param: netStation  网点信息
      * @return: com.ytz.web.model.NetStationServiceEnum
      */
-    public NetStationEnum update(NetStation netStation);
+     NetStationEnum updateInform(UpdateInfo updateInfo);
 
     /**
      * @MethodName: queryByIdNameAddress
-     * @Description: DONE : 通过 stationId stationName stationAddress 模糊查询
+     * @Description: DONE : 通过 stationInfo => stationName stationAddress 模糊查询
      * @Author: 30671
      * @date: 2022/7/5
-     * @param: stationId  网点Id
-     * @param: stationName  网点名称
-     * @param: stationAddress  网点地址
+     * @param: stationInfo  既可以是网点名称 也可以是网店地址
      * @return: List<NetStation>
      */
-    List<NetStation> queryByIdNameAddress(Integer stationId, String stationName, String stationAddress);
+    List<FuzzyQueryStationInfo> fuzzyQueryByStationInfo(String stationInfo);
 
+    /**
+     * @MethodName: queryAll
+     * @Description: TODO : 网点管理员查询所有信息
+     * @Author: Delmore
+     * @date: 2022/7/8
+     * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
+     **/
+    QueryAllInfo queryAll(String adminUsername);
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 手机号存在

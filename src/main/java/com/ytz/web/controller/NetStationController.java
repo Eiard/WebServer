@@ -6,6 +6,7 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
+import com.ytz.web.vo.UpdateInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -37,33 +38,41 @@ public class NetStationController {
     @PostMapping("/sign")
     String sign(@RequestBody String netStation) {
 
-        return new ResultMap(netStationService.sign(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
-        }))).toJson();
-    }
-
-    @PostMapping("/queryByIdNameAddress")
-    String queryByIdNameAddress(@RequestParam String stationId, @RequestParam String stationName, @RequestParam String stationAddress) {
-
-        ResultMap resultMap = new ResultMap(NetStationEnum.FORMAT_ERROR);
+        ResultMap resultMap = new ResultMap();
 
         try {
-            if (stationId.equals("")) {
-                resultMap.setData(netStationService.queryByIdNameAddress(null, stationName, stationAddress));
-            } else {
-                resultMap.setData(netStationService.queryByIdNameAddress(Integer.parseInt(stationId), stationName, stationAddress));
-            }
-
-            resultMap.setEnum(NetStationEnum.QUERY_SUCCESS);
+            resultMap.setEnum(netStationService.sign(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+            })));
         } catch (Exception e) {
-            return resultMap.toJson();
+            resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
         }
 
         return resultMap.toJson();
     }
 
-    @PostMapping("/update")
-    String update(@RequestBody String netStation) {
+    @PostMapping("/fuzzyQueryByStationInfo")
+    String fuzzyQueryByStationInfo(@RequestParam String stationInfo) {
 
-        return new ResultMap().toJson();
+        return new ResultMap(NetStationEnum.QUERY_SUCCESS, netStationService.fuzzyQueryByStationInfo(stationInfo)).toJson();
     }
+
+    @PostMapping("/queryAll")
+    String queryAll(@RequestParam String adminUsername){
+        netStationService.queryAll(adminUsername);
+        
+        return null;
+    }
+
+    @PostMapping("/update")
+    String update(@RequestBody String updateInfo) {
+        ResultMap resultMap = new ResultMap();
+        try {
+            resultMap.setEnum(netStationService.updateInform(JsonUtils.jsonToObject(updateInfo, new TypeReference<UpdateInfo>() {
+            })));
+        } catch (Exception e) {
+            resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
+        }
+        return resultMap.toJson();
+    }
+
 }
