@@ -34,7 +34,6 @@ import java.util.List;
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
 
-
     @Resource(name = "commonServiceImpl")
     private CommonService commonService;
 
