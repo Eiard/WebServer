@@ -7,11 +7,11 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.vo.FuzzyQueryStationInfo;
-import com.ytz.web.vo.QueryAllInform;
+import com.ytz.web.vo.QueryAllInfo;
+import com.ytz.web.vo.UpdateInfo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -44,7 +44,6 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 .eq(NetStation::getAdminUsername, adminUsername)
                 .eq(NetStation::getAdminPassword, adminPassword)
                 .one();
-
         if (netStation == null) {
             return NetStationEnum.LOGIN_FAILED;
         }
@@ -67,17 +66,24 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public NetStationEnum update(NetStation netStation) {
-        if (commonService.phoneIsExist(netStation.getAdminPhone())) {
+    public NetStationEnum updateInform(UpdateInfo updateInfo) {
+        NetStation station = lambdaQuery().select(NetStation::getAdminPassword)
+                .eq(NetStation::getAdminUsername, updateInfo.getAdminUsername())
+                .one();
+        if (!(updateInfo.getPassword().equals(station.getAdminPassword()))) {
+            return NetStationEnum.CHANCE_FAILED_PASSWORD_ERROR;
+        }
+        if (commonService.phoneIsExist(updateInfo.getAdminPhone())) {
             return NetStationEnum.CHANGE_FAILED_PHONE_USED;
         }
         lambdaUpdate()
-                .set(NetStation::getStationName, netStation.getStationName())
-                .set(NetStation::getStationAddress, netStation.getStationAddress())
-                .set(NetStation::getAdminName, netStation.getAdminName())
-                .set(NetStation::getAdminPhone, netStation.getAdminPhone())
-                .set(NetStation::getAdminSex, netStation.getAdminSex())
-                .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
+                .set(NetStation::getStationName, updateInfo.getStationName())
+                .set(NetStation::getStationAddress, updateInfo.getStationAddress())
+                .set(NetStation::getAdminName, updateInfo.getAdminName())
+                .set(NetStation::getAdminPhone, updateInfo.getAdminPhone())
+                .set(NetStation::getAdminSex, updateInfo.getAdminSex())
+                .set(NetStation::getAdminPassword,updateInfo.getNewPassword())
+                .eq(NetStation::getAdminUsername, updateInfo.getAdminUsername())
                 .update();
         return NetStationEnum.CHANGE_SUCCESS;
     }
@@ -85,14 +91,14 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     @Override
     public List<FuzzyQueryStationInfo> fuzzyQueryByStationInfo(String stationInfo) {
         List<FuzzyQueryStationInfo> fuzzyQueryStationInfos = new ArrayList<>();
-        List<NetStation> netStations = lambdaQuery()
-                .select(NetStation::getStationId, NetStation::getStationName, NetStation::getStationAddress)
-                .like(NetStation::getStationName, stationInfo)
-                .or(netStationLambdaQueryWrapper -> {
-                    netStationLambdaQueryWrapper
-                            .like(NetStation::getStationAddress, stationInfo);
-                }).list();
         try {
+            List<NetStation> netStations = lambdaQuery()
+                    .select(NetStation::getStationId, NetStation::getStationName, NetStation::getStationAddress)
+                    .like(NetStation::getStationName, stationInfo)
+                    .or(netStationLambdaQueryWrapper -> {
+                        netStationLambdaQueryWrapper
+                                .like(NetStation::getStationAddress, stationInfo);
+                    }).list();
             for (NetStation netStation : netStations) {
                 FuzzyQueryStationInfo fuzzyQueryStationInfo = new FuzzyQueryStationInfo();
                 BeanUtils.copyProperties(fuzzyQueryStationInfo, netStation);
@@ -107,14 +113,22 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public QueryAllInform queryAll(String adminUsername) {
-        NetStation station = lambdaQuery().select(NetStation::getStationName, NetStation::getStationAddress,
-                NetStation::getAdminName, NetStation::getAdminPhone,
-                NetStation::getAdminSex, NetStation::getOrderAmount)
-                .eq(NetStation::getAdminName, adminUsername)
-                .one();
-
-        return ;
+    public QueryAllInfo queryAll(String adminUsername) {
+        QueryAllInfo queryAllInfo = null;
+        try {
+            NetStation station = lambdaQuery().select(NetStation::getStationName, NetStation::getStationAddress,
+                    NetStation::getAdminName, NetStation::getAdminPhone,
+                    NetStation::getAdminSex, NetStation::getOrderAmount)
+                    .eq(NetStation::getAdminName, adminUsername)
+                    .one();
+            queryAllInfo = new QueryAllInfo();
+            BeanUtils.copyProperties(queryAllInfo, station);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return queryAllInfo;
     }
 
     @Override

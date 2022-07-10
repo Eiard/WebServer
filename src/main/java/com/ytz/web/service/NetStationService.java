@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.vo.FuzzyQueryStationInfo;
-import com.ytz.web.vo.QueryAllInform;
+import com.ytz.web.vo.QueryAllInfo;
+import com.ytz.web.vo.UpdateInfo;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: netStation  网点信息
      * @return: com.ytz.web.model.NetStationServiceEnum
      */
-     NetStationEnum update(NetStation netStation);
+     NetStationEnum updateInform(UpdateInfo updateInfo);
 
     /**
      * @MethodName: queryByIdNameAddress
@@ -70,7 +71,7 @@ public interface NetStationService extends IService<NetStation> {
      * @date: 2022/7/8
      * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
      **/
-    QueryAllInform queryAll(String adminUsername);
+    QueryAllInfo queryAll(String adminUsername);
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 手机号存在

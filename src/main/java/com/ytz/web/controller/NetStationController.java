@@ -6,6 +6,7 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
+import com.ytz.web.vo.UpdateInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -63,10 +64,10 @@ public class NetStationController {
     }
 
     @PostMapping("/update")
-    String update(@RequestBody String netStation) {
+    String update(@RequestBody String updateInfo) {
         ResultMap resultMap = new ResultMap();
         try {
-            resultMap.setEnum(netStationService.update(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+            resultMap.setEnum(netStationService.updateInform(JsonUtils.jsonToObject(updateInfo, new TypeReference<UpdateInfo>() {
             })));
         } catch (Exception e) {
             resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
