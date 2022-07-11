@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
  * @TableName root
  * @version: 1.0
  */
+@Deprecated
 @TableName(value = "root")
 @Data
 public class Root implements Serializable {

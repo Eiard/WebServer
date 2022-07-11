@@ -1,5 +1,6 @@
 package com.ytz.web.service.impl;
 
+import com.ytz.web.mapper.CommonMapper;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.NetStationService;
@@ -24,25 +25,12 @@ import javax.annotation.Resource;
 @Service
 @Repository("commonServiceImpl")
 public class CommonServiceImpl implements CommonService {
-
-
-    @Resource(name = "rootServiceImpl")
-    @Lazy
-    private RootService rootService;
-
-    @Resource(name = "employeeServiceImpl")
-    @Lazy
-    private EmployeeService employeeService;
-
-    @Resource(name = "netStationServiceImpl")
-    @Lazy
-    private NetStationService netStationService;
+    @Resource(name = "commonMapper")
+    private CommonMapper commonMapper;
 
     @Override
     public boolean phoneIsExist(String phone) {
-        return rootService.phoneIsExist(phone)
-                || employeeService.phoneIsExist(phone)
-                || netStationService.phoneIsExist(phone);
+        return commonMapper.phoneIsExist(phone) == 0;
     }
 
 }

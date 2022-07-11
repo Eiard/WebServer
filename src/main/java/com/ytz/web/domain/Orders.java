@@ -4,24 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
- * -*- coding:utf-8 -*-
- *
- * @projectName: web
- * @package: com.ytz.web.domain
- * @className: Orders
- * @author: 30671
- * @description: DONE : 订单信息
- * @date: 2022/7/4
+ * 
  * @TableName orders
- * @version: 1.0
  */
-@TableName(value = "orders")
+@TableName(value ="orders")
 @Data
 public class Orders implements Serializable {
     /**
@@ -55,7 +46,7 @@ public class Orders implements Serializable {
     private Integer endPoint;
 
     /**
-     * 收发货网点地址(自动)
+     * 收货网点地址(自动)
      */
     @TableField(value = "end_address")
     private String endAddress;
@@ -118,7 +109,7 @@ public class Orders implements Serializable {
      * 订单状态：[0]未收件 [1]已收件 [2]配送中 [3]已收货
      */
     @TableField(value = "order_status")
-    private Integer orderStatus;
+    private Byte orderStatus;
 
     /**
      * 派送员工号
@@ -142,7 +133,7 @@ public class Orders implements Serializable {
      * 订单结束标志位:[0]未完成 [1]已完成
      */
     @TableField(value = "is_deleted")
-    private Integer isDeleted;
+    private Boolean isDeleted;
 
     /**
      * 创建日期
@@ -172,27 +163,27 @@ public class Orders implements Serializable {
         }
         Orders other = (Orders) that;
         return (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
-                && (this.getOrderNumber() == null ? other.getOrderNumber() == null : this.getOrderNumber().equals(other.getOrderNumber()))
-                && (this.getStartPoint() == null ? other.getStartPoint() == null : this.getStartPoint().equals(other.getStartPoint()))
-                && (this.getStartAddress() == null ? other.getStartAddress() == null : this.getStartAddress().equals(other.getStartAddress()))
-                && (this.getEndPoint() == null ? other.getEndPoint() == null : this.getEndPoint().equals(other.getEndPoint()))
-                && (this.getEndAddress() == null ? other.getEndAddress() == null : this.getEndAddress().equals(other.getEndAddress()))
-                && (this.getGoodWeight() == null ? other.getGoodWeight() == null : this.getGoodWeight().equals(other.getGoodWeight()))
-                && (this.getGoodType() == null ? other.getGoodType() == null : this.getGoodType().equals(other.getGoodType()))
-                && (this.getOrderPrice() == null ? other.getOrderPrice() == null : this.getOrderPrice().equals(other.getOrderPrice()))
-                && (this.getConsignor() == null ? other.getConsignor() == null : this.getConsignor().equals(other.getConsignor()))
-                && (this.getConsignorPhone() == null ? other.getConsignorPhone() == null : this.getConsignorPhone().equals(other.getConsignorPhone()))
-                && (this.getRecipient() == null ? other.getRecipient() == null : this.getRecipient().equals(other.getRecipient()))
-                && (this.getRecipientPhone() == null ? other.getRecipientPhone() == null : this.getRecipientPhone().equals(other.getRecipientPhone()))
-                && (this.getRecipientAddress() == null ? other.getRecipientAddress() == null : this.getRecipientAddress().equals(other.getRecipientAddress()))
-                && (this.getNotes() == null ? other.getNotes() == null : this.getNotes().equals(other.getNotes()))
-                && (this.getOrderStatus() == null ? other.getOrderStatus() == null : this.getOrderStatus().equals(other.getOrderStatus()))
-                && (this.getSenderId() == null ? other.getSenderId() == null : this.getSenderId().equals(other.getSenderId()))
-                && (this.getSenderName() == null ? other.getSenderName() == null : this.getSenderName().equals(other.getSenderName()))
-                && (this.getSenderPhone() == null ? other.getSenderPhone() == null : this.getSenderPhone().equals(other.getSenderPhone()))
-                && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()))
-                && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
-                && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
+            && (this.getOrderNumber() == null ? other.getOrderNumber() == null : this.getOrderNumber().equals(other.getOrderNumber()))
+            && (this.getStartPoint() == null ? other.getStartPoint() == null : this.getStartPoint().equals(other.getStartPoint()))
+            && (this.getStartAddress() == null ? other.getStartAddress() == null : this.getStartAddress().equals(other.getStartAddress()))
+            && (this.getEndPoint() == null ? other.getEndPoint() == null : this.getEndPoint().equals(other.getEndPoint()))
+            && (this.getEndAddress() == null ? other.getEndAddress() == null : this.getEndAddress().equals(other.getEndAddress()))
+            && (this.getGoodWeight() == null ? other.getGoodWeight() == null : this.getGoodWeight().equals(other.getGoodWeight()))
+            && (this.getGoodType() == null ? other.getGoodType() == null : this.getGoodType().equals(other.getGoodType()))
+            && (this.getOrderPrice() == null ? other.getOrderPrice() == null : this.getOrderPrice().equals(other.getOrderPrice()))
+            && (this.getConsignor() == null ? other.getConsignor() == null : this.getConsignor().equals(other.getConsignor()))
+            && (this.getConsignorPhone() == null ? other.getConsignorPhone() == null : this.getConsignorPhone().equals(other.getConsignorPhone()))
+            && (this.getRecipient() == null ? other.getRecipient() == null : this.getRecipient().equals(other.getRecipient()))
+            && (this.getRecipientPhone() == null ? other.getRecipientPhone() == null : this.getRecipientPhone().equals(other.getRecipientPhone()))
+            && (this.getRecipientAddress() == null ? other.getRecipientAddress() == null : this.getRecipientAddress().equals(other.getRecipientAddress()))
+            && (this.getNotes() == null ? other.getNotes() == null : this.getNotes().equals(other.getNotes()))
+            && (this.getOrderStatus() == null ? other.getOrderStatus() == null : this.getOrderStatus().equals(other.getOrderStatus()))
+            && (this.getSenderId() == null ? other.getSenderId() == null : this.getSenderId().equals(other.getSenderId()))
+            && (this.getSenderName() == null ? other.getSenderName() == null : this.getSenderName().equals(other.getSenderName()))
+            && (this.getSenderPhone() == null ? other.getSenderPhone() == null : this.getSenderPhone().equals(other.getSenderPhone()))
+            && (this.getIsDeleted() == null ? other.getIsDeleted() == null : this.getIsDeleted().equals(other.getIsDeleted()))
+            && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
+            && (this.getUpdateDate() == null ? other.getUpdateDate() == null : this.getUpdateDate().equals(other.getUpdateDate()));
     }
 
     @Override

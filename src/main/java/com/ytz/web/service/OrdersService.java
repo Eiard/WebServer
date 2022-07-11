@@ -2,6 +2,7 @@ package com.ytz.web.service;
 
 import com.ytz.web.domain.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ytz.web.model.OrdersEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -15,5 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @version: 1.0
  */
 public interface OrdersService extends IService<Orders> {
+
+    OrdersEnum delivery(String orderNumber);
 
 }

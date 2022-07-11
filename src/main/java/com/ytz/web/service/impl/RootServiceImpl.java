@@ -18,14 +18,13 @@ import org.springframework.stereotype.Service;
  * @date: 2022/7/5
  * @version: 1.0
  */
+@Deprecated
 @Service
 @Repository("rootServiceImpl")
 public class RootServiceImpl extends ServiceImpl<RootMapper, Root>
         implements RootService {
     @Override
     public boolean phoneIsExist(String phone) {
-
-
         return lambdaQuery().eq(Root::getRootPhone, phone).exists();
     }
 }

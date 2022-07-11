@@ -9,16 +9,8 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * -*- coding:utf-8 -*-
- *
- * @projectName: web
- * @package: com.ytz.web.domain
- * @className: EmployeePosition
- * @author: 30671
- * @description: DONE : 员工类型
- * @date: 2022/7/4
+ * 
  * @TableName employee_position
- * @version: 1.0
  */
 @TableName(value ="employee_position")
 @Data
