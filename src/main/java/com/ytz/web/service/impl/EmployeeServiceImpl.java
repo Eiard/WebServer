@@ -32,7 +32,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
     @Override
     public EmployeeEnum login(String employeeUsername, String employeePassword) {
-        Employee employee = lambdaQuery().select(Employee::getIsPass)
+        Employee employee = lambdaQuery()
+                .select(Employee::getIsPass)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
                 .eq(Employee::getEmployeePassword, employeePassword)
                 .one();
@@ -55,6 +56,19 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         }
         save(employee);
         return EmployeeEnum.PRE_SIGN_SUCCESS;
+    }
+
+    public EmployeeEnum delivery(String employeeUsername) {
+        Employee employee = lambdaQuery()
+                .select(Employee::getOrderAmount)
+                .eq(Employee::getEmployeeUsername, employeeUsername)
+                .one();
+
+        lambdaUpdate()
+                .set(Employee::getOrderAmount, employee.getOrderAmount() + 1)
+                .eq(Employee::getEmployeeUsername, employeeUsername)
+                .update();
+        return EmployeeEnum.DELIVERY_SUCCESS;
     }
 
 

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.service.EmployeeService;
+import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,9 @@ public class EmployeeController {
     @Resource(name = "employeeServiceImpl")
     private EmployeeService employeeService;
 
+    @Resource(name = "ordersServiceImpl")
+    private OrdersService ordersService;
+
     @RequestMapping("/login")
     String login(@RequestParam String employeeUsername, @RequestParam String employeePassword) {
         return new ResultMap(employeeService.login(employeeUsername, employeePassword)).toJson();
@@ -45,20 +49,8 @@ public class EmployeeController {
     }
 
     @RequestMapping("/delivery")
-    String delivery(@RequestParam String employeeUsername) {
-        Employee employee = new Employee();
-        employee.setEmployeeName("王五");
-        employee.setEmployeeUsername("user3");
-        employee.setEmployeePassword("123456");
-        employee.setEmployeeSex(true);
-        employee.setEmployeePhone("125151674");
-        employee.setStationId(1);
-
-        System.out.println(JsonUtils.objectToJson(employee));
-
-
-
-
+    String delivery(@RequestParam String employeeUsername,@RequestParam String orderNumber) {
+        
 
         return "1";
     }

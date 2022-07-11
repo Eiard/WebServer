@@ -39,6 +39,17 @@ public interface EmployeeService extends IService<Employee> {
      */
     EmployeeEnum sign(Employee employee);
 
+
+    /**
+     * @MethodName: sign
+     * @Description: DONE : 派送完成
+     * @Author: 30671
+     * @date: 2022/7/4
+     * @param: employeeUsername   员工账号
+     * @return: com.ytz.web.model.EmployeeEnum
+     */
+    EmployeeEnum delivery(String employeeUsername);
+
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 手机号存在
