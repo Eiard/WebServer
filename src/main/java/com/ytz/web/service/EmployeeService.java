@@ -3,6 +3,7 @@ package com.ytz.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
+import com.ytz.web.model.OrdersEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -39,6 +40,15 @@ public interface EmployeeService extends IService<Employee> {
      */
     EmployeeEnum sign(Employee employee);
 
+    /**
+     * @MethodName: dispatch
+     * @Description: DONE : 网点管理员指定派送员配送并修改订单标志位
+     * @Author: Delmore
+     * @date: 2022/7/11
+     * @param: orderNumber
+     * @return: com.ytz.web.model.OrdersEnum
+     **/
+    OrdersEnum dispatch(String orderNumber, Employee employee);
 
     /**
      * @MethodName: delivery

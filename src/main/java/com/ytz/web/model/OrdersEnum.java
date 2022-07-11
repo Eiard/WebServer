@@ -11,10 +11,12 @@ package com.ytz.web.model;
  */
 public enum  OrdersEnum {
     /**
-     * 修改订单的状态
-     *
-     *
+     * 网点收件
+     * 派送完成
+     * 分配派送员完成
      */
+    RECEIVE_SUCCESS,
+    DISPATCH_SUCCESS,
     DELIVERY_SUCCESS,
 
 
