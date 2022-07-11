@@ -135,10 +135,6 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         return queryAllInfo;
     }
 
-    @Override
-    public boolean phoneIsExist(String phone) {
-        return lambdaQuery().eq(NetStation::getAdminPhone, phone).exists();
-    }
 
     @Override
     public boolean adminUsernameIsExist(String adminUsername) {

@@ -28,13 +28,4 @@ public interface EmployeeService extends IService<Employee> {
      */
     EmployeeEnum login(String employeeUsername, String employeePassword);
 
-    /**
-     * @MethodName: phoneIsExist
-     * @Description: DONE : 手机号存在
-     * @Author: 30671
-     * @date: 2022/7/5
-     * @param: phone  手机号
-     * @return: boolean
-     */
-    boolean phoneIsExist(String phone);
 }

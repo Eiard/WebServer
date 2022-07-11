@@ -39,11 +39,6 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return EmployeeEnum.LOGIN_SUCCESS;
     }
 
-
-    @Override
-    public boolean phoneIsExist(String phone) {
-        return lambdaQuery().eq(Employee::getEmployeePhone, phone).exists();
-    }
 }
 
 
