@@ -61,7 +61,13 @@ public class Employee implements Serializable {
      * 员工类型ID 派送员默认为3
      */
     @TableField(value = "employee_type")
-    private Boolean employeeType;
+    private Integer employeeType;
+
+    /**
+     * 派送完成的快递单数(月结)
+     */
+    @TableField(value = "order_amount")
+    private Integer orderAmount;
 
     /**
      * 派送完成的快递单数(月结)

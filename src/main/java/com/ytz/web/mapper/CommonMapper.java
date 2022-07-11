@@ -2,13 +2,11 @@ package com.ytz.web.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * -*- coding:utf-8 -*-
+ *
  * @projectName: web
  * @package: com.ytz.web.mapper
  * @className: FinanceMapper
@@ -20,7 +18,13 @@ import java.util.List;
  */
 @Mapper
 @Repository("commonMapper")
-public interface CommonMapper {
+public interface CommonMapper extends BaseMapper<String> {
 
+    /**
+     * 判断手机号是否存在
+     *
+     * @param phone
+     * @return
+     */
     int phoneIsExist(String phone);
 }

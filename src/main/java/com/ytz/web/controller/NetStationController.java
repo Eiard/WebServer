@@ -71,4 +71,9 @@ public class NetStationController {
         }
         return resultMap.toJson();
     }
+
+    @PostMapping("/dispatch")
+    String dispatch() {
+        return "1";
+    }
 }

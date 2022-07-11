@@ -11,6 +11,7 @@ import com.ytz.web.vo.QueryAllVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -135,11 +136,19 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         return queryAllInfo;
     }
 
+    @Override
+    public NetStationEnum delivery(Integer stationId) {
+        NetStation netStation = getById(stationId);
+        // 总完成订单个数加1
+        lambdaUpdate()
+                .set(NetStation::getOrderAmount, netStation.getOrderAmount() + 1)
+                .eq(NetStation::getStationId, stationId)
+                .update();
+        return NetStationEnum.DELIVERY_SUCCESS;
+    }
 
     @Override
     public boolean adminUsernameIsExist(String adminUsername) {
         return lambdaQuery().eq(NetStation::getAdminUsername, adminUsername).exists();
     }
-
-
 }

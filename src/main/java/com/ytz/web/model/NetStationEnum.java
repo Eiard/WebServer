@@ -72,4 +72,10 @@ public enum NetStationEnum {
      */
     UNKNOWN_ERROR,
     FORMAT_ERROR,
+
+    /**
+     * 一个订单完成
+     *
+     */
+    DELIVERY_SUCCESS,
 }

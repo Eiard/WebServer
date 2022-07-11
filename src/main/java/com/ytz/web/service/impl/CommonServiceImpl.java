@@ -2,10 +2,6 @@ package com.ytz.web.service.impl;
 
 import com.ytz.web.mapper.CommonMapper;
 import com.ytz.web.service.CommonService;
-import com.ytz.web.service.EmployeeService;
-import com.ytz.web.service.NetStationService;
-import com.ytz.web.service.RootService;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +28,4 @@ public class CommonServiceImpl implements CommonService {
     public boolean phoneIsExist(String phone) {
         return commonMapper.phoneIsExist(phone) == 0;
     }
-
 }

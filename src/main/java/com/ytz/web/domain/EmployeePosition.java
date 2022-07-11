@@ -9,9 +9,18 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.domain
+ * @className: EmployeePosition
+ * @author: 30671
+ * @description: DONE : 工资
+ * @date: 2022/7/4
  * @TableName employee_position
+ * @version: 1.0
  */
+@Deprecated
 @TableName(value ="employee_position")
 @Data
 public class EmployeePosition implements Serializable {
@@ -37,7 +46,7 @@ public class EmployeePosition implements Serializable {
      * 员工类别逻辑删除:[0]启用 [1]删除
      */
     @TableField(value = "is_deleted")
-    private Boolean isDeleted;
+    private Integer isDeleted;
 
     /**
      * 创建日期

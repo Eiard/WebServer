@@ -16,6 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Entity com.ytz.web.domain.Root
  * @version: 1.0
  */
+@Deprecated
 @Mapper
 public interface RootMapper extends BaseMapper<Root> {
 
