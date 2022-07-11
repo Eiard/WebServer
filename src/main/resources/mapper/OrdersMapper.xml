@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ytz.web.mapper.OrdersMapper">
+
+    <resultMap id="BaseResultMap" type="com.ytz.web.domain.Orders">
+            <id property="orderId" column="order_id" jdbcType="INTEGER"/>
+            <result property="orderNumber" column="order_number" jdbcType="VARCHAR"/>
+            <result property="startPoint" column="start_point" jdbcType="INTEGER"/>
+            <result property="startAddress" column="start_address" jdbcType="VARCHAR"/>
+            <result property="endPoint" column="end_point" jdbcType="INTEGER"/>
+            <result property="endAddress" column="end_address" jdbcType="VARCHAR"/>
+            <result property="goodWeight" column="good_weight" jdbcType="DOUBLE"/>
+            <result property="goodType" column="good_type" jdbcType="INTEGER"/>
+            <result property="orderPrice" column="order_price" jdbcType="DOUBLE"/>
+            <result property="consignor" column="consignor" jdbcType="VARCHAR"/>
+            <result property="consignorPhone" column="consignor_phone" jdbcType="VARCHAR"/>
+            <result property="recipient" column="recipient" jdbcType="VARCHAR"/>
+            <result property="recipientPhone" column="recipient_phone" jdbcType="VARCHAR"/>
+            <result property="recipientAddress" column="recipient_address" jdbcType="VARCHAR"/>
+            <result property="notes" column="notes" jdbcType="VARCHAR"/>
+            <result property="orderStatus" column="order_status" jdbcType="TINYINT"/>
+            <result property="senderId" column="sender_id" jdbcType="INTEGER"/>
+            <result property="senderName" column="sender_name" jdbcType="VARCHAR"/>
+            <result property="senderPhone" column="sender_phone" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        order_id,order_number,start_point,
+        start_address,end_point,end_address,
+        good_weight,good_type,order_price,
+        consignor,consignor_phone,recipient,
+        recipient_phone,recipient_address,notes,
+        order_status,sender_id,sender_name,
+        sender_phone,is_deleted,create_date,
+        update_date
+    </sql>
+</mapper>

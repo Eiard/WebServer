@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ytz.web.mapper.RootMapper">
+
+    <resultMap id="BaseResultMap" type="com.ytz.web.domain.Root">
+            <id property="rootId" column="root_id" jdbcType="INTEGER"/>
+            <result property="rootName" column="root_name" jdbcType="VARCHAR"/>
+            <result property="rootUsername" column="root_username" jdbcType="VARCHAR"/>
+            <result property="rootPassword" column="root_password" jdbcType="VARCHAR"/>
+            <result property="rootPhone" column="root_phone" jdbcType="VARCHAR"/>
+            <result property="rootSex" column="root_sex" jdbcType="TINYINT"/>
+            <result property="rootType" column="root_type" jdbcType="TINYINT"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        root_id,root_name,root_username,
+        root_password,root_phone,root_sex,
+        root_type,create_date,update_date
+    </sql>
+</mapper>

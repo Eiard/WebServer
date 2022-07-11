@@ -46,6 +46,17 @@ public class EmployeeController {
 
     @RequestMapping("/delivery")
     String delivery(@RequestParam String employeeUsername) {
+        Employee employee = new Employee();
+        employee.setEmployeeName("王五");
+        employee.setEmployeeUsername("user3");
+        employee.setEmployeePassword("123456");
+        employee.setEmployeeSex(true);
+        employee.setEmployeePhone("125151674");
+        employee.setEmployeeType(true);
+
+
+
+
 
         return "1";
     }
