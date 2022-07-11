@@ -42,7 +42,7 @@ CREATE TABLE root
     root_phone    VARCHAR(30) UNIQUE   NOT NULL COMMENT '系统管理员电话',
     root_sex      TINYINT(1)           NOT NULL COMMENT '员工性别 0 女 1 男',
     #-----------------------------------------------------------------------------------------
-    root_type     TINYINT(1) DEFAULT 0 NOT NULL COMMENT '默认为0 系统管理员',
+    root_type     TINYINT(1) DEFAULT 1 NOT NULL COMMENT '默认为1 系统管理员',
     #-----------------------------------------------------------------------------------------
     create_date   DATETIME   DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
     update_date   DATETIME   DEFAULT CURRENT_TIMESTAMP
@@ -57,15 +57,15 @@ DROP TABLE IF EXISTS employee;
 
 CREATE TABLE employee
 (
-    employee_id       INT(10)     NOT NULL AUTO_INCREMENT COMMENT '员工工号',
-    employee_name     VARCHAR(30) NOT NULL COMMENT '员工姓名',
-    employee_username VARCHAR(30) NOT NULL UNIQUE COMMENT '员工账号',
-    employee_password VARCHAR(30) NOT NULL COMMENT '员工密码',
-    employee_sex      TINYINT(1)  NOT NULL COMMENT '员工性别 0 女 1 男',
-    employee_phone    VARCHAR(11) NOT NULL COMMENT '员工电话',
+    employee_id       INT(10)               NOT NULL AUTO_INCREMENT COMMENT '员工工号',
+    employee_name     VARCHAR(30)           NOT NULL COMMENT '员工姓名',
+    employee_username VARCHAR(30)           NOT NULL UNIQUE COMMENT '员工账号',
+    employee_password VARCHAR(30)           NOT NULL COMMENT '员工密码',
+    employee_sex      TINYINT(1)            NOT NULL COMMENT '员工性别 0 女 1 男',
+    employee_phone    VARCHAR(11)           NOT NULL COMMENT '员工电话',
     #-----------------------------------------------------------------------------------------
-    station_id        INT(10)     NOT NULL COMMENT '所属网点ID(自动)',
-    employee_type     TINYINT(1)  NOT NULL COMMENT '员工类型ID',
+    station_id        INT(10)               NOT NULL COMMENT '所属网点ID(自动)',
+    employee_type     TINYINT(1)  DEFAULT 3 NOT NULL COMMENT '员工类型ID 派送员默认为3',
     order_amount      INT(10)     DEFAULT 0 COMMENT '派送完成的快递单数(月结)',
     #-----------------------------------------------------------------------------------------
     is_pass           TINYINT(1)  DEFAULT 0 COMMENT '状态标志位 [0] 未审核或离职 [1] 审核通过并在职',

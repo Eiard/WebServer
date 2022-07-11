@@ -52,7 +52,9 @@ public class EmployeeController {
         employee.setEmployeePassword("123456");
         employee.setEmployeeSex(true);
         employee.setEmployeePhone("125151674");
-        employee.setEmployeeType(true);
+        employee.setStationId(1);
+
+        System.out.println(JsonUtils.objectToJson(employee));
 
 
 
