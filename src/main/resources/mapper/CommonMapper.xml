@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ytz.web.mapper.CommonMapper">
+    <select id="phoneIsExist" resultType="int" parameterType="String">
+        select COUNT(*)
+        from employee
+                 left join net_station
+                           on 1 = 1
+                 left join root
+                           on 1 = 1
+        WHERE employee_phone = #{phone}
+           OR admin_phone = #{phone}
+           OR root_phone = #{phone};
+    </select>
+
+
+
+</mapper>
