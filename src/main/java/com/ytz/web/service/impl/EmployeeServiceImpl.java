@@ -1,12 +1,15 @@
 package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.mapper.EmployeeMapper;
+import com.ytz.web.model.EmployeeEnum;
+import com.ytz.web.service.CommonService;
 import com.ytz.web.service.EmployeeService;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * -*- coding:utf-8 -*-
@@ -24,6 +27,9 @@ import org.springframework.stereotype.Service;
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         implements EmployeeService {
 
+    @Resource(name = "commonServiceImpl")
+    private CommonService commonService;
+
     @Override
     public EmployeeEnum login(String employeeUsername, String employeePassword) {
         Employee employee = lambdaQuery().select(Employee::getIsPass)
@@ -39,10 +45,27 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return EmployeeEnum.LOGIN_SUCCESS;
     }
 
+    @Override
+    public EmployeeEnum sign(Employee employee) {
+        if (employeeUsernameIsExist(employee.getEmployeeUsername())) {
+            return EmployeeEnum.PRE_SIGN_USERNAME_USED;
+        }
+        if (commonService.phoneIsExist(employee.getEmployeePhone())) {
+            return EmployeeEnum.PRE_SIGN_PHONE_USED;
+        }
+        save(employee);
+        return EmployeeEnum.PRE_SIGN_SUCCESS;
+    }
+
 
     @Override
     public boolean phoneIsExist(String phone) {
         return lambdaQuery().eq(Employee::getEmployeePhone, phone).exists();
+    }
+
+    @Override
+    public boolean employeeUsernameIsExist(String employeeUsername) {
+        return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
     }
 }
 

@@ -1,8 +1,8 @@
 package com.ytz.web.service;
 
-import com.ytz.web.model.EmployeeEnum;
-import com.ytz.web.domain.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ytz.web.domain.Employee;
+import com.ytz.web.model.EmployeeEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -24,9 +24,20 @@ public interface EmployeeService extends IService<Employee> {
      * @date: 2022/7/4
      * @param: employeeUsername  员工账号
      * @param: employeePassword  员工密码
-     * @return: com.ytz.web.model.NetStationServiceEnum
+     * @return: com.ytz.web.model.EmployeeEnum
      */
     EmployeeEnum login(String employeeUsername, String employeePassword);
+
+
+    /**
+     * @MethodName: sign
+     * @Description: DONE : 实现员工注册
+     * @Author: 30671
+     * @date: 2022/7/4
+     * @param: employee   员工信息
+     * @return: com.ytz.web.model.EmployeeEnum
+     */
+    EmployeeEnum sign(Employee employee);
 
     /**
      * @MethodName: phoneIsExist
@@ -37,4 +48,14 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     boolean phoneIsExist(String phone);
+
+    /**
+     * @MethodName: employeeUsernameIsExist
+     * @Description: DONE : 员工用户名存在
+     * @Author: 30671
+     * @date: 2022/7/11
+     * @param: employeeUsername  员工用户名
+     * @return: boolean
+     */
+    boolean employeeUsernameIsExist(String employeeUsername);
 }
