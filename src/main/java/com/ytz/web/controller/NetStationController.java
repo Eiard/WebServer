@@ -6,6 +6,7 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
+import com.ytz.web.vo.QueryAllVO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
@@ -53,9 +54,8 @@ public class NetStationController {
 
     @PostMapping("/queryAll")
     String queryAll(@RequestParam String adminUsername) {
-        netStationService.queryAll(adminUsername);
-
-        return null;
+        QueryAllVO queryAllVO = netStationService.queryAll(adminUsername);
+        return new ResultMap(NetStationEnum.QUERY_SUCCESS, queryAllVO).toJson();
     }
 
     @PostMapping("/update")

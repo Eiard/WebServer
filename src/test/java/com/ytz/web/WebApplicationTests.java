@@ -2,6 +2,9 @@ package com.ytz.web;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ytz.web.domain.GoodType;
+import com.ytz.web.mapper.GoodTypeMapper;
+import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.mapper.RootMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +15,8 @@ import javax.annotation.Resource;
 class WebApplicationTests {
     @Resource
     RootMapper rootMapper;
+    @Resource
+    NetStationMapper netStationMapper;
 
     @Test
     void contextLoads() {
@@ -22,5 +27,10 @@ class WebApplicationTests {
         System.out.println("总页数:"+page.getPages());
         System.out.println("数据:"+page.getRecords());
         System.out.println("总数据数:"+page.getTotal());
+    }
+
+    @Test
+    void test(){
+        netStationMapper.deleteById(1);
     }
 }

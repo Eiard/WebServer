@@ -119,10 +119,11 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         QueryAllVO queryAllInfo = null;
         try {
             NetStation station = lambdaQuery()
-                    .select(NetStation::getStationName, NetStation::getStationAddress,
-                    NetStation::getAdminName, NetStation::getAdminPhone,
-                    NetStation::getAdminSex, NetStation::getOrderAmount)
-                    .eq(NetStation::getAdminName, adminUsername)
+                    .select(NetStation::getStationName,
+                            NetStation::getStationAddress, NetStation::getAdminName,
+                            NetStation::getAdminPhone, NetStation::getAdminUsername,
+                            NetStation::getAdminSex, NetStation::getOrderAmount)
+                    .eq(NetStation::getAdminUsername, adminUsername)
                     .one();
             queryAllInfo = new QueryAllVO();
             BeanUtils.copyProperties(queryAllInfo, station);

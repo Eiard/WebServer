@@ -13,7 +13,7 @@ import lombok.Data;
  *
  * @projectName: web
  * @package: com.ytz.web.domain
- * @className: Orders
+ * @className: Employee
  * @author: 30671
  * @description: DONE : 员工
  * @date: 2022/7/4
@@ -72,7 +72,7 @@ public class Employee implements Serializable {
     private Boolean employeeType;
 
     /**
-     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 离职 
+     * 状态标志位 [0] 未审核或离职 [1] 审核通过并在职
      */
     @TableField(value = "is_pass")
     private Integer isPass;

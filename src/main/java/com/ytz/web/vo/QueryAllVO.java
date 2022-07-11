@@ -1,6 +1,8 @@
 package com.ytz.web.vo;
 
+import com.ytz.web.domain.NetStation;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @projectName: web
@@ -12,7 +14,7 @@ import lombok.Data;
  * @version: 1.0
  */
 @Data
-public class QueryAllVO {
+public class QueryAllVO  {
     private String stationName;
     private String stationAddress;
     private String adminName;

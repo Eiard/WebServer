@@ -71,6 +71,7 @@ public interface NetStationService extends IService<NetStation> {
      * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
      **/
     QueryAllVO queryAll(String adminUsername);
+
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 手机号存在
