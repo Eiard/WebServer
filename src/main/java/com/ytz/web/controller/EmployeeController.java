@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.service.EmployeeService;
+import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
@@ -31,6 +32,9 @@ public class EmployeeController {
     @Resource(name = "ordersServiceImpl")
     private OrdersService ordersService;
 
+    @Resource(name = "netStationServiceImpl")
+    private NetStationService netStationService;
+
     @RequestMapping("/login")
     String login(@RequestParam String employeeUsername, @RequestParam String employeePassword) {
         return new ResultMap(employeeService.login(employeeUsername, employeePassword)).toJson();
@@ -49,9 +53,17 @@ public class EmployeeController {
     }
 
     @RequestMapping("/delivery")
-    String delivery(@RequestParam String employeeUsername,@RequestParam String orderNumber) {
-        
+    String delivery(@RequestParam String employeeUsername,Integer stationId, @RequestParam String orderNumber) {
 
-        return "1";
+        // 派送员送件数增加
+        employeeService.delivery(employeeUsername);
+
+        // 网点送件数增加
+
+
+        // 订单状态更改
+
+
+        return new ResultMap(EmployeeEnum.DELIVERY_SUCCESS).toJson();
     }
 }
