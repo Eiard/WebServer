@@ -3,9 +3,8 @@ package com.ytz.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
-import com.ytz.web.vo.FuzzyQueryStationInfo;
-import com.ytz.web.vo.QueryAllInfo;
-import com.ytz.web.vo.UpdateInfo;
+import com.ytz.web.vo.FuzzyQueryStationVO;
+import com.ytz.web.vo.QueryAllVO;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: netStation  网点信息
      * @return: com.ytz.web.model.NetStationServiceEnum
      */
-     NetStationEnum updateInform(UpdateInfo updateInfo);
+     NetStationEnum updateStationInform(NetStation netStation,String newPassword );
 
     /**
      * @MethodName: queryByIdNameAddress
@@ -62,7 +61,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: stationInfo  既可以是网点名称 也可以是网店地址
      * @return: List<NetStation>
      */
-    List<FuzzyQueryStationInfo> fuzzyQueryByStationInfo(String stationInfo);
+    List<FuzzyQueryStationVO> fuzzyQueryByStationInfo(String stationInfo);
 
     /**
      * @MethodName: queryAll
@@ -71,7 +70,7 @@ public interface NetStationService extends IService<NetStation> {
      * @date: 2022/7/8
      * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
      **/
-    QueryAllInfo queryAll(String adminUsername);
+    QueryAllVO queryAll(String adminUsername);
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 手机号存在
