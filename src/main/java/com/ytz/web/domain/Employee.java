@@ -69,7 +69,7 @@ public class Employee implements Serializable {
      * 员工类型ID
      */
     @TableField(value = "employee_type")
-    private Boolean employeeType;
+    private Integer employeeType;
 
     /**
      * 派送完成的快递单数(月结)
