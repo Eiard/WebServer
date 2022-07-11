@@ -68,9 +68,21 @@ public interface NetStationService extends IService<NetStation> {
      * @Description: TODO : 网点管理员查询所有信息
      * @Author: Delmore
      * @date: 2022/7/8
+     * @param: adminUsername  网点账号
      * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
      **/
     QueryAllVO queryAllInform(String adminUsername);
+
+    /**
+     * @MethodName: delivery
+     * @Description: DONE : 通过网点Id 完成一个订单则增加数量
+     * @Author: 30671
+     * @date: 2022/7/1
+     * @param: stationId  网点Id
+     * @return: com.ytz.web.model.NetStationServiceEnum
+     */
+    NetStationEnum delivery(Integer stationId);
+
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 手机号存在

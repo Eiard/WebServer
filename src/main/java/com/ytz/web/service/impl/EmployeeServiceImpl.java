@@ -58,7 +58,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return EmployeeEnum.PRE_SIGN_SUCCESS;
     }
 
-    public EmployeeEnum delivery(String employeeUsername) {
+    public Integer delivery(String employeeUsername) {
         Employee employee = lambdaQuery()
                 .select(Employee::getOrderAmount)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
@@ -68,7 +68,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .set(Employee::getOrderAmount, employee.getOrderAmount() + 1)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
                 .update();
-        return EmployeeEnum.DELIVERY_SUCCESS;
+        return employee.getStationId();
     }
 
 

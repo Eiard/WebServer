@@ -29,11 +29,13 @@ public class EmployeeController {
     @Resource(name = "employeeServiceImpl")
     private EmployeeService employeeService;
 
+    @Resource(name = "netStationServiceImpl")
+    private NetStationService netStationService;
+
     @Resource(name = "ordersServiceImpl")
     private OrdersService ordersService;
 
-    @Resource(name = "netStationServiceImpl")
-    private NetStationService netStationService;
+
 
     @RequestMapping("/login")
     String login(@RequestParam String employeeUsername, @RequestParam String employeePassword) {
@@ -53,13 +55,13 @@ public class EmployeeController {
     }
 
     @RequestMapping("/delivery")
-    String delivery(@RequestParam String employeeUsername,Integer stationId, @RequestParam String orderNumber) {
+    String delivery(@RequestParam String employeeUsername,@RequestParam String orderNumber) {
 
         // 派送员送件数增加
-        employeeService.delivery(employeeUsername);
+        Integer stationId = employeeService.delivery(employeeUsername);
 
         // 网点送件数增加
-
+        netStationService.delivery(stationId);
 
         // 订单状态更改
 

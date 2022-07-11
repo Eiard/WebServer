@@ -46,9 +46,9 @@ public interface EmployeeService extends IService<Employee> {
      * @Author: 30671
      * @date: 2022/7/4
      * @param: employeeUsername   员工账号
-     * @return: com.ytz.web.model.EmployeeEnum
+     * @return: stationId
      */
-    EmployeeEnum delivery(String employeeUsername);
+    Integer delivery(String employeeUsername);
 
     /**
      * @MethodName: phoneIsExist

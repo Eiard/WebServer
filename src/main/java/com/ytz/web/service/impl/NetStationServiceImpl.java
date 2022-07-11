@@ -137,6 +137,14 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
+    public NetStationEnum delivery(Integer stationId) {
+        NetStation netStation = getById(stationId);
+        // 总完成订单个数加1
+        netStation.setOrderAmount(netStation.getOrderAmount() + 1);
+        return NetStationEnum.DELIVERY_SUCCESS;
+    }
+
+    @Override
     public boolean phoneIsExist(String phone) {
         return lambdaQuery().eq(NetStation::getAdminPhone, phone).exists();
     }
