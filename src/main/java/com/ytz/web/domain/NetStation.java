@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
@@ -22,6 +24,7 @@ import lombok.Data;
  */
 @TableName(value ="net_station")
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class NetStation implements Serializable {
     /**
      * 网点ID 等价于 网点管理员ID

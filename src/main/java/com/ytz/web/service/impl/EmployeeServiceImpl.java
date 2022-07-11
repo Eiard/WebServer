@@ -33,12 +33,11 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         if (employee == null) {
             return EmployeeEnum.LOGIN_FAILED;
         }
-        if (employee.getIsPass() == 0) {
+        if (!(employee.getIsPass())) {
             return EmployeeEnum.LOGIN_UNVERIFIED;
         }
         return EmployeeEnum.LOGIN_SUCCESS;
     }
-
 
 
     @Override

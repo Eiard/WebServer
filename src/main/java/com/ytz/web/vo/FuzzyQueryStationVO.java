@@ -17,5 +17,4 @@ import org.apache.commons.beanutils.BeanUtils;
 public class FuzzyQueryStationVO {
     private String stationName;
     private String stationAddress;
-
 }

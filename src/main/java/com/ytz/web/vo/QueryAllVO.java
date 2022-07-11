@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
  * @package: com.ytz.web.vo
  * @className: QueryAllInform
  * @author: Delmore
- * @description: TODO
+ * @description: DONE ：
  * @date: 2022/7/8 21:12
  * @version: 1.0
  */

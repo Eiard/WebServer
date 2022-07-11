@@ -17,7 +17,7 @@ import lombok.Data;
  * @author: 30671
  * @description: DONE : 员工类型
  * @date: 2022/7/4
- * @TableName employee
+ * @TableName employee_position
  * @version: 1.0
  */
 @TableName(value ="employee_position")

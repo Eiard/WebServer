@@ -8,6 +8,7 @@ import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import com.ytz.web.vo.QueryAllVO;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 
 /**
@@ -52,18 +53,19 @@ public class NetStationController {
         return new ResultMap(NetStationEnum.QUERY_SUCCESS, netStationService.fuzzyQueryByStationInfo(stationInfo)).toJson();
     }
 
-    @PostMapping("/queryAll")
+    @PostMapping("/queryAllInform")
     String queryAll(@RequestParam String adminUsername) {
-        QueryAllVO queryAllVO = netStationService.queryAll(adminUsername);
+        QueryAllVO queryAllVO = netStationService.queryAllInform(adminUsername);
         return new ResultMap(NetStationEnum.QUERY_SUCCESS, queryAllVO).toJson();
     }
 
-    @PostMapping("/update")
-    String update(@RequestParam String netStation,@RequestParam String newPassword) {
+
+    @PostMapping("/updateStationInform")
+    String update(@RequestParam String netStation, @RequestParam String newPassword) {
         ResultMap resultMap = new ResultMap();
         try {
             resultMap.setEnum(netStationService.updateStationInform(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
-            }),newPassword));
+            }), newPassword));
         } catch (Exception e) {
             resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
         }

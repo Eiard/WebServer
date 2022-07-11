@@ -26,7 +26,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeePassword  员工密码
      * @return: com.ytz.web.model.NetStationServiceEnum
      */
-    EmployeeEnum login(String employeeUsername, String adminPassword);
+    EmployeeEnum login(String employeeUsername, String employeePassword);
 
     /**
      * @MethodName: phoneIsExist
