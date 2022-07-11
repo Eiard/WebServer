@@ -23,10 +23,4 @@ import org.springframework.stereotype.Service;
 public class EmployeePositionServiceImpl extends ServiceImpl<EmployeePositionMapper, EmployeePosition>
         implements EmployeePositionService {
 
-
-
 }
-
-
-
-

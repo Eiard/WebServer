@@ -6,9 +6,8 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
-import com.ytz.web.vo.UpdateInfo;
+import com.ytz.web.vo.QueryAllVO;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 
 /**
@@ -36,17 +35,14 @@ public class NetStationController {
     }
 
     @PostMapping("/sign")
-    String sign(@RequestBody String netStation) {
-
+    String sign(@RequestParam String netStation) {
         ResultMap resultMap = new ResultMap();
-
         try {
             resultMap.setEnum(netStationService.sign(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
             })));
         } catch (Exception e) {
             resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
         }
-
         return resultMap.toJson();
     }
 
@@ -57,22 +53,20 @@ public class NetStationController {
     }
 
     @PostMapping("/queryAll")
-    String queryAll(@RequestParam String adminUsername){
-        netStationService.queryAll(adminUsername);
-        
-        return null;
+    String queryAll(@RequestParam String adminUsername) {
+        QueryAllVO queryAllVO = netStationService.queryAll(adminUsername);
+        return new ResultMap(NetStationEnum.QUERY_SUCCESS, queryAllVO).toJson();
     }
 
     @PostMapping("/update")
-    String update(@RequestBody String updateInfo) {
+    String update(@RequestParam String netStation,@RequestParam String newPassword) {
         ResultMap resultMap = new ResultMap();
         try {
-            resultMap.setEnum(netStationService.updateInform(JsonUtils.jsonToObject(updateInfo, new TypeReference<UpdateInfo>() {
-            })));
+            resultMap.setEnum(netStationService.updateStationInform(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+            }),newPassword));
         } catch (Exception e) {
             resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
         }
         return resultMap.toJson();
     }
-
 }

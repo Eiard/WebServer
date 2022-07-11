@@ -6,9 +6,8 @@ import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
-import com.ytz.web.vo.FuzzyQueryStationInfo;
-import com.ytz.web.vo.QueryAllInfo;
-import com.ytz.web.vo.UpdateInfo;
+import com.ytz.web.vo.FuzzyQueryStationVO;
+import com.ytz.web.vo.QueryAllVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,6 @@ import java.util.List;
 @Repository("netStationServiceImpl")
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
-
 
     @Resource(name = "commonServiceImpl")
     private CommonService commonService;
@@ -66,62 +64,68 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public NetStationEnum updateInform(UpdateInfo updateInfo) {
-        NetStation station = lambdaQuery().select(NetStation::getAdminPassword)
-                .eq(NetStation::getAdminUsername, updateInfo.getAdminUsername())
+    public NetStationEnum updateStationInform(NetStation netStation,String newPassword) {
+        NetStation station = lambdaQuery()
+                .select(NetStation::getAdminPassword,NetStation::getAdminPhone)
+                .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
                 .one();
-        if (!(updateInfo.getPassword().equals(station.getAdminPassword()))) {
+        if (!(netStation.getAdminPassword().equals(station.getAdminPassword()))) {
             return NetStationEnum.CHANCE_FAILED_PASSWORD_ERROR;
         }
-        if (commonService.phoneIsExist(updateInfo.getAdminPhone())) {
+        if (commonService.phoneIsExist(netStation.getAdminPhone())) {
+            if (!(station.getAdminPhone().equals(netStation.getAdminPhone())))
             return NetStationEnum.CHANGE_FAILED_PHONE_USED;
         }
         lambdaUpdate()
-                .set(NetStation::getStationName, updateInfo.getStationName())
-                .set(NetStation::getStationAddress, updateInfo.getStationAddress())
-                .set(NetStation::getAdminName, updateInfo.getAdminName())
-                .set(NetStation::getAdminPhone, updateInfo.getAdminPhone())
-                .set(NetStation::getAdminSex, updateInfo.getAdminSex())
-                .set(NetStation::getAdminPassword,updateInfo.getNewPassword())
-                .eq(NetStation::getAdminUsername, updateInfo.getAdminUsername())
+                .set(NetStation::getStationName, netStation.getStationName())
+                .set(NetStation::getStationAddress, netStation.getStationAddress())
+                .set(NetStation::getAdminName, netStation.getAdminName())
+                .set(NetStation::getAdminPhone, netStation.getAdminPhone())
+                .set(NetStation::getAdminSex, netStation.getAdminSex())
+                .set(NetStation::getAdminPassword, newPassword)
+                .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
                 .update();
         return NetStationEnum.CHANGE_SUCCESS;
     }
 
     @Override
-    public List<FuzzyQueryStationInfo> fuzzyQueryByStationInfo(String stationInfo) {
-        List<FuzzyQueryStationInfo> fuzzyQueryStationInfos = new ArrayList<>();
+    public List<FuzzyQueryStationVO> fuzzyQueryByStationInfo(String stationInfo) {
+        List<FuzzyQueryStationVO> fuzzyQueryStationVOS = new ArrayList<>();
         try {
             List<NetStation> netStations = lambdaQuery()
-                    .select(NetStation::getStationId, NetStation::getStationName, NetStation::getStationAddress)
+                    .select(NetStation::getStationId,
+                            NetStation::getStationName,
+                            NetStation::getStationAddress)
                     .like(NetStation::getStationName, stationInfo)
                     .or(netStationLambdaQueryWrapper -> {
                         netStationLambdaQueryWrapper
                                 .like(NetStation::getStationAddress, stationInfo);
                     }).list();
             for (NetStation netStation : netStations) {
-                FuzzyQueryStationInfo fuzzyQueryStationInfo = new FuzzyQueryStationInfo();
-                BeanUtils.copyProperties(fuzzyQueryStationInfo, netStation);
-                fuzzyQueryStationInfos.add(fuzzyQueryStationInfo);
+                FuzzyQueryStationVO fuzzyQueryStationVO = new FuzzyQueryStationVO();
+                BeanUtils.copyProperties(fuzzyQueryStationVO, netStation);
+                fuzzyQueryStationVOS.add(fuzzyQueryStationVO);
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        return fuzzyQueryStationInfos;
+        return fuzzyQueryStationVOS;
     }
 
     @Override
-    public QueryAllInfo queryAll(String adminUsername) {
-        QueryAllInfo queryAllInfo = null;
+    public QueryAllVO queryAll(String adminUsername) {
+        QueryAllVO queryAllInfo = null;
         try {
-            NetStation station = lambdaQuery().select(NetStation::getStationName, NetStation::getStationAddress,
-                    NetStation::getAdminName, NetStation::getAdminPhone,
-                    NetStation::getAdminSex, NetStation::getOrderAmount)
-                    .eq(NetStation::getAdminName, adminUsername)
+            NetStation station = lambdaQuery()
+                    .select(NetStation::getStationName,
+                            NetStation::getStationAddress, NetStation::getAdminName,
+                            NetStation::getAdminPhone, NetStation::getAdminUsername,
+                            NetStation::getAdminSex, NetStation::getOrderAmount)
+                    .eq(NetStation::getAdminUsername, adminUsername)
                     .one();
-            queryAllInfo = new QueryAllInfo();
+            queryAllInfo = new QueryAllVO();
             BeanUtils.copyProperties(queryAllInfo, station);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
