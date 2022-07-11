@@ -2,6 +2,7 @@ package com.ytz.web.service;
 
 import com.ytz.web.domain.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ytz.web.model.OrdersEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -15,5 +16,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @version: 1.0
  */
 public interface OrdersService extends IService<Orders> {
+
+    /**
+     * @MethodName: delivery
+     * @Description: DONE : 派送员配送完成并修改订单标志位，修改订单逻辑删除位
+     * @Author: Delmore
+     * @date: 2022/7/11
+     * @param: orderNumber
+     * @return: com.ytz.web.model.OrdersEnum
+     **/
+    OrdersEnum delivery(String orderNumber);
 
 }
