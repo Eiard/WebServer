@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @date: 2022/7/4
  * @version: 1.0
  */
+@Deprecated
 public interface RootService extends IService<Root> {
 
     /**
