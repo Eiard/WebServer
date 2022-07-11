@@ -29,4 +29,18 @@ public class EmployeeController {
         return new ResultMap(employeeService.login(employeeUsername, employeePassword)).toJson();
     }
 
+    @RequestMapping("/sign")
+    String sign(){
+
+
+        return "1";
+    }
+
+    @RequestMapping("/delivery")
+    String delivery(@RequestParam String employeeUsername,@RequestParam String orderNumber){
+
+        return "1";
+    }
+
+
 }

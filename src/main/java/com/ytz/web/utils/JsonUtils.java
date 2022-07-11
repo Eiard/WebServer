@@ -6,6 +6,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.JSONLibDataFormatSerializer;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 
 import java.util.List;
 import java.util.Map;

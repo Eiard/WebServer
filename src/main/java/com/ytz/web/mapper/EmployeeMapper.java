@@ -1,23 +1,14 @@
 package com.ytz.web.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ytz.web.domain.Employee;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * -*- coding:utf-8 -*-
- *
- * @projectName: web
- * @package: com.ytz.web.mapper
- * @className: EmployeeMapper
- * @author: 30671
- * @description: DONE : 针对表【employee】的数据库操作Mapper
- * @date: 2022/7/4
- * @Entity com.ytz.web.domain.Employee
- * @version: 1.0
- */
-@Mapper
+* @author 30671
+* @description 针对表【employee】的数据库操作Mapper
+* @createDate 2022-07-11 17:14:13
+* @Entity com.ytz.web.domain.Employee
+*/
 public interface EmployeeMapper extends BaseMapper<Employee> {
 
 }

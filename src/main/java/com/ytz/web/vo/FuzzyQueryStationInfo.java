@@ -9,7 +9,7 @@ import org.apache.commons.beanutils.BeanUtils;
  * @package: com.ytz.web.vo
  * @className: NetStationVo
  * @author: Delmore
- * @description: TODO
+ * @description: DONE : 用于模糊查询
  * @date: 2022/7/7 21:18
  * @version: 1.0
  */
@@ -17,5 +17,4 @@ import org.apache.commons.beanutils.BeanUtils;
 public class FuzzyQueryStationInfo {
     private String stationName;
     private String stationAddress;
-
 }

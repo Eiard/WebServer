@@ -9,16 +9,8 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * -*- coding:utf-8 -*-
- *
- * @projectName: web
- * @package: com.ytz.web.domain
- * @className: Orders
- * @author: 30671
- * @description: DONE : 员工
- * @date: 2022/7/4
+ * 
  * @TableName employee
- * @version: 1.0
  */
 @TableName(value ="employee")
 @Data
@@ -51,7 +43,7 @@ public class Employee implements Serializable {
      * 员工性别 0 女 1 男
      */
     @TableField(value = "employee_sex")
-    private Boolean employeeSex;
+    private Integer employeeSex;
 
     /**
      * 员工电话
@@ -69,10 +61,16 @@ public class Employee implements Serializable {
      * 员工类型ID
      */
     @TableField(value = "employee_type")
-    private Boolean employeeType;
+    private Integer employeeType;
 
     /**
-     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 离职 
+     * 派送完成的快递单数(月结)
+     */
+    @TableField(value = "order_amount")
+    private Integer orderAmount;
+
+    /**
+     * 状态标志位 [0] 未审核或离职 [1] 审核通过并在职
      */
     @TableField(value = "is_pass")
     private Integer isPass;
@@ -118,6 +116,7 @@ public class Employee implements Serializable {
             && (this.getEmployeePhone() == null ? other.getEmployeePhone() == null : this.getEmployeePhone().equals(other.getEmployeePhone()))
             && (this.getStationId() == null ? other.getStationId() == null : this.getStationId().equals(other.getStationId()))
             && (this.getEmployeeType() == null ? other.getEmployeeType() == null : this.getEmployeeType().equals(other.getEmployeeType()))
+            && (this.getOrderAmount() == null ? other.getOrderAmount() == null : this.getOrderAmount().equals(other.getOrderAmount()))
             && (this.getIsPass() == null ? other.getIsPass() == null : this.getIsPass().equals(other.getIsPass()))
             && (this.getResignReason() == null ? other.getResignReason() == null : this.getResignReason().equals(other.getResignReason()))
             && (this.getCreateDate() == null ? other.getCreateDate() == null : this.getCreateDate().equals(other.getCreateDate()))
@@ -136,6 +135,7 @@ public class Employee implements Serializable {
         result = prime * result + ((getEmployeePhone() == null) ? 0 : getEmployeePhone().hashCode());
         result = prime * result + ((getStationId() == null) ? 0 : getStationId().hashCode());
         result = prime * result + ((getEmployeeType() == null) ? 0 : getEmployeeType().hashCode());
+        result = prime * result + ((getOrderAmount() == null) ? 0 : getOrderAmount().hashCode());
         result = prime * result + ((getIsPass() == null) ? 0 : getIsPass().hashCode());
         result = prime * result + ((getResignReason() == null) ? 0 : getResignReason().hashCode());
         result = prime * result + ((getCreateDate() == null) ? 0 : getCreateDate().hashCode());
@@ -157,6 +157,7 @@ public class Employee implements Serializable {
         sb.append(", employeePhone=").append(employeePhone);
         sb.append(", stationId=").append(stationId);
         sb.append(", employeeType=").append(employeeType);
+        sb.append(", orderAmount=").append(orderAmount);
         sb.append(", isPass=").append(isPass);
         sb.append(", resignReason=").append(resignReason);
         sb.append(", createDate=").append(createDate);
