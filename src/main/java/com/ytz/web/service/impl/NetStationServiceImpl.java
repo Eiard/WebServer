@@ -11,6 +11,7 @@ import com.ytz.web.vo.QueryAllVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -64,9 +65,9 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public NetStationEnum updateStationInform(NetStation netStation,String newPassword) {
+    public NetStationEnum updateStationInform(NetStation netStation, String newPassword) {
         NetStation station = lambdaQuery()
-                .select(NetStation::getAdminPassword,NetStation::getAdminPhone)
+                .select(NetStation::getAdminPassword, NetStation::getAdminPhone)
                 .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
                 .one();
         if (!(netStation.getAdminPassword().equals(station.getAdminPassword()))) {
@@ -74,7 +75,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         }
         if (commonService.phoneIsExist(netStation.getAdminPhone())) {
             if (!(station.getAdminPhone().equals(netStation.getAdminPhone())))
-            return NetStationEnum.CHANGE_FAILED_PHONE_USED;
+                return NetStationEnum.CHANGE_FAILED_PHONE_USED;
         }
         lambdaUpdate()
                 .set(NetStation::getStationName, netStation.getStationName())
@@ -115,7 +116,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public QueryAllVO queryAll(String adminUsername) {
+    public QueryAllVO queryAllInform(String adminUsername) {
         QueryAllVO queryAllInfo = null;
         try {
             NetStation station = lambdaQuery()
