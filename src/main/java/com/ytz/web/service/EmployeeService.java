@@ -41,16 +41,6 @@ public interface EmployeeService extends IService<Employee> {
     EmployeeEnum sign(Employee employee);
 
     /**
-     * @MethodName: dispatch
-     * @Description: DONE : 网点管理员指定派送员配送并修改订单标志位
-     * @Author: Delmore
-     * @date: 2022/7/11
-     * @param: orderNumber
-     * @return: com.ytz.web.model.OrdersEnum
-     **/
-    OrdersEnum dispatch(String orderNumber, Employee employee);
-
-    /**
      * @MethodName: delivery
      * @Description: DONE : 派送完成
      * @Author: 30671

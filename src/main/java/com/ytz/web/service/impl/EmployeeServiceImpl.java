@@ -60,16 +60,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return EmployeeEnum.PRE_SIGN_SUCCESS;
     }
 
-    @Override
-    public OrdersEnum dispatch(String orderNumber, Employee employee) {
-        lambdaUpdate().set(Orders::getOrderStatus, 2)
-                .set(Orders::getSenderId, employee.getEmployeeId())
-                .set(Orders::getSenderName, employee.getEmployeeName())
-                .set(Orders::getSenderPhone, employee.getEmployeePhone())
-                .eq(Orders::getOrderNumber, orderNumber)
-                .update();
-        return OrdersEnum.DISPATCH_SUCCESS;
-    }
+
 
     public Integer delivery(String employeeUsername) {
         Employee employee = lambdaQuery()
