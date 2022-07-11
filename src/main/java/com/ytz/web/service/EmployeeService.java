@@ -41,24 +41,14 @@ public interface EmployeeService extends IService<Employee> {
 
 
     /**
-     * @MethodName: sign
+     * @MethodName: delivery
      * @Description: DONE : 派送完成
      * @Author: 30671
      * @date: 2022/7/4
      * @param: employeeUsername   员工账号
-     * @return: stationId
+     * @return: stationId 网点Id
      */
     Integer delivery(String employeeUsername);
-
-    /**
-     * @MethodName: phoneIsExist
-     * @Description: DONE : 手机号存在
-     * @Author: 30671
-     * @date: 2022/7/5
-     * @param: phone  手机号
-     * @return: boolean
-     */
-    boolean phoneIsExist(String phone);
 
     /**
      * @MethodName: employeeUsernameIsExist

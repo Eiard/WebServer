@@ -1,7 +1,7 @@
 package com.ytz.web.service;
 
-import com.ytz.web.domain.Root;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ytz.web.domain.Root;
 
 /**
  * -*- coding:utf-8 -*-
@@ -17,13 +17,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
 @Deprecated
 public interface RootService extends IService<Root> {
 
-    /**
-     * @MethodName: phoneIsExist
-     * @Description: DONE : 手机号存在
-     * @Author: 30671
-     * @date: 2022/7/5
-     * @param: phone  手机号
-     * @return: boolean
-     */
-    boolean phoneIsExist(String phone);
 }

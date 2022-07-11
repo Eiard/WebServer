@@ -71,12 +71,6 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return employee.getStationId();
     }
 
-
-    @Override
-    public boolean phoneIsExist(String phone) {
-        return lambdaQuery().eq(Employee::getEmployeePhone, phone).exists();
-    }
-
     @Override
     public boolean employeeUsernameIsExist(String employeeUsername) {
         return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
