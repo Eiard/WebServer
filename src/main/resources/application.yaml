@@ -57,7 +57,9 @@ spring:
       #属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有：
       #监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall
       filters: stat,wall
-
+#   将json返回给前端时，将其中值为null的数据抹除（用spring自带的json工具类时才能用）
+#  jackson:
+#    default-property-inclusion: non_null
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -68,3 +70,6 @@ mybatis-plus:
     db-config:
       id-type: assign_id
       capital-mode: false
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0

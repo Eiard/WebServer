@@ -66,8 +66,6 @@ public enum NetStationEnum {
      */
     QUERY_SUCCESS,
 
-
-
     /**
      * 未知错误
      * 格式错误

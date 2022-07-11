@@ -13,8 +13,8 @@ import lombok.Data;
  *
  * @projectName: web
  * @package: com.ytz.web.domain
- * @className: GoodType
- * @author: Delmore
+ * @className: NetStation
+ * @author: 30671
  * @description: DONE : 网点管理员
  * @date: 2022/7/5
  * @TableName net_station
@@ -72,10 +72,10 @@ public class NetStation implements Serializable {
     private Boolean adminSex;
 
     /**
-     * 默认为1 网点管理员
+     * 默认为2 网点管理员
      */
     @TableField(value = "admin_type")
-    private Boolean adminType;
+    private Integer adminType;
 
     /**
      * 网点管理员完成的快递单数(月结)
@@ -84,7 +84,7 @@ public class NetStation implements Serializable {
     private Integer orderAmount;
 
     /**
-     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 在职
+     * 状态标志位 [0] 未审核或离职 [1] 审核通过并在职
      */
     @TableField(value = "is_pass")
     private Integer isPass;

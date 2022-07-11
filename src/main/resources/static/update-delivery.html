@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update-delivery</title>
+
+    <link href="layout/css/bootstrap.min.css" rel="stylesheet">
+    <link href="layout/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="layout/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="layout/css/animate.css" rel="stylesheet">
+    <link href="layout/css/style.css" rel="stylesheet">
+    <link href="layout/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="col-lg-12">
+        <div class="ibox ">
+
+            <div class="ibox-title">
+                <h5>添加快件</h5>
+            </div>
+
+            <div class="hr-line-dashed"></div>
+
+            <div class="content">
+                <div class="ibox-content">
+                    <form method="get">
+
+                        <div class="form-group row"><label class="col-lg-2 col-form-label">订单号</label>
+                            <div class="col-lg-10"><input type="text" disabled="" class="order-number"></div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">收货网点地址</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="province">
+                                    <option>湖北省</option>
+                                    <option>湖南省</option>
+                                    <option>江苏省</option>
+                                    <option>河南省</option>
+                                </select>
+                                <select class="form-control m-b" name="city">
+                                    <option>荆州市</option>
+                                    <option>武汉市</option>
+                                    <option>天门市</option>
+                                    <option>襄阳市</option>
+                                </select>
+                                <select class="form-control m-b" name="county">
+                                    <option>公安县</option>
+                                    <option>监利县</option>
+                                    <option>江陵县</option>
+                                    <option>枣阳县</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">发货人姓名</label>
+                            <div class="col-sm-10"><input type="text" class="sender-name"></div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">发货人姓名电话</label>
+                            <div class="col-sm-10"><input type="text" class="sender-tel"></div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">收货人姓名</label>
+                            <div class="col-sm-10"><input type="text" class="receiver-name"></div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">收货人姓名电话</label>
+                            <div class="col-sm-10"><input type="text" class="receiver-tel"></div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">收货人地址</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="province">
+                                    <option>湖北省</option>
+                                    <option>湖南省</option>
+                                    <option>江苏省</option>
+                                    <option>河南省</option>
+                                </select>
+                                <select class="form-control m-b" name="city">
+                                    <option>荆州市</option>
+                                    <option>武汉市</option>
+                                    <option>天门市</option>
+                                    <option>襄阳市</option>
+                                </select>
+                                <select class="form-control m-b" name="county">
+                                    <option>公安县</option>
+                                    <option>监利县</option>
+                                    <option>江陵县</option>
+                                    <option>枣阳县</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">货物重量</label>
+                            <div class="col-sm-10"><input type="text" class="weight"></div>
+                        </div>
+
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">货物类型</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="delivery-type">
+                                    <option>液体货</option>
+                                    <option>干散货</option>
+                                    <option>件杂货</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">备注信息</label>
+                            <textarea class="form-control" id="message" rows="3" placeholder="输入备注信息.."></textarea>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="hr-line-dashed"></div>
+
+            <div class="content">
+                <div class="ibox-content">
+                    <form method="get">
+                        <div class="form-group row">
+                            <div class="last-place">
+                                <button class="btn btn-white" type="submit">取消</button>
+                                <button class="btn btn-primary" type="submit">保存更改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
