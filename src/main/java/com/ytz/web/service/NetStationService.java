@@ -84,16 +84,6 @@ public interface NetStationService extends IService<NetStation> {
     NetStationEnum delivery(Integer stationId);
 
     /**
-     * @MethodName: phoneIsExist
-     * @Description: DONE : 手机号存在
-     * @Author: 30671
-     * @date: 2022/7/5
-     * @param: phone  手机号
-     * @return: boolean
-     */
-    boolean phoneIsExist(String phone);
-
-    /**
      * @MethodName: adminUsernameIsExist
      * @Description: DONE : 用户名存在
      * @Author: 30671
