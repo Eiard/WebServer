@@ -5,6 +5,8 @@ import com.ytz.web.domain.Employee;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * -*- coding:utf-8 -*-
  *
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 public interface EmployeeMapper extends BaseMapper<Employee> {
-
 }
 
 

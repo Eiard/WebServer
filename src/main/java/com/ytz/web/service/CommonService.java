@@ -1,6 +1,9 @@
 package com.ytz.web.service;
 
+import com.ytz.web.mapper.CommonMapper;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * -*- coding:utf-8 -*-
@@ -15,7 +18,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface CommonService {
-
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 在所有表中寻找手机号是否存在
@@ -25,5 +27,4 @@ public interface CommonService {
      * @return: boolean
      */
     public boolean phoneIsExist(String phone);
-
 }

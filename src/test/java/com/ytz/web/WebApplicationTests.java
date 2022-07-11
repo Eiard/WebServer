@@ -3,9 +3,7 @@ package com.ytz.web;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ytz.web.domain.GoodType;
-import com.ytz.web.mapper.GoodTypeMapper;
-import com.ytz.web.mapper.NetStationMapper;
-import com.ytz.web.mapper.RootMapper;
+import com.ytz.web.mapper.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,6 +15,8 @@ class WebApplicationTests {
     RootMapper rootMapper;
     @Resource
     NetStationMapper netStationMapper;
+    @Resource
+    CommonMapper commonMapper;
 
     @Test
     void contextLoads() {
@@ -32,5 +32,9 @@ class WebApplicationTests {
     @Test
     void test(){
         netStationMapper.deleteById(1);
+    }
+    @Test
+    void test2(){
+        System.out.println(commonMapper.phoneIsExist("1"));
     }
 }

@@ -11,7 +11,6 @@ import com.ytz.web.vo.QueryAllVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -145,4 +144,6 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     public boolean adminUsernameIsExist(String adminUsername) {
         return lambdaQuery().eq(NetStation::getAdminUsername, adminUsername).exists();
     }
+
+
 }
