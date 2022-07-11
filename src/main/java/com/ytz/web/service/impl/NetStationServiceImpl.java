@@ -140,7 +140,10 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     public NetStationEnum delivery(Integer stationId) {
         NetStation netStation = getById(stationId);
         // 总完成订单个数加1
-        netStation.setOrderAmount(netStation.getOrderAmount() + 1);
+        lambdaUpdate()
+                .set(NetStation::getOrderAmount, netStation.getOrderAmount() + 1)
+                .eq(NetStation::getStationId, stationId)
+                .update();
         return NetStationEnum.DELIVERY_SUCCESS;
     }
 

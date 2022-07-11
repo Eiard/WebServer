@@ -66,7 +66,6 @@ public class EmployeeController {
         // 订单状态更改
         ordersService.delivery(orderNumber);
 
-
         return new ResultMap(EmployeeEnum.DELIVERY_SUCCESS).toJson();
     }
 }

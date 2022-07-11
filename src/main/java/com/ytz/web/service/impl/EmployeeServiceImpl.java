@@ -2,10 +2,8 @@ package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
-import com.ytz.web.domain.Orders;
 import com.ytz.web.mapper.EmployeeMapper;
 import com.ytz.web.model.EmployeeEnum;
-import com.ytz.web.model.OrdersEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.EmployeeService;
 import org.springframework.stereotype.Repository;
@@ -60,14 +58,12 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return EmployeeEnum.PRE_SIGN_SUCCESS;
     }
 
-
-
+    @Override
     public Integer delivery(String employeeUsername) {
         Employee employee = lambdaQuery()
-                .select(Employee::getOrderAmount)
+                .select(Employee::getStationId, Employee::getOrderAmount)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
                 .one();
-
         lambdaUpdate()
                 .set(Employee::getOrderAmount, employee.getOrderAmount() + 1)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
