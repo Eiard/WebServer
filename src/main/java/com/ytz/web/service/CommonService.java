@@ -27,6 +27,6 @@ public interface CommonService {
      * @param: phone  手机号
      * @return: boolean
      */
-    public boolean phoneIsExist(String phone);
+    boolean phoneIsExist(String phone);
 
 }
