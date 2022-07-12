@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository("commonMapper")
-public interface CommonMapper extends BaseMapper<String> {
+public interface CommonMapper{
 
     /**
      * 判断手机号是否存在
