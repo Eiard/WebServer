@@ -1,5 +1,6 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.mapper.EmployeeMapper;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * -*- coding:utf-8 -*-
@@ -22,8 +25,7 @@ import javax.annotation.Resource;
  * @date: 2022/7/5
  * @version: 1.0
  */
-@Service
-@Repository("employeeServiceImpl")
+@Service("employeeServiceImpl")
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         implements EmployeeService {
 
@@ -70,6 +72,20 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .update();
         return employee.getStationId();
     }
+
+    @Override
+    public EmployeeEnum resetPassword(String employeeId) {
+        lambdaUpdate().set(Employee::getEmployeePassword,"123456")
+                .eq(Employee::getEmployeeId,employeeId)
+                .update();
+        return EmployeeEnum.RESET_PASSWORD_SUCCESS;
+    }
+
+    @Override
+    public Employee dispatch(String employeeId) {
+        return getById(employeeId);
+    }
+
 
     @Override
     public boolean employeeUsernameIsExist(String employeeUsername) {

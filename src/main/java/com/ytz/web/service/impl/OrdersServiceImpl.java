@@ -20,8 +20,7 @@ import org.springframework.stereotype.Service;
  * @date: 2022/7/5
  * @version: 1.0
  */
-@Service
-@Repository("ordersServiceImpl")
+@Service("ordersServiceImpl")
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         implements OrdersService {
 
@@ -47,8 +46,11 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         return OrdersEnum.DELIVERY_SUCCESS;
     }
 
+    @Override
+    public OrdersEnum received(String orderNumber) {
+        lambdaUpdate().set(Orders::getOrderStatus, 1)
+                .eq(Orders::getOrderNumber, orderNumber)
+                .update();
+        return OrdersEnum.RECEIVE_SUCCESS;
+    }
 }
-
-
-
-

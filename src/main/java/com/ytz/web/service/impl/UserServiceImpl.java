@@ -19,8 +19,7 @@ import org.springframework.stereotype.Service;
  * @version: 1.0
  */
 @Deprecated
-@Service
-@Repository("userServiceImpl")
+@Service("userServiceImpl")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
 

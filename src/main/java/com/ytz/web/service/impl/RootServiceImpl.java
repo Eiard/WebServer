@@ -19,8 +19,7 @@ import org.springframework.stereotype.Service;
  * @version: 1.0
  */
 @Deprecated
-@Service
-@Repository("rootServiceImpl")
+@Service("rootServiceImpl")
 public class RootServiceImpl extends ServiceImpl<RootMapper, Root>
         implements RootService {
 

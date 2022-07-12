@@ -7,7 +7,7 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.vo.FuzzyQueryStationVO;
-import com.ytz.web.vo.QueryAllVO;
+import com.ytz.web.vo.QueryStationVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -29,8 +29,7 @@ import java.util.List;
  * @date: 2022/7/4
  * @version: 1.0
  */
-@Service
-@Repository("netStationServiceImpl")
+@Service("netStationServiceImpl")
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
 
@@ -116,8 +115,8 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public QueryAllVO queryAllInform(String adminUsername) {
-        QueryAllVO queryAllInfo = null;
+    public QueryStationVO queryStationInform(String adminUsername) {
+        QueryStationVO queryAllInfo = null;
         try {
             NetStation station = lambdaQuery()
                     .select(NetStation::getStationName,
@@ -126,7 +125,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                             NetStation::getAdminSex, NetStation::getOrderAmount)
                     .eq(NetStation::getAdminUsername, adminUsername)
                     .one();
-            queryAllInfo = new QueryAllVO();
+            queryAllInfo = new QueryStationVO();
             BeanUtils.copyProperties(queryAllInfo, station);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -146,6 +145,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 .update();
         return NetStationEnum.DELIVERY_SUCCESS;
     }
+
 
     @Override
     public boolean adminUsernameIsExist(String adminUsername) {

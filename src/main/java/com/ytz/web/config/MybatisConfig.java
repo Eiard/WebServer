@@ -20,6 +20,7 @@ public class MybatisConfig {
     @Bean
     public MybatisPlusInterceptor mpInterceptor(){
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
+        //分页查询插件
         mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         return mybatisPlusInterceptor;
     }

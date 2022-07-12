@@ -1,6 +1,10 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ytz.web.domain.EmployeePosition;
 import com.ytz.web.mapper.CommonMapper;
+import com.ytz.web.mapper.EmployeePositionMapper;
 import com.ytz.web.service.CommonService;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -18,12 +22,11 @@ import javax.annotation.Resource;
  * @date: 2022/7/5
  * @version: 1.0
  */
-@Service
-@Repository("commonServiceImpl")
-public class CommonServiceImpl implements CommonService {
-    @Resource(name = "commonMapper")
-    private CommonMapper commonMapper;
+@Service("commonServiceImpl")
+    public class CommonServiceImpl implements CommonService {
 
+    @Resource
+    private CommonMapper commonMapper;
     @Override
     public boolean phoneIsExist(String phone) {
         return commonMapper.phoneIsExist(phone) == 0;

@@ -5,6 +5,9 @@ import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.model.OrdersEnum;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * -*- coding:utf-8 -*-
  *
@@ -51,6 +54,26 @@ public interface EmployeeService extends IService<Employee> {
     Integer delivery(String employeeUsername);
 
     /**
+     * @MethodName: resetPassword
+     * @Description: DONE : 重置员工密码，默认为123456
+     * @Author: Delmore
+     * @date: 2022/7/12
+     * @param: employeeId
+     * @return: com.ytz.web.model.EmployeeEnum
+     **/
+    EmployeeEnum resetPassword(String employeeId);
+
+    /**
+     * @MethodName: dispatch
+     * @Description: DONE : 通过Id查询员工信息
+     * @Author: Delmore
+     * @date: 2022/7/12
+     * @param: employeeId
+     * @return: java.util.Map<java.lang.String, java.lang.String> 姓名和电话
+     **/
+    Employee dispatch(String employeeId);
+
+    /**
      * @MethodName: employeeUsernameIsExist
      * @Description: DONE : 员工用户名存在
      * @Author: 30671
@@ -59,4 +82,6 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     boolean employeeUsernameIsExist(String employeeUsername);
+
+//    List<>
 }

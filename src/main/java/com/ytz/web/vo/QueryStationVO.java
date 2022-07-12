@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  * @version: 1.0
  */
 @Data
-public class QueryAllVO  {
+public class QueryStationVO {
     private String stationName;
     private String stationAddress;
     private String adminName;

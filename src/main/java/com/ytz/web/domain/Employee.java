@@ -70,12 +70,6 @@ public class Employee implements Serializable {
     private Integer orderAmount;
 
     /**
-     * 派送完成的快递单数(月结)
-     */
-    @TableField(value = "order_amount")
-    private Integer orderAmount;
-
-    /**
      * 状态标志位 [0] 未审核或离职 [1] 审核通过并在职
      */
     @TableField(value = "is_pass")
