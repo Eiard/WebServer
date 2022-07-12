@@ -2,7 +2,9 @@ package com.ytz.web.service.impl;
 
 import com.ytz.web.mapper.CommonMapper;
 import com.ytz.web.service.CommonService;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 
 /**
@@ -17,10 +19,10 @@ import javax.annotation.Resource;
  * @version: 1.0
  */
 @Service("commonServiceImpl")
-    public class CommonServiceImpl implements CommonService {
-
-    @Resource
+public class CommonServiceImpl implements CommonService {
+    @Resource(name = "commonMapper")
     private CommonMapper commonMapper;
+
     @Override
     public boolean phoneIsExist(String phone) {
         return commonMapper.phoneIsExist(phone) == 0;
