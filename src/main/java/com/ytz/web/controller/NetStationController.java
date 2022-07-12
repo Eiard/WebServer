@@ -40,7 +40,7 @@ public class NetStationController {
     @PostMapping("/login")
     String login(@RequestParam String adminUsername,
                  @RequestParam String adminPassword) {
-        System.out.println(adminPassword);
+        System.out.println("111");
         return new ResultMap(netStationService.login(adminUsername, adminPassword)).toJson();
     }
 
