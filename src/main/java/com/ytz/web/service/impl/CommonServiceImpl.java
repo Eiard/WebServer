@@ -18,8 +18,7 @@ import javax.annotation.Resource;
  * @date: 2022/7/5
  * @version: 1.0
  */
-@Service
-@Repository("commonServiceImpl")
+@Service("commonServiceImpl")
 public class CommonServiceImpl implements CommonService {
     @Resource(name = "commonMapper")
     private CommonMapper commonMapper;
