@@ -16,7 +16,9 @@ import javax.annotation.Resource;
  * @date: 2022/7/5
  * @version: 1.0
  */
+@Service
 public interface CommonService {
+
     /**
      * @MethodName: phoneIsExist
      * @Description: DONE : 在所有表中寻找手机号是否存在
@@ -26,4 +28,5 @@ public interface CommonService {
      * @return: boolean
      */
     public boolean phoneIsExist(String phone);
+
 }

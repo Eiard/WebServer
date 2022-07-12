@@ -20,7 +20,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.controller
  * @className: NetStationController
  * @author: 30671
- * @description: TODO :
+ * @description: TODO : 管理员通信接口
  * @date: 2022/7/4
  * @version: 1.0
  */
@@ -40,6 +40,7 @@ public class NetStationController {
     @PostMapping("/login")
     String login(@RequestParam String adminUsername,
                  @RequestParam String adminPassword) {
+        System.out.println(adminPassword);
         return new ResultMap(netStationService.login(adminUsername, adminPassword)).toJson();
     }
 

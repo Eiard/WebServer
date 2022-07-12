@@ -1,14 +1,8 @@
 package com.ytz.web.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ytz.web.domain.EmployeePosition;
 import com.ytz.web.mapper.CommonMapper;
-import com.ytz.web.mapper.EmployeePositionMapper;
 import com.ytz.web.service.CommonService;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 
 /**
