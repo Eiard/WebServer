@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
  * @date: 2022/7/5
  * @version: 1.0
  */
-@Service
-@Repository("financeServiceImpl")
+@Service("financeServiceImpl")
 public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
     implements FinanceService{
 

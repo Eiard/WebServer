@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
  * @date: 2022/7/4
  * @version: 1.0
  */
-@Service
-@Repository("goodTypeServiceImpl")
+@Service("goodTypeServiceImpl")
 public class GoodTypeServiceImpl extends ServiceImpl<GoodTypeMapper, GoodType>
     implements GoodTypeService{
 

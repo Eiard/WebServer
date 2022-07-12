@@ -29,8 +29,7 @@ import java.util.List;
  * @date: 2022/7/4
  * @version: 1.0
  */
-@Service
-@Repository("netStationServiceImpl")
+@Service("netStationServiceImpl")
 public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStation>
         implements NetStationService {
 

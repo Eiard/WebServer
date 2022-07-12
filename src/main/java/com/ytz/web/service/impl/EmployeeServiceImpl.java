@@ -22,8 +22,7 @@ import javax.annotation.Resource;
  * @date: 2022/7/5
  * @version: 1.0
  */
-@Service
-@Repository("employeeServiceImpl")
+@Service("employeeServiceImpl")
 public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         implements EmployeeService {
 

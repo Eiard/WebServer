@@ -19,8 +19,7 @@ import org.springframework.stereotype.Service;
  * @version: 1.0
  */
 @Deprecated
-@Service
-@Repository("employeePositionServiceImpl")
+@Service("employeePositionServiceImpl")
 public class EmployeePositionServiceImpl extends ServiceImpl<EmployeePositionMapper, EmployeePosition>
     implements EmployeePositionService{
 
