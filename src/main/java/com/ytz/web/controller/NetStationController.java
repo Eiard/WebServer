@@ -4,14 +4,17 @@ import com.alibaba.fastjson.TypeReference;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.model.variable.NetStationVar;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
+import com.ytz.web.vo.IncumbentEmployeeVO;
 import com.ytz.web.vo.QueryStationVO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * -*- coding:utf-8 -*-
@@ -40,7 +43,6 @@ public class NetStationController {
     @PostMapping("/login")
     String login(@RequestParam String adminUsername,
                  @RequestParam String adminPassword) {
-        System.out.println("111");
         return new ResultMap(netStationService.login(adminUsername, adminPassword)).toJson();
     }
 
@@ -66,6 +68,19 @@ public class NetStationController {
     String queryAll(@RequestParam String adminUsername) {
         QueryStationVO queryStationVO = netStationService.queryStationInform(adminUsername);
         return new ResultMap(NetStationEnum.QUERY_SUCCESS, queryStationVO).toJson();
+    }
+
+    @PostMapping("/queryInEmployee")
+    String queryInEmployee(@RequestParam Integer current){
+        ResultMap resultMap = new ResultMap();
+        try {
+            List<IncumbentEmployeeVO> inEmployeeList = employeeService.queryInEmployee(current);
+            resultMap.setEnum(NetStationEnum.QUERY_SUCCESS);
+            resultMap.setData(inEmployeeList);
+        } catch (Exception e) {
+           resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
+        }
+        return resultMap.toJson();
     }
 
 

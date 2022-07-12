@@ -25,6 +25,6 @@ public class CommonServiceImpl implements CommonService {
 
     @Override
     public boolean phoneIsExist(String phone) {
-        return commonMapper.phoneIsExist(phone) == 0;
+        return commonMapper.phoneIsExist(phone) !=0;
     }
 }

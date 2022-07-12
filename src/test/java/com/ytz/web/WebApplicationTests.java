@@ -33,8 +33,4 @@ class WebApplicationTests {
     void test(){
         netStationMapper.deleteById(1);
     }
-    @Test
-    void test2(){
-        System.out.println(commonMapper.phoneIsExist("1"));
-    }
 }
