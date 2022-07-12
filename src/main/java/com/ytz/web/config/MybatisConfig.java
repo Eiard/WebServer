@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @package: com.ytz.web.config
  * @className: MybatisConfig
  * @author: Delmore
- * @description: TODO
+ * @description: TODO : 分页查询
  * @date: 2022/7/10 17:59
  * @version: 1.0
  */
