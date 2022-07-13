@@ -30,7 +30,8 @@ dependencies {
     // fastjson
     implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.83'
     // BeanUtils
-    implementation 'commons-beanutils:commons-beanutils:1.9.4'
+    //    implementation group: 'net.sf.dozer',name:'dozer' , version:'5.5.1'
+    //    implementation 'commons-beanutils:commons-beanutils:1.9.4'
 }
 
 tasks.named('test') {

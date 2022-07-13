@@ -1,23 +1,16 @@
 package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.mapper.EmployeeMapper;
 import com.ytz.web.model.EmployeeEnum;
-import com.ytz.web.model.variable.NetStationVar;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.EmployeeService;
-import com.ytz.web.vo.IncumbentEmployeeVO;
-import org.apache.commons.beanutils.BeanUtils;
+import com.ytz.web.utils.PageUtils;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -81,6 +74,40 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
+    public IPage queryInEmployee(Integer current) {
+        return pageMaps(PageUtils.getQueryInEmployee(current),
+                new LambdaQueryWrapper<Employee>()
+                        .select(
+                                Employee::getEmployeeId,
+                                Employee::getEmployeeName,
+                                Employee::getEmployeeUsername,
+                                Employee::getEmployeeSex,
+                                Employee::getEmployeePhone,
+                                Employee::getOrderAmount,
+                                Employee::getCreateDate
+                        )
+                        .eq(Employee::getIsPass, 1))
+                ;
+    }
+
+    @Override
+    public IPage queryOutEmployee(Integer current) {
+        return pageMaps(PageUtils.getQueryInEmployee(current),
+                new LambdaQueryWrapper<Employee>()
+                        .select(
+                                Employee::getEmployeeId,
+                                Employee::getEmployeeName,
+                                Employee::getEmployeeUsername,
+                                Employee::getEmployeeSex,
+                                Employee::getEmployeePhone,
+                                Employee::getOrderAmount,
+                                Employee::getCreateDate
+                        )
+                        .eq(Employee::getIsPass, 1));
+    }
+
+
+    @Override
     public EmployeeEnum resetPassword(String employeeId) {
         lambdaUpdate().set(Employee::getEmployeePassword, "123456")
                 .eq(Employee::getEmployeeId, employeeId)
@@ -98,27 +125,6 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
     }
 
-    @Override
-    public List<IncumbentEmployeeVO> queryInEmployee(Integer current) {
-        ArrayList<IncumbentEmployeeVO> inEmployeeList = new ArrayList<>();
-        try {
-            IPage page = new Page(current, NetStationVar.PAGE_SIZE);
-            LambdaQueryWrapper<Employee> lqw = new LambdaQueryWrapper<Employee>();
-            lqw.select(Employee::getEmployeeId, Employee::getEmployeeName, Employee::getEmployeeUsername,
-                    Employee::getEmployeeSex, Employee::getEmployeePhone, Employee::getOrderAmount,
-                    Employee::getCreateDate).eq(Employee::getIsPass, 1);
-            getBaseMapper().selectPage(page, lqw);
-            List<Employee> employeeList = page.getRecords();
-            for (int i = 0; i < employeeList.size(); i++) {
-                IncumbentEmployeeVO inEmployee = new IncumbentEmployeeVO();
-                BeanUtils.copyProperties(inEmployee, employeeList.get(i));
-                inEmployeeList.add(inEmployee);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return inEmployeeList;
-    }
 }
 
 

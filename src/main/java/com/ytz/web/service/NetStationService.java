@@ -3,9 +3,6 @@ package com.ytz.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
-import com.ytz.web.vo.FuzzyQueryStationVO;
-import com.ytz.web.vo.QueryStationVO;
-
 import java.util.List;
 
 /**
@@ -42,7 +39,6 @@ public interface NetStationService extends IService<NetStation> {
      */
     NetStationEnum sign(NetStation netStation);
 
-
     /**
      * @MethodName: update
      * @Description: DONE : 账号更新信息
@@ -61,7 +57,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: stationInfo  既可以是网点名称 也可以是网店地址
      * @return: List<NetStation>
      */
-    List<FuzzyQueryStationVO> fuzzyQueryByStationInfo(String stationInfo);
+    List fuzzyQueryByStationInfo(String stationInfo);
 
     /**
      * @MethodName: queryAll
@@ -71,7 +67,8 @@ public interface NetStationService extends IService<NetStation> {
      * @param: adminUsername  网点账号
      * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
      **/
-    QueryStationVO queryStationInform(String adminUsername);
+    List queryStationInform(String adminUsername);
+
 
     /**
      * @MethodName: delivery
