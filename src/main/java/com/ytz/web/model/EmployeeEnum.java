@@ -37,7 +37,10 @@ public enum EmployeeEnum {
     PRE_SIGN_SUCCESS,
     PRE_SIGN_USERNAME_USED,
     PRE_SIGN_PHONE_USED,
-
+    /**
+     * 重置密码成功
+     */
+    RESET_PASSWORD_SUCCESS,
 
     /**
      * 派送成功

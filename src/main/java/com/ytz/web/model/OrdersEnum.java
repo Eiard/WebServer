@@ -19,5 +19,4 @@ public enum  OrdersEnum {
     DISPATCH_SUCCESS,
     DELIVERY_SUCCESS,
 
-
 }

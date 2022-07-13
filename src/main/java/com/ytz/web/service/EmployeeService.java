@@ -1,9 +1,9 @@
 package com.ytz.web.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
-import com.ytz.web.model.OrdersEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -51,6 +51,46 @@ public interface EmployeeService extends IService<Employee> {
     Integer delivery(String employeeUsername);
 
     /**
+     * @MethodName: resetPassword
+     * @Description: DONE : 重置员工密码，默认为123456
+     * @Author: Delmore
+     * @date: 2022/7/12
+     * @param: employeeId
+     * @return: com.ytz.web.model.EmployeeEnum
+     **/
+    EmployeeEnum resetPassword(String employeeId);
+
+    /**
+     * @MethodName: dispatch
+     * @Description: DONE : 通过Id查询员工信息
+     * @Author: Delmore
+     * @date: 2022/7/12
+     * @param: employeeId
+     * @return: java.util.Map<java.lang.String, java.lang.String> 姓名和电话
+     **/
+    Employee dispatch(String employeeId);
+
+    /**
+     * @MethodName: queryIncumbentEmployee
+     * @Description: DONE ： 显示在职员工信息（分页）
+     * @Author: Delmore
+     * @date: 2022/7/12
+     * @param: current
+     * @return: java.util.List 在职员工的信息
+     **/
+    IPage queryInEmployee(Integer current);
+
+    /**
+     * @MethodName: queryOutEmployee
+     * @Description: TODO : 显示离职员工信息（分页）
+     * @Author: Delmore
+     * @date: 2022/7/13
+     * @param: current
+     * @return: java.util.List
+     **/
+    IPage queryOutEmployee(Integer current);
+
+    /**
      * @MethodName: employeeUsernameIsExist
      * @Description: DONE : 员工用户名存在
      * @Author: 30671
@@ -59,4 +99,5 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     boolean employeeUsernameIsExist(String employeeUsername);
+
 }

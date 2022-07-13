@@ -1,15 +1,18 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.mapper.EmployeeMapper;
 import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.EmployeeService;
-import org.springframework.stereotype.Repository;
+import com.ytz.web.utils.PageUtils;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
+import java.util.List;
+
 
 /**
  * -*- coding:utf-8 -*-
@@ -71,9 +74,56 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
+    public IPage queryInEmployee(Integer current) {
+        return pageMaps(PageUtils.getQueryInEmployee(current),
+                new LambdaQueryWrapper<Employee>()
+                        .select(
+                                Employee::getEmployeeId,
+                                Employee::getEmployeeName,
+                                Employee::getEmployeeUsername,
+                                Employee::getEmployeeSex,
+                                Employee::getEmployeePhone,
+                                Employee::getOrderAmount,
+                                Employee::getCreateDate
+                        )
+                        .eq(Employee::getIsPass, 1));
+    }
+
+    @Override
+    public IPage queryOutEmployee(Integer current) {
+        return pageMaps(PageUtils.getQueryInEmployee(current),
+                new LambdaQueryWrapper<Employee>()
+                        .select(
+                                Employee::getEmployeeId,
+                                Employee::getEmployeeName,
+                                Employee::getEmployeeUsername,
+                                Employee::getEmployeeSex,
+                                Employee::getEmployeePhone,
+                                Employee::getOrderAmount,
+                                Employee::getCreateDate
+                        )
+                        .eq(Employee::getIsPass, 1));
+    }
+
+
+    @Override
+    public EmployeeEnum resetPassword(String employeeId) {
+        lambdaUpdate().set(Employee::getEmployeePassword, "123456")
+                .eq(Employee::getEmployeeId, employeeId)
+                .update();
+        return EmployeeEnum.RESET_PASSWORD_SUCCESS;
+    }
+
+    @Override
+    public Employee dispatch(String employeeId) {
+        return getById(employeeId);
+    }
+
+    @Override
     public boolean employeeUsernameIsExist(String employeeUsername) {
         return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
     }
+
 }
 
 

@@ -9,16 +9,8 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * -*- coding:utf-8 -*-
- *
- * @projectName: web
- * @package: com.ytz.web.domain
- * @className: Employee
- * @author: 30671
- * @description: DONE : 员工
- * @date: 2022/7/4
+ * 
  * @TableName employee
- * @version: 1.0
  */
 @TableName(value ="employee")
 @Data
@@ -66,7 +58,7 @@ public class Employee implements Serializable {
     private Integer stationId;
 
     /**
-     * 员工类型ID
+     * 员工类型ID 派送员默认为3
      */
     @TableField(value = "employee_type")
     private Integer employeeType;

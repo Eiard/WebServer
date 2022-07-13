@@ -46,8 +46,11 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         return OrdersEnum.DELIVERY_SUCCESS;
     }
 
+    @Override
+    public OrdersEnum received(String orderNumber) {
+        lambdaUpdate().set(Orders::getOrderStatus, 1)
+                .eq(Orders::getOrderNumber, orderNumber)
+                .update();
+        return OrdersEnum.RECEIVE_SUCCESS;
+    }
 }
-
-
-
-

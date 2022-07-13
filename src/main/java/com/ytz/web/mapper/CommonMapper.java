@@ -1,6 +1,5 @@
 package com.ytz.web.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +22,7 @@ public interface CommonMapper{
     /**
      * 判断手机号是否存在
      *
-     * @param phone
+     * @param : phone
      * @return
      */
     int phoneIsExist(String phone);

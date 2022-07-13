@@ -1,20 +1,15 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
-import com.ytz.web.vo.FuzzyQueryStationVO;
-import com.ytz.web.vo.QueryAllVO;
-import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -89,51 +84,35 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public List<FuzzyQueryStationVO> fuzzyQueryByStationInfo(String stationInfo) {
-        List<FuzzyQueryStationVO> fuzzyQueryStationVOS = new ArrayList<>();
-        try {
-            List<NetStation> netStations = lambdaQuery()
-                    .select(NetStation::getStationId,
-                            NetStation::getStationName,
-                            NetStation::getStationAddress)
-                    .like(NetStation::getStationName, stationInfo)
-                    .or(netStationLambdaQueryWrapper -> {
-                        netStationLambdaQueryWrapper
-                                .like(NetStation::getStationAddress, stationInfo);
-                    }).list();
-            for (NetStation netStation : netStations) {
-                FuzzyQueryStationVO fuzzyQueryStationVO = new FuzzyQueryStationVO();
-                BeanUtils.copyProperties(fuzzyQueryStationVO, netStation);
-                fuzzyQueryStationVOS.add(fuzzyQueryStationVO);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return fuzzyQueryStationVOS;
+    public List fuzzyQueryByStationInfo(String stationInfo) {
+        return listMaps(
+                new LambdaQueryWrapper<NetStation>()
+                        .select(NetStation::getStationId,
+                                NetStation::getStationName,
+                                NetStation::getStationAddress
+                        )
+                        .like(NetStation::getStationName, stationInfo)
+                        .or(netStationLambdaQueryWrapper -> {
+                            netStationLambdaQueryWrapper
+                                    .like(NetStation::getStationAddress, stationInfo);
+                        }));
     }
 
     @Override
-    public QueryAllVO queryAllInform(String adminUsername) {
-        QueryAllVO queryAllInfo = null;
-        try {
-            NetStation station = lambdaQuery()
-                    .select(NetStation::getStationName,
-                            NetStation::getStationAddress, NetStation::getAdminName,
-                            NetStation::getAdminPhone, NetStation::getAdminUsername,
-                            NetStation::getAdminSex, NetStation::getOrderAmount)
-                    .eq(NetStation::getAdminUsername, adminUsername)
-                    .one();
-            queryAllInfo = new QueryAllVO();
-            BeanUtils.copyProperties(queryAllInfo, station);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return queryAllInfo;
+    public List queryStationInform(String adminUsername) {
+        return listMaps(
+                new LambdaQueryWrapper<NetStation>()
+                        .select(NetStation::getStationName,
+                                NetStation::getStationAddress,
+                                NetStation::getAdminName,
+                                NetStation::getAdminPhone,
+                                NetStation::getAdminUsername,
+                                NetStation::getAdminSex,
+                                NetStation::getOrderAmount)
+                        .eq(NetStation::getAdminUsername, adminUsername)
+        );
     }
+
 
     @Override
     public NetStationEnum delivery(Integer stationId) {
@@ -145,6 +124,8 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 .update();
         return NetStationEnum.DELIVERY_SUCCESS;
     }
+
+
 
     @Override
     public boolean adminUsernameIsExist(String adminUsername) {
