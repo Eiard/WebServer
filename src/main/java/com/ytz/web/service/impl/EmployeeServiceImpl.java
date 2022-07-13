@@ -86,8 +86,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                                 Employee::getOrderAmount,
                                 Employee::getCreateDate
                         )
-                        .eq(Employee::getIsPass, 1))
-                ;
+                        .eq(Employee::getIsPass, 1));
     }
 
     @Override
