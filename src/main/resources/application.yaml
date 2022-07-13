@@ -60,6 +60,7 @@ spring:
 #   将json返回给前端时，将其中值为null的数据抹除（用spring自带的json工具类时才能用）
 #  jackson:
 #    default-property-inclusion: non_null
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
