@@ -61,7 +61,7 @@ public interface NetStationService extends IService<NetStation> {
 
     /**
      * @MethodName: queryAll
-     * @Description: TODO : 网点管理员查询所有信息
+     * @Description: DONE : 网点管理员查询所有信息
      * @Author: Delmore
      * @date: 2022/7/8
      * @param: adminUsername  网点账号
@@ -89,5 +89,14 @@ public interface NetStationService extends IService<NetStation> {
      * @return: boolean
      */
     boolean adminUsernameIsExist(String adminUsername);
+    /**
+     * @MethodName: findByAdminUsername
+     * @Description: DONE ：通过userName找stationId
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @param: adminUsername
+     * @return: java.lang.Integer 网点Id
+     **/
+    Integer findByAdminUsername(String adminUsername);
 }
 

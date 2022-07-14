@@ -11,7 +11,6 @@ import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 
 /**
@@ -21,7 +20,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.controller
  * @className: NetStationController
  * @author: 30671
- * @description: TODO : 管理员通信接口
+ * @description: TODO : 管理员操作
  * @date: 2022/7/4
  * @version: 1.0
  */
@@ -68,17 +67,20 @@ public class NetStationController {
     }
 
     @PostMapping("/queryInEmployee")
-    String queryInEmployee(@RequestParam Integer current) {
-        ResultMap resultMap = new ResultMap();
-
-        IPage page = employeeService.queryInEmployee(current);
-
-        resultMap.setData(page.getRecords());
+    String queryInEmployee(@RequestParam Integer current,@RequestParam String adminUsername) {
+        IPage page = employeeService.queryInEmployee(current,netStationService.findByAdminUsername(adminUsername));
+        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS,page.getRecords());
         resultMap.put("totalPage", page.getPages());
-        resultMap.setEnum(NetStationEnum.QUERY_SUCCESS);
         return resultMap.toJson();
     }
 
+    @PostMapping("/queryOutEmployee")
+    String queryOutEmployee(@RequestParam Integer current,@RequestParam String adminUsername) {
+        IPage page = employeeService.queryOutEmployee(current, netStationService.findByAdminUsername(adminUsername));
+        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS,page.getRecords());
+        resultMap.put("totalPage",page.getPages());
+        return resultMap.toJson();
+    }
 
     @PostMapping("/updateStationInform")
     String update(@RequestParam String netStation,

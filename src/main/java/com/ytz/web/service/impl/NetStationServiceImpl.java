@@ -2,7 +2,6 @@ package com.ytz.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.model.NetStationEnum;
@@ -11,7 +10,6 @@ import com.ytz.web.service.NetStationService;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
-
 
 /**
  * -*- coding:utf-8 -*-
@@ -130,5 +128,13 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     @Override
     public boolean adminUsernameIsExist(String adminUsername) {
         return lambdaQuery().eq(NetStation::getAdminUsername, adminUsername).exists();
+    }
+
+    @Override
+    public Integer findByAdminUsername(String adminUsername) {
+        return lambdaQuery()
+                .select(NetStation::getStationId)
+                .eq(NetStation::getAdminUsername,adminUsername)
+        .one().getStationId();
     }
 }

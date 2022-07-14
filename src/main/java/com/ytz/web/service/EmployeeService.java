@@ -78,7 +78,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: current
      * @return: java.util.List 在职员工的信息
      **/
-    IPage queryInEmployee(Integer current);
+    IPage queryInEmployee(Integer current,Integer stationId);
 
     /**
      * @MethodName: queryOutEmployee
@@ -88,7 +88,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: current
      * @return: java.util.List
      **/
-    IPage queryOutEmployee(Integer current);
+    IPage queryOutEmployee(Integer current,Integer stationId);
 
     /**
      * @MethodName: employeeUsernameIsExist

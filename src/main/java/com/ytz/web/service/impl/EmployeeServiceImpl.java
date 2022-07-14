@@ -11,8 +11,6 @@ import com.ytz.web.service.EmployeeService;
 import com.ytz.web.utils.PageUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import java.util.List;
-
 
 /**
  * -*- coding:utf-8 -*-
@@ -74,7 +72,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public IPage queryInEmployee(Integer current) {
+    public IPage queryInEmployee(Integer current,Integer stationId) {
         return pageMaps(PageUtils.getQueryInEmployee(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
@@ -86,11 +84,12 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                                 Employee::getOrderAmount,
                                 Employee::getCreateDate
                         )
+                        .eq(Employee::getStationId,stationId)
                         .eq(Employee::getIsPass, 1));
     }
 
     @Override
-    public IPage queryOutEmployee(Integer current) {
+    public IPage queryOutEmployee(Integer current,Integer stationId) {
         return pageMaps(PageUtils.getQueryInEmployee(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
@@ -99,10 +98,10 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                                 Employee::getEmployeeUsername,
                                 Employee::getEmployeeSex,
                                 Employee::getEmployeePhone,
-                                Employee::getOrderAmount,
-                                Employee::getCreateDate
+                                Employee::getResignReason
                         )
-                        .eq(Employee::getIsPass, 1));
+                        .eq(Employee::getStationId,stationId)
+                        .eq(Employee::getIsPass, 0));
     }
 
 
@@ -124,8 +123,5 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
     }
 
+
 }
-
-
-
-
