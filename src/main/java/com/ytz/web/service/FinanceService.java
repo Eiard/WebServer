@@ -16,4 +16,14 @@ import com.ytz.web.domain.Finance;
  */
 public interface FinanceService extends IService<Finance> {
 
+    /**
+     * @MethodName: paySalaryPerNetStation
+     * @Description: DONE : 实现网点Id(一次性结算整个网点工资) 对网点所有员工进行发工资,月结
+     * @Author: 30671
+     * @date: 2022/7/14
+     * @param: stationId  网点Id
+     * @return: com.ytz.web.model.EmployeeEnum
+     */
+    Finance paySalaryPerNetStation(Integer stationId);
+
 }
