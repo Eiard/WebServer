@@ -70,10 +70,10 @@ public class Employee implements Serializable {
     private Integer orderAmount;
 
     /**
-     * 状态标志位 [0] 未审核或离职 [1] 审核通过并在职
+     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 离职
      */
     @TableField(value = "is_pass")
-    private Boolean isPass;
+    private Integer isPass;
 
     /**
      * 辞职理由

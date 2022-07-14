@@ -78,4 +78,5 @@ public enum NetStationEnum {
      *
      */
     DELIVERY_SUCCESS,
+
 }

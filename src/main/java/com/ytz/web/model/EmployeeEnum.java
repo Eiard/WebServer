@@ -53,4 +53,13 @@ public enum EmployeeEnum {
      */
     UNKNOWN_ERROR,
     FORMAT_ERROR,
+
+    /**
+     *
+     * 提交离职申请成功
+     * 离职成功
+     */
+    SUBMIT_SUCCESS,
+    CONSENT_SUCCESS,
+
 }

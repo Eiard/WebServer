@@ -40,7 +40,7 @@ public interface NetStationService extends IService<NetStation> {
     NetStationEnum sign(NetStation netStation);
 
     /**
-     * @MethodName: update
+     * @MethodName: updateStationInform
      * @Description: DONE : 账号更新信息
      * @Author: Delmore
      * @date: 2022/7/5
@@ -50,7 +50,7 @@ public interface NetStationService extends IService<NetStation> {
     NetStationEnum updateStationInform(NetStation netStation, String newPassword);
 
     /**
-     * @MethodName: queryByIdNameAddress
+     * @MethodName: fuzzyQueryByStationInfo
      * @Description: DONE : 通过 stationInfo => stationName stationAddress 模糊查询
      * @Author: 30671
      * @date: 2022/7/5
@@ -60,15 +60,14 @@ public interface NetStationService extends IService<NetStation> {
     List fuzzyQueryByStationInfo(String stationInfo);
 
     /**
-     * @MethodName: queryAll
-     * @Description: TODO : 网点管理员查询所有信息
+     * @MethodName: queryStationInform
+     * @Description: DONE : 网点管理员查询所有信息
      * @Author: Delmore
      * @date: 2022/7/8
      * @param: adminUsername  网点账号
      * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
      **/
     List queryStationInform(String adminUsername);
-
 
     /**
      * @MethodName: delivery
@@ -89,5 +88,14 @@ public interface NetStationService extends IService<NetStation> {
      * @return: boolean
      */
     boolean adminUsernameIsExist(String adminUsername);
+    /**
+     * @MethodName: findIdByUsername
+     * @Description: DONE ：通过用户名找ID
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @param: adminUsername
+     * @return: java.lang.Integer 网点Id
+     **/
+    Integer findIdByUsername(String adminUsername);
 }
 

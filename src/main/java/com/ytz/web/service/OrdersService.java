@@ -37,13 +37,4 @@ public interface OrdersService extends IService<Orders> {
      **/
     OrdersEnum delivery(String orderNumber);
 
-    /**
-     * @MethodName: received
-     * @Description: TODO : 货件到达网点后，管理员修改订单状态位
-     * @Author: Delmore
-     * @date: 2022/7/12
-     * @param: orderNumber
-     * @return: com.ytz.web.model.OrdersEnum
-     **/
-    OrdersEnum received(String orderNumber);
 }

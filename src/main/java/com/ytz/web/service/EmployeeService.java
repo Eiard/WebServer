@@ -58,7 +58,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeId
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum resetPassword(String employeeId);
+    EmployeeEnum resetPassword(Integer employeeId);
 
     /**
      * @MethodName: dispatch
@@ -71,24 +71,24 @@ public interface EmployeeService extends IService<Employee> {
     Employee dispatch(String employeeId);
 
     /**
-     * @MethodName: queryIncumbentEmployee
+     * @MethodName: queryInEmployee
      * @Description: DONE ： 显示在职员工信息（分页）
      * @Author: Delmore
      * @date: 2022/7/12
      * @param: current
      * @return: java.util.List 在职员工的信息
      **/
-    IPage queryInEmployee(Integer current);
+    IPage queryInEmployee(Integer current,Integer stationId);
 
     /**
      * @MethodName: queryOutEmployee
-     * @Description: TODO : 显示离职员工信息（分页）
+     * @Description: DONE : 显示离职员工信息（分页）
      * @Author: Delmore
      * @date: 2022/7/13
      * @param: current
      * @return: java.util.List
      **/
-    IPage queryOutEmployee(Integer current);
+    IPage queryOutEmployee(Integer current,Integer stationId);
 
     /**
      * @MethodName: employeeUsernameIsExist
@@ -99,5 +99,30 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     boolean employeeUsernameIsExist(String employeeUsername);
+    /**
+     * @MethodName: submitResignation
+     * @Description: DONE : 员工提交离职申请
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: com.ytz.web.model.EmployeeEnum
+     **/
+    EmployeeEnum submitResignation(String resignReason,String employeeUsername);
 
+    /**
+     * @MethodName: consentResignation
+     * @Description: TODO : 同意离职申请
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: com.ytz.web.model.NetStationEnum
+     **/
+    EmployeeEnum  consentResignation(String employUsername);
+
+    /**
+     * @MethodName: findByUsername
+     * @Description: DONE : 通过用户名找ID
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: java.lang.Integer
+     **/
+    Integer findByUsername(String employUsername);
 }

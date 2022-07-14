@@ -6,13 +6,17 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.mapper.EmployeeMapper;
 import com.ytz.web.model.EmployeeEnum;
+import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.EmployeeService;
+import com.ytz.web.service.NetStationService;
 import com.ytz.web.utils.PageUtils;
+import com.ytz.web.utils.ResultMap;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 
 /**
  * -*- coding:utf-8 -*-
@@ -32,6 +36,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     @Resource(name = "commonServiceImpl")
     private CommonService commonService;
 
+
+
     @Override
     public EmployeeEnum login(String employeeUsername, String employeePassword) {
         Employee employee = lambdaQuery()
@@ -42,7 +48,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         if (employee == null) {
             return EmployeeEnum.LOGIN_FAILED;
         }
-        if (!(employee.getIsPass())) {
+        if (employee.getIsPass()==0) {
             return EmployeeEnum.LOGIN_UNVERIFIED;
         }
         return EmployeeEnum.LOGIN_SUCCESS;
@@ -63,7 +69,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     @Override
     public Integer delivery(String employeeUsername) {
         Employee employee = lambdaQuery()
-                .select(Employee::getStationId, Employee::getOrderAmount)
+                .select(Employee::getStationId,
+                        Employee::getOrderAmount)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
                 .one();
         lambdaUpdate()
@@ -74,7 +81,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public IPage queryInEmployee(Integer current) {
+    public IPage queryInEmployee(Integer current, Integer stationId) {
         return pageMaps(PageUtils.getQueryInEmployee(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
@@ -86,11 +93,12 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                                 Employee::getOrderAmount,
                                 Employee::getCreateDate
                         )
+                        .eq(Employee::getStationId, stationId)
                         .eq(Employee::getIsPass, 1));
     }
 
     @Override
-    public IPage queryOutEmployee(Integer current) {
+    public IPage queryOutEmployee(Integer current, Integer stationId) {
         return pageMaps(PageUtils.getQueryInEmployee(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
@@ -99,16 +107,17 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                                 Employee::getEmployeeUsername,
                                 Employee::getEmployeeSex,
                                 Employee::getEmployeePhone,
-                                Employee::getOrderAmount,
-                                Employee::getCreateDate
+                                Employee::getResignReason
                         )
-                        .eq(Employee::getIsPass, 1));
+                        .eq(Employee::getStationId, stationId)
+                        .eq(Employee::getIsPass, 2));
     }
 
 
     @Override
-    public EmployeeEnum resetPassword(String employeeId) {
-        lambdaUpdate().set(Employee::getEmployeePassword, "123456")
+    public EmployeeEnum resetPassword(Integer employeeId) {
+        lambdaUpdate()
+                .set(Employee::getEmployeePassword, "123456")
                 .eq(Employee::getEmployeeId, employeeId)
                 .update();
         return EmployeeEnum.RESET_PASSWORD_SUCCESS;
@@ -124,8 +133,35 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
     }
 
+    @Override
+    public EmployeeEnum submitResignation(String resignReason, String employeeUsername) {
+        lambdaUpdate()
+                .set(Employee::getResignReason, resignReason)
+                .set(Employee::getIsPass, 2)
+                .eq(Employee::getEmployeeUsername, employeeUsername)
+                .update();
+        return EmployeeEnum.SUBMIT_SUCCESS;
+    }
+
+    @Override
+    public EmployeeEnum consentResignation(String employUsername) {
+        lambdaUpdate()
+                .set(Employee::getEmployeeName,"")
+                .set(Employee::getEmployeePhone,"")
+                .set(Employee::getIsPass,0)
+                .set(Employee::getResignReason,"")
+                .eq(Employee::getEmployeeUsername,employUsername)
+                .update();
+        return EmployeeEnum.CONSENT_SUCCESS;
+    }
+
+
+    @Override
+    public Integer findByUsername(String employUsername) {
+        return lambdaQuery()
+                .select(Employee::getEmployeeId)
+                .eq(Employee::getEmployeeUsername, employUsername)
+                .one()
+                .getEmployeeId();
+    }
 }
-
-
-
-

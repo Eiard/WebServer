@@ -24,7 +24,7 @@ public class Orders implements Serializable {
     /**
      * 订单号(自动)
      */
-    @TableField(value = "order_number")
+    @TableId(value = "order_number",type = IdType.ASSIGN_ID)
     private String orderNumber;
 
     /**

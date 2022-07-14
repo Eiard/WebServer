@@ -1,8 +1,6 @@
 package com.ytz.web.controller;
 
 import com.alibaba.fastjson.TypeReference;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.EmployeeService;
@@ -11,7 +9,6 @@ import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 
 /**
@@ -21,7 +18,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.controller
  * @className: NetStationController
  * @author: 30671
- * @description: TODO : 管理员通信接口
+ * @description: TODO : 管理员操作
  * @date: 2022/7/4
  * @version: 1.0
  */
@@ -38,6 +35,7 @@ public class NetStationController {
     @Resource(name = "ordersServiceImpl")
     private OrdersService ordersService;
 
+    //登录注册功能
     @PostMapping("/login")
     String login(@RequestParam String adminUsername,
                  @RequestParam String adminPassword) {
@@ -56,29 +54,10 @@ public class NetStationController {
         return resultMap.toJson();
     }
 
-    @PostMapping("/fuzzyQueryByStationInfo")
-    String fuzzyQueryByStationInfo(@RequestParam String stationInfo) {
-
-        return new ResultMap(NetStationEnum.QUERY_SUCCESS, netStationService.fuzzyQueryByStationInfo(stationInfo)).toJson();
-    }
-
     @PostMapping("/queryStationInform")
     String queryAll(@RequestParam String adminUsername) {
         return new ResultMap(NetStationEnum.QUERY_SUCCESS, netStationService.queryStationInform(adminUsername)).toJson();
     }
-
-    @PostMapping("/queryInEmployee")
-    String queryInEmployee(@RequestParam Integer current) {
-        ResultMap resultMap = new ResultMap();
-
-        IPage page = employeeService.queryInEmployee(current);
-
-        resultMap.setData(page.getRecords());
-        resultMap.put("totalPage", page.getPages());
-        resultMap.setEnum(NetStationEnum.QUERY_SUCCESS);
-        return resultMap.toJson();
-    }
-
 
     @PostMapping("/updateStationInform")
     String update(@RequestParam String netStation,
@@ -93,20 +72,4 @@ public class NetStationController {
         return resultMap.toJson();
     }
 
-    @PostMapping("/dispatch")
-    String dispatch(@RequestParam String orderNumber, @RequestParam String employeeId) {
-
-        Employee employee = employeeService.dispatch(employeeId);
-        return new ResultMap(ordersService.dispatch(orderNumber, employee)).toJson();
-    }
-
-    @PostMapping("/resetPassword")
-    String resetPassword(@RequestParam String employeeId) {
-        return new ResultMap(employeeService.resetPassword(employeeId)).toJson();
-    }
-
-    @PostMapping("/received")
-    String received(@RequestParam String orderNumber) {
-        return new ResultMap(ordersService.received(orderNumber)).toJson();
-    }
 }
