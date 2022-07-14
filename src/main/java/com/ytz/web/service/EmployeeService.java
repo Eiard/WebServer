@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
+import com.ytz.web.model.NetStationEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -58,7 +59,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeId
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum resetPassword(String employeeId);
+    EmployeeEnum resetPassword(Integer employeeId);
 
     /**
      * @MethodName: dispatch
@@ -82,7 +83,7 @@ public interface EmployeeService extends IService<Employee> {
 
     /**
      * @MethodName: queryOutEmployee
-     * @Description: TODO : 显示离职员工信息（分页）
+     * @Description: DONE : 显示离职员工信息（分页）
      * @Author: Delmore
      * @date: 2022/7/13
      * @param: current
@@ -99,5 +100,30 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     boolean employeeUsernameIsExist(String employeeUsername);
+    /**
+     * @MethodName: resign
+     * @Description: DONE : 员工提交离职申请
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: com.ytz.web.model.EmployeeEnum
+     **/
+    EmployeeEnum submitResignation(String resignReason,String employeeUsername);
 
+    /**
+     * @MethodName: reviewResignation
+     * @Description: TODO : 同意离职申请
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: com.ytz.web.model.NetStationEnum
+     **/
+    EmployeeEnum  consentResignation(String employUsername);
+
+    /**
+     * @MethodName: findByUsername
+     * @Description: DONE : 通过用户名找ID
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: java.lang.Integer
+     **/
+    Integer findByUsername(String employUsername);
 }

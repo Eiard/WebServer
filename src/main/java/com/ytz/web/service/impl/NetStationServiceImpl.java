@@ -123,18 +123,16 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         return NetStationEnum.DELIVERY_SUCCESS;
     }
 
-
-
     @Override
     public boolean adminUsernameIsExist(String adminUsername) {
         return lambdaQuery().eq(NetStation::getAdminUsername, adminUsername).exists();
     }
 
     @Override
-    public Integer findByAdminUsername(String adminUsername) {
+    public Integer findIdByUsername(String adminUsername) {
         return lambdaQuery()
                 .select(NetStation::getStationId)
-                .eq(NetStation::getAdminUsername,adminUsername)
-        .one().getStationId();
+                .eq(NetStation::getAdminUsername, adminUsername)
+                .one().getStationId();
     }
 }

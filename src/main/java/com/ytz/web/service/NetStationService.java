@@ -69,7 +69,6 @@ public interface NetStationService extends IService<NetStation> {
      **/
     List queryStationInform(String adminUsername);
 
-
     /**
      * @MethodName: delivery
      * @Description: DONE : 通过网点Id 完成一个订单则增加数量
@@ -91,12 +90,12 @@ public interface NetStationService extends IService<NetStation> {
     boolean adminUsernameIsExist(String adminUsername);
     /**
      * @MethodName: findByAdminUsername
-     * @Description: DONE ：通过userName找stationId
+     * @Description: DONE ：通过用户名找ID
      * @Author: Delmore
      * @date: 2022/7/14
      * @param: adminUsername
      * @return: java.lang.Integer 网点Id
      **/
-    Integer findByAdminUsername(String adminUsername);
+    Integer findIdByUsername(String adminUsername);
 }
 
