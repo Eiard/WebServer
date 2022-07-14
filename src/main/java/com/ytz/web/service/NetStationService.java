@@ -40,7 +40,7 @@ public interface NetStationService extends IService<NetStation> {
     NetStationEnum sign(NetStation netStation);
 
     /**
-     * @MethodName: update
+     * @MethodName: updateStationInform
      * @Description: DONE : 账号更新信息
      * @Author: Delmore
      * @date: 2022/7/5
@@ -50,7 +50,7 @@ public interface NetStationService extends IService<NetStation> {
     NetStationEnum updateStationInform(NetStation netStation, String newPassword);
 
     /**
-     * @MethodName: queryByIdNameAddress
+     * @MethodName: fuzzyQueryByStationInfo
      * @Description: DONE : 通过 stationInfo => stationName stationAddress 模糊查询
      * @Author: 30671
      * @date: 2022/7/5
@@ -60,7 +60,7 @@ public interface NetStationService extends IService<NetStation> {
     List fuzzyQueryByStationInfo(String stationInfo);
 
     /**
-     * @MethodName: queryAll
+     * @MethodName: queryStationInform
      * @Description: DONE : 网点管理员查询所有信息
      * @Author: Delmore
      * @date: 2022/7/8
@@ -89,7 +89,7 @@ public interface NetStationService extends IService<NetStation> {
      */
     boolean adminUsernameIsExist(String adminUsername);
     /**
-     * @MethodName: findByAdminUsername
+     * @MethodName: findIdByUsername
      * @Description: DONE ：通过用户名找ID
      * @Author: Delmore
      * @date: 2022/7/14

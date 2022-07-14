@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
-import com.ytz.web.model.NetStationEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -72,7 +71,7 @@ public interface EmployeeService extends IService<Employee> {
     Employee dispatch(String employeeId);
 
     /**
-     * @MethodName: queryIncumbentEmployee
+     * @MethodName: queryInEmployee
      * @Description: DONE ： 显示在职员工信息（分页）
      * @Author: Delmore
      * @date: 2022/7/12
@@ -101,7 +100,7 @@ public interface EmployeeService extends IService<Employee> {
      */
     boolean employeeUsernameIsExist(String employeeUsername);
     /**
-     * @MethodName: resign
+     * @MethodName: submitResignation
      * @Description: DONE : 员工提交离职申请
      * @Author: Delmore
      * @date: 2022/7/14
@@ -110,7 +109,7 @@ public interface EmployeeService extends IService<Employee> {
     EmployeeEnum submitResignation(String resignReason,String employeeUsername);
 
     /**
-     * @MethodName: reviewResignation
+     * @MethodName: consentResignation
      * @Description: TODO : 同意离职申请
      * @Author: Delmore
      * @date: 2022/7/14
