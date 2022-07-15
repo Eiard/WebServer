@@ -15,7 +15,7 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: Orders
  * @author: 30671
- * @description: DONE : 订单
+ * @description: DONE : 系统管理员
  * @date: 2022/7/4
  * @TableName orders
  * @version: 1.0

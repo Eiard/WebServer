@@ -15,8 +15,8 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: Employee
  * @author: 30671
- * @description: DONE : 员工
- * @date: 2022/7/4
+ * @description: DONE : 工资
+ * @date: 2022/7/15
  * @TableName employee
  * @version: 1.0
  */
@@ -78,7 +78,7 @@ public class Employee implements Serializable {
     private Integer orderAmount;
 
     /**
-     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 预备离职 [3] 已离职
+     * 状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 离职
      */
     @TableField(value = "is_pass")
     private Integer isPass;

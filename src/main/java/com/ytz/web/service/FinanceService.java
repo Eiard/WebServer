@@ -2,6 +2,8 @@ package com.ytz.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Finance;
+import com.ytz.web.domain.NetStation;
+import com.ytz.web.model.FinanceEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -16,4 +18,22 @@ import com.ytz.web.domain.Finance;
  */
 public interface FinanceService extends IService<Finance> {
 
+    /**
+     * @MethodName: paySalaryPerNetStation
+     * @Description: DONE : 实现所有的网点所有员工发工资
+     * @Author: 30671
+     * @date: 2022/7/15
+     * @return: com.ytz.web.model.FinanceEnum
+     */
+    FinanceEnum paySalaryAllNetStation();
+
+    /**
+     * @MethodName: paySalaryPerNetStation
+     * @Description: DONE : 实现一个网点所有员工发工资
+     * @Author: 30671
+     * @date: 2022/7/14
+     * @param: netStation  网点信息
+     * @return: com.ytz.web.model.FinanceEnum
+     */
+    FinanceEnum paySalaryOneNetStation(NetStation netStation);
 }

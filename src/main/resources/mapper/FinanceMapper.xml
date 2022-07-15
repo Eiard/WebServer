@@ -7,6 +7,7 @@
     <resultMap id="BaseResultMap" type="com.ytz.web.domain.Finance">
             <result property="employeeId" column="employee_id" jdbcType="INTEGER"/>
             <result property="employeeName" column="employee_name" jdbcType="VARCHAR"/>
+            <result property="typeId" column="type_id" jdbcType="INTEGER"/>
             <result property="salary" column="salary" jdbcType="DOUBLE"/>
             <result property="orderAmount" column="order_amount" jdbcType="INTEGER"/>
             <result property="totalSalary" column="total_salary" jdbcType="DOUBLE"/>
@@ -15,8 +16,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        employee_id,employee_name,salary,
-        order_amount,total_salary,create_date,
-        update_date
+        employee_id,employee_name,type_id,
+        salary,order_amount,total_salary,
+        create_date,update_date
     </sql>
 </mapper>

@@ -65,7 +65,7 @@ public interface NetStationService extends IService<NetStation> {
      * @Author: Delmore
      * @date: 2022/7/8
      * @param: adminUsername  网点账号
-     * @return: java.util.List<com.ytz.web.vo.QueryAllInform>
+     * @return: List<NetStation>
      **/
     List queryStationInform(String adminUsername);
 
@@ -97,5 +97,14 @@ public interface NetStationService extends IService<NetStation> {
      * @return: java.lang.Integer 网点Id
      **/
     Integer findIdByUsername(String adminUsername);
+
+    /**
+     * @MethodName: queryAllStationInform
+     * @Description: DONE : 查询所有网点信息(用于网点管理员发工资)
+     * @Author: 30671
+     * @date: 2022/7/15
+     * @return: List<NetStation>
+     */
+    List<NetStation> queryAllStationInform();
 }
 
