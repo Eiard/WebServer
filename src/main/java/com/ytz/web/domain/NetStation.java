@@ -11,12 +11,19 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
- * 
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.domain
+ * @className: NetStation
+ * @author: 30671
+ * @description: DONE : 网点管理员
+ * @date: 2022/7/4
  * @TableName net_station
+ * @version: 1.0
  */
 @TableName(value ="net_station")
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class NetStation implements Serializable {
     /**
      * 网点ID 等价于 网点管理员ID

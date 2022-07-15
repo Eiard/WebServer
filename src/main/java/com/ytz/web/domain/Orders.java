@@ -9,8 +9,16 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.domain
+ * @className: Orders
+ * @author: 30671
+ * @description: DONE : 订单
+ * @date: 2022/7/4
  * @TableName orders
+ * @version: 1.0
  */
 @TableName(value ="orders")
 @Data
