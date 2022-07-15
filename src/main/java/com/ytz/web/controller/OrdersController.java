@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Orders;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.model.OrdersEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
@@ -56,5 +57,11 @@ public class OrdersController {
         resultMap.setEnum(ordersService.createOrder(JsonUtils.jsonToObject(orderAmount, new TypeReference<Orders>() {
         })));
         return resultMap.toJson();
+    }
+
+    @PostMapping("/getFinalPrice")
+    String getFinalPrice(@RequestParam Double goodWeight,@RequestParam Integer goodType) {
+        Double finalPrice = ordersService.getFinalPrice(goodWeight, goodType);
+        return new ResultMap(OrdersEnum.ACHIEVE_PRICE_SUCCESS,finalPrice).toJson();
     }
 }

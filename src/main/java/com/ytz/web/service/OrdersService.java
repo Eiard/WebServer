@@ -45,4 +45,13 @@ public interface OrdersService extends IService<Orders> {
      * @return: com.ytz.web.model.OrdersEnum
      **/
     OrdersEnum createOrder(Orders orderAmount);
+    /**
+     * @MethodName: getFinalPrice
+     * @Description: DONE : 获取订单价格
+     * @Author: Delmore
+     * @date: 2022/7/15
+     * @param: orderAmount
+     * @return: java.lang.Double
+     **/
+    Double getFinalPrice(Double goodWeight,Integer goodType);
 }

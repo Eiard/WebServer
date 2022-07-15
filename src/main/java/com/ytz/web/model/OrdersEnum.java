@@ -9,7 +9,7 @@ package com.ytz.web.model;
  * @date: 2022/7/11 22:03
  * @version: 1.0
  */
-public enum  OrdersEnum {
+public enum OrdersEnum {
     /**
      * 网点收件
      * 派送完成
@@ -20,9 +20,15 @@ public enum  OrdersEnum {
     DELIVERY_SUCCESS,
     /**
      *
-     *
      * 创建订单成功
+     * 获取订单价格
+     *
+     *
+     *
+     *
+     *
      *
      **/
     CREATE_ORDER_SUCCESS,
+    ACHIEVE_PRICE_SUCCESS,
 }

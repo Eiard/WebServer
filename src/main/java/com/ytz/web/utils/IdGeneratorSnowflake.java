@@ -3,7 +3,6 @@ package com.ytz.web.utils;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.IdUtil;
-
 import javax.annotation.PostConstruct;
 
 /**

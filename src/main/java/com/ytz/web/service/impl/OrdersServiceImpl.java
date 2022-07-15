@@ -7,6 +7,7 @@ import com.ytz.web.mapper.OrdersMapper;
 import com.ytz.web.model.OrdersEnum;
 import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.IdGeneratorSnowflake;
+import com.ytz.web.utils.PriceUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -50,12 +51,12 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     @Override
     public OrdersEnum createOrder(Orders orderAmount) {
         orderAmount.setOrderNumber(Long.toString(new IdGeneratorSnowflake().snowflakeId()));
-        //通过重量算价格
-
-        orderAmount.setOrderPrice(20.0);
-
         save(orderAmount);
         return OrdersEnum.CREATE_ORDER_SUCCESS;
     }
 
+    @Override
+    public Double getFinalPrice(Double goodWeight,Integer goodType) {
+        return PriceUtils.getFinalPrice(goodWeight, goodType);
+    }
 }
