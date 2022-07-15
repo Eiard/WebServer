@@ -59,9 +59,4 @@ public class OrdersController {
         return resultMap.toJson();
     }
 
-    @PostMapping("/getFinalPrice")
-    String getFinalPrice(@RequestParam Double goodWeight,@RequestParam Integer goodType) {
-        Double finalPrice = ordersService.getFinalPrice(goodWeight, goodType);
-        return new ResultMap(OrdersEnum.ACHIEVE_PRICE_SUCCESS,finalPrice).toJson();
-    }
 }

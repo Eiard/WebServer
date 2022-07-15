@@ -94,6 +94,7 @@ public class EmployeeController {
 
     @PostMapping("/resetPassword")
     String resetPassword(@RequestParam String employeeUsernameList) {
+        System.out.println(employeeUsernameList);
         List<String> employeeList = JsonUtils.jsonToList(employeeUsernameList, new TypeReference<List<String>>(){});
         return new ResultMap(employeeService.resetPassword(employeeList)).toJson();
     }

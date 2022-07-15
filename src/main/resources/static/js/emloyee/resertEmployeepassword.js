@@ -1,13 +1,13 @@
 //对多选框进行操作
 var resert = document.getElementById("resert");
-var array = [];
+var list = [];
 resert.onclick = function () {
     $('input[type=checkbox]').each(function () { //遍历checkbox的选择状态
         if ($(this).prop("checked")) { //如果值为checked表明选中了
             var data = $(this).closest('tr').find('td').eq(2).text();
-            array.push(data);
-            console.log(array);
-            array.length=0;//清空array历史
+            list.push(data);
+            console.log(list)
+            // array.length=0;//清空array历史
         }
     })
 
@@ -18,11 +18,10 @@ resert.onclick = function () {
         contentType: "application/x-www-form-urlencoded",
         timeout: 10000,
         dataType: 'json',
-        data: {
-            employeeUsernameList: array,
+        data:{
+            employeeUsernameList:JSON.stringify(list),
         },
         success: function (data) {
-            alert(data)
             if (data.status === 6) {
                 alert("重置成功！！！")
             } else {    // 如果请求资源异常，直接把后端定义的异常提示展示给用户
