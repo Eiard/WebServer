@@ -9,8 +9,16 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 
+ * -*- coding:utf-8 -*-
+ *
+ * @projectName: web
+ * @package: com.ytz.web.domain
+ * @className: Orders
+ * @author: 30671
+ * @description: DONE : 系统管理员
+ * @date: 2022/7/4
  * @TableName orders
+ * @version: 1.0
  */
 @TableName(value ="orders")
 @Data
@@ -24,7 +32,7 @@ public class Orders implements Serializable {
     /**
      * 订单号(自动)
      */
-    @TableId(value = "order_number",type = IdType.ASSIGN_ID)
+    @TableField(value = "order_number")
     private String orderNumber;
 
     /**

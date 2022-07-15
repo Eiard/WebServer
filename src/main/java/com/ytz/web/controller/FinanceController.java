@@ -1,6 +1,9 @@
 package com.ytz.web.controller;
 
+import com.ytz.web.model.FinanceEnum;
 import com.ytz.web.service.FinanceService;
+import com.ytz.web.utils.ResultMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +28,15 @@ public class FinanceController {
     private FinanceService financeService;
 
 
+    @PostMapping("/paySalaryAllNetStation")
+    public ResultMap paySalaryAllNetStation() {
 
+        return new ResultMap(financeService.paySalaryAllNetStation());
+    }
 
+    @PostMapping("/paySalaryAllRoot")
+    public ResultMap paySalaryAllRoot() {
 
-
+        return new ResultMap(FinanceEnum.PAY_SALARY_SUCCESS);
+    }
 }

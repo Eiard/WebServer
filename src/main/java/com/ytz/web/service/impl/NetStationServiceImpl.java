@@ -135,4 +135,16 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 .eq(NetStation::getAdminUsername, adminUsername)
                 .one().getStationId();
     }
+
+    @Override
+    public List<NetStation> queryAllStationInform() {
+        return lambdaQuery()
+                .select(
+                        NetStation::getStationId,
+                        NetStation::getAdminName,
+                        NetStation::getAdminType,
+                        NetStation::getOrderAmount
+                        )
+                .list();
+    }
 }

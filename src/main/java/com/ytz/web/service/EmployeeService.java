@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
 
+import java.util.List;
+
 /**
  * -*- coding:utf-8 -*-
  *
@@ -76,9 +78,20 @@ public interface EmployeeService extends IService<Employee> {
      * @Author: Delmore
      * @date: 2022/7/12
      * @param: current
+     * @param: stationId
+     * @return: IPage 分页数据
+     **/
+    IPage queryInEmployee(Integer current, Integer stationId);
+
+    /**
+     * @MethodName: queryInEmployee
+     * @Description: DONE ： 显示在职员工信息(全查) 用于发工资
+     * @Author: 30671
+     * @date: 2022/7/15
+     * @param: stationId
      * @return: java.util.List 在职员工的信息
      **/
-    IPage queryInEmployee(Integer current,Integer stationId);
+    List queryInEmployee(Integer stationId);
 
     /**
      * @MethodName: queryOutEmployee
@@ -88,7 +101,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: current
      * @return: java.util.List
      **/
-    IPage queryOutEmployee(Integer current,Integer stationId);
+    IPage queryOutEmployee(Integer current, Integer stationId);
 
     /**
      * @MethodName: employeeUsernameIsExist
@@ -99,6 +112,7 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     boolean employeeUsernameIsExist(String employeeUsername);
+
     /**
      * @MethodName: submitResignation
      * @Description: DONE : 员工提交离职申请
@@ -106,7 +120,7 @@ public interface EmployeeService extends IService<Employee> {
      * @date: 2022/7/14
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum submitResignation(String resignReason,String employeeUsername);
+    EmployeeEnum submitResignation(String resignReason, String employeeUsername);
 
     /**
      * @MethodName: consentResignation
@@ -115,7 +129,7 @@ public interface EmployeeService extends IService<Employee> {
      * @date: 2022/7/14
      * @return: com.ytz.web.model.NetStationEnum
      **/
-    EmployeeEnum  consentResignation(String employUsername);
+    EmployeeEnum consentResignation(String employUsername);
 
     /**
      * @MethodName: findByUsername

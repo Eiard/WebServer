@@ -107,6 +107,7 @@ CREATE TABLE finance
 (
     employee_id   INT(10) NOT NULL COMMENT '员工ID',
     employee_name VARCHAR(11) COMMENT '员工姓名',
+    type_id       INT(10) NOT NULL COMMENT '员工类别 1派送员 2网点管理员 3系统管理员',
     salary        DOUBLE  NOT NULL COMMENT '员工薪水(税前)',
     order_amount  INT(11)  DEFAULT NULL COMMENT '快递单数',
     total_salary  DOUBLE   DEFAULT NULL COMMENT '员工总工资(税后)',

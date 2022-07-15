@@ -70,7 +70,7 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: assign_id
-#      capital-mode: false
-#      logic-delete-field: isDeleted
-#      logic-delete-value: 1
-#      logic-not-delete-value: 0
+      capital-mode: false
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
