@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
+
 /**
  * -*- coding:utf-8 -*-
  *
@@ -14,8 +15,8 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: GoodType
  * @author: 30671
- * @description: DONE : 货物类型
- * @date: 2022/7/4
+ * @description: DONE : 工资
+ * @date: 2022/7/15
  * @TableName good_type
  * @version: 1.0
  */

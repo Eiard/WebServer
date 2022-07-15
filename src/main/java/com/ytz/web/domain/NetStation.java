@@ -17,8 +17,8 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: NetStation
  * @author: 30671
- * @description: DONE : 网点管理员
- * @date: 2022/7/4
+ * @description: DONE : 工资
+ * @date: 2022/7/15
  * @TableName net_station
  * @version: 1.0
  */
@@ -77,7 +77,7 @@ public class NetStation implements Serializable {
      * 默认为2 网点管理员
      */
     @TableField(value = "admin_type")
-    private Boolean adminType;
+    private Integer adminType;
 
     /**
      * 网点管理员完成的快递单数(月结)

@@ -3,6 +3,7 @@ package com.ytz.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
+
 import java.util.List;
 
 /**
@@ -88,6 +89,7 @@ public interface NetStationService extends IService<NetStation> {
      * @return: boolean
      */
     boolean adminUsernameIsExist(String adminUsername);
+
     /**
      * @MethodName: findIdByUsername
      * @Description: DONE ：通过用户名找ID
@@ -106,5 +108,15 @@ public interface NetStationService extends IService<NetStation> {
      * @return: List<NetStation>
      */
     List<NetStation> queryAllStationInform();
+
+    /**
+     * @MethodName: resetAmount
+     * @Description: DONE : 更新该月的处理订单数量
+     * @Author: 30671
+     * @date: 2022/7/16
+     * @param: employeeId  网点Id
+     * @return: NetStationEnum
+     */
+    NetStationEnum resetAmount(Integer stationId);
 }
 

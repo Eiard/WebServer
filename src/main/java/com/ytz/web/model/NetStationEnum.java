@@ -79,4 +79,8 @@ public enum NetStationEnum {
      */
     DELIVERY_SUCCESS,
 
+    /**
+     * 清空订单数成功
+     */
+    RESET_AMOUNT_SUCCESS;
 }

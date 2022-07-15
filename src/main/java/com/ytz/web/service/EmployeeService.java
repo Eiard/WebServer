@@ -60,7 +60,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeId
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum resetPassword(List employeeUsernameList);
+    EmployeeEnum resetPassword(Integer employeeId);
 
     /**
      * @MethodName: dispatch
@@ -78,9 +78,20 @@ public interface EmployeeService extends IService<Employee> {
      * @Author: Delmore
      * @date: 2022/7/12
      * @param: current
+     * @param: stationId
+     * @return: IPage 分页数据
+     **/
+    IPage queryInEmployee(Integer current, Integer stationId);
+
+    /**
+     * @MethodName: queryInEmployee
+     * @Description: DONE ： 显示在职员工信息(全查) 用于发工资
+     * @Author: 30671
+     * @date: 2022/7/15
+     * @param: stationId
      * @return: java.util.List 在职员工的信息
      **/
-    IPage queryInEmployee(Integer current,Integer stationId);
+    List<Employee> queryInEmployee(Integer stationId);
 
     /**
      * @MethodName: queryOutEmployee
@@ -90,7 +101,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: current
      * @return: java.util.List
      **/
-    IPage queryOutEmployee(Integer current,Integer stationId);
+    IPage queryOutEmployee(Integer current, Integer stationId);
 
     /**
      * @MethodName: employeeUsernameIsExist
@@ -101,6 +112,7 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     boolean employeeUsernameIsExist(String employeeUsername);
+
     /**
      * @MethodName: submitResignation
      * @Description: DONE : 员工提交离职申请
@@ -108,15 +120,33 @@ public interface EmployeeService extends IService<Employee> {
      * @date: 2022/7/14
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum submitResignation(String resignReason,String employeeUsername);
+    EmployeeEnum submitResignation(String resignReason, String employeeUsername);
 
     /**
      * @MethodName: consentResignation
-     * @Description: DONE : 同意离职申请
+     * @Description: TODO : 同意离职申请
      * @Author: Delmore
      * @date: 2022/7/14
      * @return: com.ytz.web.model.NetStationEnum
      **/
-    EmployeeEnum  consentResignation(String employUsername);
+    EmployeeEnum consentResignation(String employUsername);
 
+    /**
+     * @MethodName: findByUsername
+     * @Description: DONE : 通过用户名找ID
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: java.lang.Integer
+     **/
+    Integer findByUsername(String employUsername);
+
+    /**
+     * @MethodName: resetAmount
+     * @Description: DONE : 更新该月的处理订单数量
+     * @Author: 30671
+     * @date: 2022/7/16
+     * @param: employeeId  员工用Id
+     * @return: boolean
+     */
+    EmployeeEnum resetAmount(Integer employeeId);
 }

@@ -8,6 +8,7 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -135,6 +136,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 .eq(NetStation::getAdminUsername, adminUsername)
                 .one().getStationId();
     }
+
     @Override
     public List<NetStation> queryAllStationInform() {
         return lambdaQuery()
@@ -144,6 +146,19 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                         NetStation::getAdminType,
                         NetStation::getOrderAmount
                 )
+                .eq(NetStation::getIsPass, 1)
+                .or(netStationLambdaQueryWrapper -> {
+                    netStationLambdaQueryWrapper.eq(NetStation::getIsPass, 2);
+                })
                 .list();
+    }
+
+    public NetStationEnum resetAmount(Integer stationId) {
+        lambdaUpdate()
+                .set(NetStation::getOrderAmount, 0)
+                .eq(NetStation::getStationId, stationId)
+                .update();
+
+        return NetStationEnum.RESET_AMOUNT_SUCCESS;
     }
 }

@@ -64,4 +64,9 @@ public enum EmployeeEnum {
     CONSENT_RESIGNATION_SUCCESS,
     IS_RESIGNED,
 
+    /**
+     * 清空订单数成功
+     */
+    RESET_AMOUNT_SUCCESS;
+
 }
