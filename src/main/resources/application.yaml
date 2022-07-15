@@ -5,7 +5,7 @@ spring:
     url: jdbc:mysql://localhost:3306/logistics?useUnicode=true&characterEncoding=utf-8&relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 0.021.zyc
+    password: 0104
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       #最大连接池数量
@@ -65,11 +65,10 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:/mapper/*.xml
   type-aliases-package: com.ytz.web.domain
-
   #  数据库支持id唯一
-  global-config:
-    db-config:
-      id-type: assign_id
+#  global-config:
+#    db-config:
+#      id-type: assign_id
 #      capital-mode: false
 #      logic-delete-field: isDeleted
 #      logic-delete-value: 1

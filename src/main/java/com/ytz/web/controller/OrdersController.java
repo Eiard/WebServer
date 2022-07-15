@@ -1,10 +1,13 @@
 package com.ytz.web.controller;
 
+import com.alibaba.fastjson.TypeReference;
 import com.ytz.web.domain.Employee;
+import com.ytz.web.domain.Orders;
 import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
+import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,5 +48,13 @@ public class OrdersController {
     String dispatch(@RequestParam String orderNumber, @RequestParam String employeeId) {
         Employee employee = employeeService.dispatch(employeeId);
         return new ResultMap(ordersService.dispatch(orderNumber, employee)).toJson();
+    }
+
+    @PostMapping("/createOrder")
+    String createOrder(@RequestParam String orderAmount) {
+        ResultMap resultMap = new ResultMap();
+        resultMap.setEnum(ordersService.createOrder(JsonUtils.jsonToObject(orderAmount, new TypeReference<Orders>() {
+        })));
+        return resultMap.toJson();
     }
 }

@@ -29,6 +29,8 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.33'
     // fastjson
     implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.83'
+    //idworker
+    implementation group:'cn.hutool',name: 'hutool-all',version:'5.4.4'
     // BeanUtils
     //    implementation group: 'net.sf.dozer',name:'dozer' , version:'5.5.1'
     //    implementation 'commons-beanutils:commons-beanutils:1.9.4'

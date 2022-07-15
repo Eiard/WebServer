@@ -68,7 +68,7 @@ CREATE TABLE employee
     employee_type     TINYINT(1)  DEFAULT 3 NOT NULL COMMENT '员工类型ID 派送员默认为3',
     order_amount      INT(10)     DEFAULT 0 COMMENT '派送完成的快递单数(月结)',
     #-----------------------------------------------------------------------------------------
-    is_pass           TINYINT(1)  DEFAULT 0 COMMENT '状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 离职',
+    is_pass           TINYINT(1)  DEFAULT 0 COMMENT '状态标志位 [0] 未审核 [1] 审核通过并在职 [2] 预备离职 [3] 已离职',
     resign_reason     VARCHAR(50) DEFAULT NULL COMMENT '辞职理由',
     create_date       DATETIME    DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
     update_date       DATETIME    DEFAULT CURRENT_TIMESTAMP
@@ -146,8 +146,8 @@ DROP TABLE IF EXISTS orders;
 CREATE TABLE orders
 (
     #---------------------------------------------------------------------------------------
-    order_id          INT(10)     NOT NULL AUTO_INCREMENT COMMENT '主键id',
-    order_number      VARCHAR(50) NOT NULL UNIQUE COMMENT '订单号(自动)',
+    order_id          INT(50)     NOT NULL AUTO_INCREMENT COMMENT '主键id',
+    order_number      VARCHAR(30) NOT NULL UNIQUE COMMENT '订单号(自动)',
     start_point       INT(10)     NOT NULL COMMENT '发货网点(自动)',
     start_address     VARCHAR(50) NOT NULL COMMENT '发货网点地址(自动)',
     end_point         INT(10)     NOT NULL COMMENT '收货网点',

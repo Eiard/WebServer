@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * -*- coding:utf-8 -*-
@@ -36,8 +37,6 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     @Resource(name = "commonServiceImpl")
     private CommonService commonService;
 
-
-
     @Override
     public EmployeeEnum login(String employeeUsername, String employeePassword) {
         Employee employee = lambdaQuery()
@@ -50,6 +49,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         }
         if (employee.getIsPass()==0) {
             return EmployeeEnum.LOGIN_UNVERIFIED;
+        }
+        if (employee.getIsPass()==3){
+            return EmployeeEnum.IS_RESIGNED;
         }
         return EmployeeEnum.LOGIN_SUCCESS;
     }
@@ -115,11 +117,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
 
     @Override
-    public EmployeeEnum resetPassword(Integer employeeId) {
-        lambdaUpdate()
-                .set(Employee::getEmployeePassword, "123456")
-                .eq(Employee::getEmployeeId, employeeId)
-                .update();
+    public EmployeeEnum resetPassword(List employeeUsernameList) {
+        for (int i=0;i<employeeUsernameList.size();i++){
+            lambdaUpdate()
+                    .set(Employee::getEmployeePassword, "123456")
+                    .eq(Employee::getEmployeeUsername,  employeeUsernameList.get(i))
+                    .update();
+        }
         return EmployeeEnum.RESET_PASSWORD_SUCCESS;
     }
 
@@ -140,7 +144,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .set(Employee::getIsPass, 2)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
                 .update();
-        return EmployeeEnum.SUBMIT_SUCCESS;
+        return EmployeeEnum.SUBMIT_RESIGNATION_SUCCESS;
     }
 
     @Override
@@ -148,20 +152,10 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         lambdaUpdate()
                 .set(Employee::getEmployeeName,"")
                 .set(Employee::getEmployeePhone,"")
-                .set(Employee::getIsPass,0)
+                .set(Employee::getIsPass,3)
                 .set(Employee::getResignReason,"")
                 .eq(Employee::getEmployeeUsername,employUsername)
                 .update();
-        return EmployeeEnum.CONSENT_SUCCESS;
-    }
-
-
-    @Override
-    public Integer findByUsername(String employUsername) {
-        return lambdaQuery()
-                .select(Employee::getEmployeeId)
-                .eq(Employee::getEmployeeUsername, employUsername)
-                .one()
-                .getEmployeeId();
+        return EmployeeEnum.CONSENT_RESIGNATION_SUCCESS;
     }
 }

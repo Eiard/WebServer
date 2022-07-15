@@ -5,7 +5,7 @@ package com.ytz.web.model;
  * @package: com.ytz.web.model
  * @className: OrdersEnum
  * @author: Delmore
- * @description: TODO
+ * @description: TODO : Orders状态码
  * @date: 2022/7/11 22:03
  * @version: 1.0
  */
@@ -18,5 +18,11 @@ public enum  OrdersEnum {
     RECEIVE_SUCCESS,
     DISPATCH_SUCCESS,
     DELIVERY_SUCCESS,
-
+    /**
+     *
+     *
+     * 创建订单成功
+     *
+     **/
+    CREATE_ORDER_SUCCESS,
 }
