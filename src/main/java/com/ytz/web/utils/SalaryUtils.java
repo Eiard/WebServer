@@ -27,7 +27,7 @@ public class SalaryUtils {
     /**
      * 完成每单额外工资
      * 派送员每单
-     * 派送员每单
+     * 网点管理员每单
      */
     final static double employeeSalaryPerOrder = 2;
     final static double netStationSalaryPerOrder = 0.8;
