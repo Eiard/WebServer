@@ -13,7 +13,7 @@ import com.ytz.web.model.FinanceEnum;
  * @className: FinanceService
  * @author: 30671
  * @description: TODO : 针对表【finance】的数据库操作Service
- * @date: 2022/7/4
+ * @date: 2022/7/15
  * @version: 1.0
  */
 public interface FinanceService extends IService<Finance> {
@@ -59,7 +59,7 @@ public interface FinanceService extends IService<Finance> {
 
     /**
      * @MethodName: paySalaryPerNetStation
-     * @Description: DONE : Root 员工所有发工资
+     * @Description: TODO : Root 员工所有发工资
      * @Author: 30671
      * @date: 2022/7/14
      * @param: netStation  网点信息

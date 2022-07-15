@@ -34,6 +34,7 @@ public class FinanceController {
         return new ResultMap(financeService.paySalaryAllNetStation()).toJson();
     }
 
+    @Deprecated
     @PostMapping("/paySalaryAllRoot")
     public String paySalaryAllRoot() {
 
