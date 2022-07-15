@@ -8,6 +8,7 @@ import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -144,7 +145,11 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                         NetStation::getAdminName,
                         NetStation::getAdminType,
                         NetStation::getOrderAmount
-                        )
+                )
+                .eq(NetStation::getIsPass, 1)
+                .or(netStationLambdaQueryWrapper -> {
+                    netStationLambdaQueryWrapper.eq(NetStation::getIsPass, 2);
+                })
                 .list();
     }
 }

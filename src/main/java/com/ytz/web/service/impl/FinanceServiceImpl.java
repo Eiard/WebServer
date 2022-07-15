@@ -33,15 +33,43 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
     @Override
     public FinanceEnum paySalaryAllNetStation() {
 
+        // 所有网点
         List<NetStation> netStations = netStationService.queryAllStationInform();
-        System.out.println(netStations);
+
+        // 单个网点
+        for (NetStation netStation : netStations) {
+            paySalaryOneNetStation(netStation);
+        }
 
         return FinanceEnum.PAY_SALARY_SUCCESS;
     }
 
     public FinanceEnum paySalaryOneNetStation(NetStation netStation) {
 
+        // 该网点
+        // 网点管理员发工资
+        paySalaryAdmin(netStation);
+
+        // 网点其他员工发工资
+        paySalaryEmployee(netStation.getStationId());
+
         return FinanceEnum.PAY_SALARY_SUCCESS;
+    }
+
+    @Override
+    public FinanceEnum paySalaryAdmin(NetStation netStation) {
+        return null;
+    }
+
+    @Override
+    public FinanceEnum paySalaryEmployee(Integer stationId) {
+        return null;
+    }
+
+    @Deprecated
+    @Override
+    public FinanceEnum paySalaryRoot(NetStation netStation) {
+        return null;
     }
 }
 

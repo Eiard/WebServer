@@ -29,14 +29,14 @@ public class FinanceController {
 
 
     @PostMapping("/paySalaryAllNetStation")
-    public ResultMap paySalaryAllNetStation() {
+    public String paySalaryAllNetStation() {
 
-        return new ResultMap(financeService.paySalaryAllNetStation());
+        return new ResultMap(financeService.paySalaryAllNetStation()).toJson();
     }
 
     @PostMapping("/paySalaryAllRoot")
-    public ResultMap paySalaryAllRoot() {
+    public String paySalaryAllRoot() {
 
-        return new ResultMap(FinanceEnum.PAY_SALARY_SUCCESS);
+        return new ResultMap(FinanceEnum.PAY_SALARY_SUCCESS).toJson();
     }
 }
