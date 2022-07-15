@@ -93,19 +93,17 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public List queryInEmployee(Integer stationId) {
-        return listMaps(new LambdaQueryWrapper<Employee>()
+    public List<Employee> queryInEmployee(Integer stationId) {
+        return lambdaQuery()
                 .select(
                         Employee::getEmployeeId,
                         Employee::getEmployeeName,
-                        Employee::getEmployeeUsername,
-                        Employee::getEmployeeSex,
-                        Employee::getEmployeePhone,
-                        Employee::getOrderAmount,
-                        Employee::getCreateDate
+                        Employee::getEmployeeType,
+                        Employee::getOrderAmount
                 )
                 .eq(Employee::getStationId, stationId)
-                .eq(Employee::getIsPass, 1));
+                .eq(Employee::getIsPass, 1)
+                .list();
     }
 
 
