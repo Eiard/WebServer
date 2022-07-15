@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/check.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery.cookie.min.js"></script>
+    <script src="js/url.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="form-box">
+        <!-- 注册 -->
+        <div class="register-box hidden">
+            <h1>register</h1>
+            <input id="register-name" type="text" placeholder="姓名">
+            <input id="register-phone" type="text" maxlength=11 placeholder="电话">
+            <input id="register-password" type="password" placeholder="密码">
+            <input id="register-account" type="text" placeholder="用户名">
+            <div class="select">
+                <select id="province">
+                    <option>请选择...</option>
+                    <option value="1">湖北省</option>
+                    <option value="2">湖南省</option>
+                </select>
+                <select id="city">
+                    <option>请选择...</option>
+                </select>
+                <select id="district">
+                    <option>请选择...</option>
+                </select>
+            </div>
+            <input id="register-addressname" type="text" placeholder="站点名">
+            <div class="rdos">
+                <label for="selectsex1">
+                    <input name="selectsex" id="selectsex1" type="radio" value="0">女
+                </label>
+                <label for="selectsex2">
+                    <input name="selectsex" id="selectsex2" type="radio" value="1">男
+                </label>
+            </div>
+
+
+            <button id="register-btn" type="button">注册</button>
+        </div>
+
+
+        <!-- 登录 -->
+        <div class="login-box">
+            <h1>login</h1>
+            <input id="login-account" type="text" placeholder="用户名">
+            <input id="login-password" type="password" placeholder="密码">
+            <div class="rdos1">
+                <label class="rdo">
+                    <input name="select" id="select1" type="radio" value="0">
+                    <label for="select1">管理员</label>
+                </label>
+                <label class="rdo">
+                    <input name="select" id="select2" type="radio" value="1">
+                    <label for="select2">员工</label>
+                </label>
+            </div>
+            <button id="login-btn" type="button">登录</button>
+        </div>
+    </div>
+
+
+    <div class="con-box left">
+        <h2>欢迎来到<span>物流管理系统</span></h2>
+        <p>欢迎注册您的专属<span>账号</span></p>
+        <img src="image/login.jpg" alt="">
+        <p>已有账号</p>
+        <button id="gologin">去登录</button>
+    </div>
+
+
+    <div class="con-box right">
+        <h2>欢迎来到<span>物流管理系统</span></h2>
+        <p>快来看看你的<span>物流</span>吧</p>
+        <img src="image/resister.jpg" alt="">
+        <p>没有账号？</p>
+        <button id="goregister">去注册</button>
+    </div>
+</div>
+
+<script src="js/city.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
