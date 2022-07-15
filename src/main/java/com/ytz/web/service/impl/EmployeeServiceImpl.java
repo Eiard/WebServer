@@ -180,7 +180,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     public EmployeeEnum resetAmount(Integer employeeId) {
         lambdaUpdate()
                 .set(Employee::getOrderAmount, 0)
-                .eq(Employee::getEmployeeId, employeeId);
+                .eq(Employee::getEmployeeId, employeeId)
+                .update();
 
         return EmployeeEnum.RESET_AMOUNT_SUCCESS;
     }

@@ -109,6 +109,7 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
 
         }
 
+        // 发该网点Id的所有 员工的工资
         saveBatch(finances);
 
         return FinanceEnum.PAY_SALARY_SUCCESS;

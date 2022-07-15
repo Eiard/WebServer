@@ -156,7 +156,8 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     public NetStationEnum resetAmount(Integer stationId) {
         lambdaUpdate()
                 .set(NetStation::getOrderAmount, 0)
-                .eq(NetStation::getStationId, stationId);
+                .eq(NetStation::getStationId, stationId)
+                .update();
 
         return NetStationEnum.RESET_AMOUNT_SUCCESS;
     }
