@@ -77,7 +77,7 @@ public class NetStation implements Serializable {
      * 默认为2 网点管理员
      */
     @TableField(value = "admin_type")
-    private Boolean adminType;
+    private Integer adminType;
 
     /**
      * 网点管理员完成的快递单数(月结)

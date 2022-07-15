@@ -81,13 +81,13 @@ public class SalaryUtils {
      * @param: type  员工类别
      * @return: Double
      */
-    public Double getBaseSalary(Integer type) {
+    public static Double getBaseSalary(Integer type) {
         if (type == 1) {
-            return employeeBaseSalary;
+            return rootBaseSalary;
         } else if (type == 2) {
             return netStationBaseSalary;
         } else if (type == 3) {
-            return rootBaseSalary;
+            return employeeBaseSalary;
         }
         return 0.0;
     }
@@ -101,11 +101,11 @@ public class SalaryUtils {
      * @param: orderAmount  订单完成数量
      * @return: Double
      */
-    public Double calculateSalary(Integer type, Integer orderAmount) {
+    public static Double calculateSalary(Integer type, Integer orderAmount) {
 
         Double baseSalary = getBaseSalary(type);
 
-        if (type == 1) {
+        if (type == 3) {
             return baseSalary + orderAmount * employeeSalaryPerOrder;
         } else if (type == 2) {
             return baseSalary + orderAmount * netStationSalaryPerOrder;
@@ -123,7 +123,7 @@ public class SalaryUtils {
      * @param: salary  包含订单派送个数 计算过后 的总工资
      * @return: Double
      */
-    public Double taxDeduction(Double salary) {
+    public static Double taxDeduction(Double salary) {
 
         double pension = salary * pensionTax;
         double medical = salary * medicalTax;

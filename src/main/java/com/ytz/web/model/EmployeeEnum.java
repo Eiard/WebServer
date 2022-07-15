@@ -62,4 +62,9 @@ public enum EmployeeEnum {
     SUBMIT_SUCCESS,
     CONSENT_SUCCESS,
 
+    /**
+     * 清空订单数成功
+     */
+    RESET_AMOUNT_SUCCESS;
+
 }

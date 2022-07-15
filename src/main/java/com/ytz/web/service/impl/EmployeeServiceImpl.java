@@ -103,6 +103,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 )
                 .eq(Employee::getStationId, stationId)
                 .eq(Employee::getIsPass, 1)
+                .or(netStationLambdaQueryWrapper -> {
+                    netStationLambdaQueryWrapper.eq(Employee::getIsPass, 2);
+                })
                 .list();
     }
 
@@ -165,7 +168,6 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return EmployeeEnum.CONSENT_SUCCESS;
     }
 
-
     @Override
     public Integer findByUsername(String employUsername) {
         return lambdaQuery()
@@ -173,5 +175,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .eq(Employee::getEmployeeUsername, employUsername)
                 .one()
                 .getEmployeeId();
+    }
+
+    public EmployeeEnum resetAmount(Integer employeeId) {
+        lambdaUpdate()
+                .set(Employee::getOrderAmount, 0)
+                .eq(Employee::getEmployeeId, employeeId);
+
+        return EmployeeEnum.RESET_AMOUNT_SUCCESS;
     }
 }

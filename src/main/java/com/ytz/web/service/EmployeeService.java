@@ -91,7 +91,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: stationId
      * @return: java.util.List 在职员工的信息
      **/
-    List queryInEmployee(Integer stationId);
+    List<Employee> queryInEmployee(Integer stationId);
 
     /**
      * @MethodName: queryOutEmployee
@@ -139,4 +139,14 @@ public interface EmployeeService extends IService<Employee> {
      * @return: java.lang.Integer
      **/
     Integer findByUsername(String employUsername);
+
+    /**
+     * @MethodName: resetAmount
+     * @Description: DONE : 更新该月的处理订单数量
+     * @Author: 30671
+     * @date: 2022/7/16
+     * @param: employeeId  员工用Id
+     * @return: boolean
+     */
+    EmployeeEnum resetAmount(Integer employeeId);
 }

@@ -152,4 +152,12 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 })
                 .list();
     }
+
+    public NetStationEnum resetAmount(Integer stationId) {
+        lambdaUpdate()
+                .set(NetStation::getOrderAmount, 0)
+                .eq(NetStation::getStationId, stationId);
+
+        return NetStationEnum.RESET_AMOUNT_SUCCESS;
+    }
 }
