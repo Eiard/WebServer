@@ -128,7 +128,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
 
     @Override
-    public EmployeeEnum resetPassword(List employeeUsernameList) {
+    public EmployeeEnum resetPassword(List<String> employeeUsernameList) {
         for (int i=0;i<employeeUsernameList.size();i++){
             lambdaUpdate()
                     .set(Employee::getEmployeePassword, "123456")
@@ -167,7 +167,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .set(Employee::getResignReason,"")
                 .eq(Employee::getEmployeeUsername,employUsername)
                 .update();
-        return EmployeeEnum.CONSENT_SUCCESS;
+        return EmployeeEnum.CONSENT_RESIGNATION_SUCCESS;
     }
 
 

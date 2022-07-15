@@ -60,7 +60,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeId
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum resetPassword(Integer employeeId);
+    EmployeeEnum resetPassword(List<String> employeeUsernameList);
 
     /**
      * @MethodName: dispatch
@@ -131,14 +131,6 @@ public interface EmployeeService extends IService<Employee> {
      **/
     EmployeeEnum consentResignation(String employUsername);
 
-    /**
-     * @MethodName: findByUsername
-     * @Description: DONE : 通过用户名找ID
-     * @Author: Delmore
-     * @date: 2022/7/14
-     * @return: java.lang.Integer
-     **/
-    Integer findByUsername(String employUsername);
 
     /**
      * @MethodName: resetAmount
