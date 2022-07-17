@@ -139,7 +139,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public Employee dispatch(String employeeId) {
+    public Employee dispatch(Integer employeeId) {
         return getById(employeeId);
     }
 

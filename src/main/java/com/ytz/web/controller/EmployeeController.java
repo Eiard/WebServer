@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class EmployeeController {
     }
 
     @RequestMapping("/delivery")
-    String delivery(@RequestParam String employeeUsername,@RequestParam String orderNumber) {
+    String delivery(@RequestParam String employeeUsername, @RequestParam String orderNumber) {
 
         // 派送员送件数增加
         Integer stationId = employeeService.delivery(employeeUsername);
@@ -70,52 +71,52 @@ public class EmployeeController {
 
         return new ResultMap(EmployeeEnum.DELIVERY_SUCCESS).toJson();
     }
+
     @PostMapping("/submitResignation")
-    String resign(@RequestParam String resignReason,@RequestParam String employeeUsername){
-        return new ResultMap(employeeService.submitResignation(resignReason,employeeUsername)).toJson();
+    String resign(@RequestParam String resignReason, @RequestParam String employeeUsername) {
+        return new ResultMap(employeeService.submitResignation(resignReason, employeeUsername)).toJson();
     }
 
     /**
-     * 查询在职员工
+     * @description: FIXME : 查询在职员工
+     *
      * @param current
      * @param adminUsername
      * @return
      */
     @PostMapping("/queryInEmployee")
     String queryInEmployee(@RequestParam Integer current, @RequestParam String adminUsername) {
-        IPage page = employeeService.queryInEmployee(current,netStationService.findIdByUsername(adminUsername));
-        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS,page.getRecords());
+        IPage page = employeeService.queryInEmployee(current, netStationService.findIdByUsername(adminUsername));
+        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
         resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
     }
 
     /**
-     * 查询准备离职的员工
+     * @description: FIXME : 员工操作查询准备离职的员工
      * @param current
      * @param adminUsername
-     * @return
      */
     @PostMapping("/queryOutEmployee")
-    String queryOutEmployee(@RequestParam Integer current,@RequestParam String adminUsername) {
+    String queryOutEmployee(@RequestParam Integer current, @RequestParam String adminUsername) {
         IPage page = employeeService.queryOutEmployee(current, netStationService.findIdByUsername(adminUsername));
-        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS,page.getRecords());
-        resultMap.put("totalPage",page.getPages());
+        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
+        resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
     }
 
     /**
-     * 重置员工密码
-     * @param employeeUsernameList
-     * @return
+     * @description: DONE : 重置员工密码
+     * @param employeeIdList    员工Id的List Json
      */
     @PostMapping("/resetPassword")
-    String resetPassword(@RequestParam List<Integer> employeeId) {
-        // List<String> employeeList = JsonUtils.jsonToList(employeeUsernameList, new TypeReference<List<String>>(){});
-        return new ResultMap(employeeService.resetPassword(employeeId)).toJson();
+    String resetPassword(@RequestParam String employeeIdList) {
+        return new ResultMap(employeeService.resetPassword(JsonUtils.jsonToList(employeeIdList, new TypeReference<List<Integer>>() {
+        }))).toJson();
     }
 
     @PostMapping("/consentResignation")
-    String consentResignation(@RequestParam String employeeUsername){
+    String consentResignation(@RequestParam String employeeUsername) {
         return new ResultMap(employeeService.consentResignation(employeeUsername)).toJson();
     }
 }

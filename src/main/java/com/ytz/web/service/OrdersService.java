@@ -6,6 +6,8 @@ import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Orders;
 import com.ytz.web.model.OrdersEnum;
 
+import java.util.List;
+
 /**
  * -*- coding:utf-8 -*-
  *
@@ -20,13 +22,14 @@ import com.ytz.web.model.OrdersEnum;
 public interface OrdersService extends IService<Orders> {
     /**
      * @MethodName: dispatch
-     * @Description: DONE : 网点管理员指定派送员配送并修改订单标志位
+     * @Description: DONE : 订单绑定派送员 并修改订单标志位
      * @Author: Delmore
      * @date: 2022/7/11
      * @param: orderNumber
+     * @param: employee
      * @return: com.ytz.web.model.OrdersEnum
      **/
-    OrdersEnum dispatch(String orderNumber, Employee employee);
+    OrdersEnum dispatch(List<String >  orderNumber, Employee employee);
 
     /**
      * @MethodName: delivery

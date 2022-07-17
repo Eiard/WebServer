@@ -12,6 +12,8 @@ import com.ytz.web.utils.IdGeneratorSnowflake;
 import com.ytz.web.utils.PageUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * -*- coding:utf-8 -*-
  *
@@ -26,15 +28,18 @@ import org.springframework.stereotype.Service;
 @Service("ordersServiceImpl")
 public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         implements OrdersService {
+
     @Override
-    public OrdersEnum dispatch(String orderNumber, Employee employee) {
-        lambdaUpdate()
-                .set(Orders::getOrderStatus, 2)
-                .set(Orders::getSenderId, employee.getEmployeeId())
-                .set(Orders::getSenderName, employee.getEmployeeName())
-                .set(Orders::getSenderPhone, employee.getEmployeePhone())
-                .eq(Orders::getOrderNumber, orderNumber)
-                .update();
+    public OrdersEnum dispatch(List<String> orderNumberList, Employee employee) {
+        for (String orderNumber : orderNumberList) {
+            lambdaUpdate()
+                    .set(Orders::getOrderStatus, 2)
+                    .set(Orders::getSenderId, employee.getEmployeeId())
+                    .set(Orders::getSenderName, employee.getEmployeeName())
+                    .set(Orders::getSenderPhone, employee.getEmployeePhone())
+                    .eq(Orders::getOrderNumber, orderNumber)
+                    .update();
+        }
         return OrdersEnum.DISPATCH_SUCCESS;
     }
 

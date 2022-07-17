@@ -70,7 +70,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeId
      * @return: java.util.Map<java.lang.String, java.lang.String> 姓名和电话
      **/
-    Employee dispatch(String employeeId);
+    Employee dispatch(Integer employeeId);
 
     /**
      * @MethodName: queryInEmployee
@@ -115,7 +115,7 @@ public interface EmployeeService extends IService<Employee> {
 
     /**
      * @MethodName: submitResignation
-     * @Description: DONE : 员工提交离职申请
+     * @Description: FIXME : 员工提交离职申请
      * @Author: Delmore
      * @date: 2022/7/14
      * @return: com.ytz.web.model.EmployeeEnum
@@ -124,7 +124,7 @@ public interface EmployeeService extends IService<Employee> {
 
     /**
      * @MethodName: consentResignation
-     * @Description: TODO : 同意离职申请
+     * @Description: FIXME : 同意离职申请
      * @Author: Delmore
      * @date: 2022/7/14
      * @return: com.ytz.web.model.NetStationEnum
