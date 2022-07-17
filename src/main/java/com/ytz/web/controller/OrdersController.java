@@ -3,6 +3,7 @@ package com.ytz.web.controller;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ytz.web.NeedChange;
+import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Orders;
 import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.model.OrdersEnum;
@@ -38,34 +39,53 @@ public class OrdersController {
     @Resource(name = "ordersServiceImpl")
     private OrdersService ordersService;
 
-    /**
-     * @param stationInfo 网点信息
-     * @description: DONE : 将多个订单号绑定员工
-     */
-    @PostMapping("/fuzzyQueryByStationInfo")
-    String fuzzyQueryByStationInfo(@RequestParam String stationInfo) {
-        return new ResultMap(NetStationEnum.QUERY_SUCCESS, netStationService.fuzzyQueryByStationInfo(stationInfo)).toJson();
-    }
 
     /**
-     * @param orderNumber 订单号Json
-     * @param employeeId  员工ID
+     * @param orderNumber 订单号List的Json
+     * @param employee    包含员工Id 姓名 手机号
      * @description: DONE : 将多个订单号绑定员工
      */
     @PostMapping("/dispatch")
-    String dispatch(@RequestParam String orderNumber, @RequestParam Integer employeeId) {
+    String dispatch(@RequestParam String orderNumber, @RequestParam String employee) {
 
-        return new ResultMap(ordersService.dispatch(JsonUtils.jsonToList(orderNumber, new TypeReference<List<String>>() {
-        }), employeeService.dispatch(employeeId))).toJson();
+        return new ResultMap(
+                ordersService.dispatch(
+                        JsonUtils.jsonToList(orderNumber, new TypeReference<List<String>>() {
+                        }),
+                        JsonUtils.jsonToObject(employee, new TypeReference<Employee>() {
+                        })
+                )).toJson();
     }
 
-
+    /**
+     * @description: FIXME : 创建订单
+     */
     @PostMapping("/createOrder")
     String createOrder(@RequestParam String orderAmount) {
         ResultMap resultMap = new ResultMap();
         resultMap.setEnum(ordersService.createOrder(JsonUtils.jsonToObject(orderAmount, new TypeReference<Orders>() {
         })));
         return resultMap.toJson();
+    }
+
+    /**
+     * @param stationInfo 网点信息
+     * @description: DONE : 模糊查询收件时的网点
+     */
+    @PostMapping("/fuzzyQueryByStationInfo")
+    String fuzzyQueryByStationInfo(@RequestParam String stationInfo) {
+        return new ResultMap(NetStationEnum.QUERY_SUCCESS
+                , netStationService.fuzzyQueryByStationInfo(stationInfo))
+                .toJson();
+    }
+
+    /**
+     * @description: FIXME : 查询出在职员工信息(用于指派)
+     */
+    @GetMapping("/queryNetStationEmployee")
+    String queryNetStationEmployee() {
+
+        return new ResultMap(OrdersEnum.QUERY_SUCCESS, employeeService.queryNetStationEmployeeForDispatch(NeedChange.needChange)).toJson();
     }
 
     /**
@@ -85,14 +105,4 @@ public class OrdersController {
 
         return resultMap.toJson();
     }
-
-    @GetMapping("/queryNetStationEmployee")
-    String queryNetStationEmployee() {
-        ResultMap resultMap = new ResultMap(OrdersEnum.QUERY_SUCCESS);
-
-        resultMap.setData(employeeService.queryInEmployee(NeedChange.needChange));
-
-        return resultMap.toJson();
-    }
-
 }

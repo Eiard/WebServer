@@ -29,7 +29,7 @@ public interface OrdersService extends IService<Orders> {
      * @param: employee
      * @return: com.ytz.web.model.OrdersEnum
      **/
-    OrdersEnum dispatch(List<String >  orderNumber, Employee employee);
+    OrdersEnum dispatch(List<String> orderNumber, Employee employee);
 
     /**
      * @MethodName: delivery

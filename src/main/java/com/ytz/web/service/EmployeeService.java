@@ -60,17 +60,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeIdList   员工Id
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum resetPassword( List<Integer> employeeIdList);
-
-    /**
-     * @MethodName: dispatch
-     * @Description: DONE : 通过Id查询员工信息
-     * @Author: Delmore
-     * @date: 2022/7/12
-     * @param: employeeId
-     * @return: java.util.Map<java.lang.String, java.lang.String> 姓名和电话
-     **/
-    Employee dispatch(Integer employeeId);
+    EmployeeEnum resetPassword(List<Integer> employeeIdList);
 
     /**
      * @MethodName: queryInEmployee
@@ -141,4 +131,14 @@ public interface EmployeeService extends IService<Employee> {
      * @return: boolean
      */
     EmployeeEnum resetAmount(Integer employeeId);
+
+    /**
+     * @MethodName: queryNetStationEmployeeForDispatch
+     * @Description: DONE : 用于指派时查询 绑定派送员和订单的派送员信息
+     * @Author: 30671
+     * @date: 2022/7/17
+     * @param: stationId  网点Id
+     * @return: boolean
+     */
+    List queryNetStationEmployeeForDispatch(Integer stationId);
 }

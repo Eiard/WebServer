@@ -139,11 +139,6 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public Employee dispatch(Integer employeeId) {
-        return getById(employeeId);
-    }
-
-    @Override
     public boolean employeeUsernameIsExist(String employeeUsername) {
         return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
     }
@@ -178,5 +173,22 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .update();
 
         return EmployeeEnum.RESET_AMOUNT_SUCCESS;
+    }
+
+    @Override
+    public List queryNetStationEmployeeForDispatch(Integer stationId) {
+
+        return listMaps(new LambdaQueryWrapper<Employee>()
+                .select(
+                        Employee::getEmployeeId,
+                        Employee::getEmployeeName,
+                        Employee::getEmployeePhone
+                )
+                .eq(Employee::getStationId, stationId)
+                .eq(Employee::getIsPass, 1)
+                .or(netStationLambdaQueryWrapper -> {
+                    netStationLambdaQueryWrapper.eq(Employee::getIsPass, 2);
+                }))
+                ;
     }
 }
