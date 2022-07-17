@@ -1,9 +1,12 @@
 package com.ytz.web.controller;
 
 import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.ytz.web.NeedChange;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Orders;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.model.OrdersEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
@@ -54,10 +57,24 @@ public class OrdersController {
         return resultMap.toJson();
     }
 
-    @GetMapping("/queryOrderByOrderNumber")
-    String queryOrderByOrderNumber() {
-        ResultMap resultMap = new ResultMap();
+    @PostMapping("/queryOrderByOrderNumber")
+    String queryOrderByOrderNumber(@RequestParam Integer current, @RequestParam String orderNumber) {
+        ResultMap resultMap = new ResultMap(OrdersEnum.QUERY_SUCCESS);
 
+        // 通过session 拿到 netstation的信息
+        IPage page = ordersService.queryOrderByOrderNumber(NeedChange.needChange, current, orderNumber);
+
+        resultMap.setData(page.getRecords());
+        resultMap.put("totalPage", page.getPages());
+
+        return resultMap.toJson();
+    }
+
+    @GetMapping("/queryNetStationEmployee")
+    String queryNetStationEmployee() {
+        ResultMap resultMap = new ResultMap(OrdersEnum.QUERY_SUCCESS);
+
+        resultMap.setData(employeeService.queryInEmployee(NeedChange.needChange));
 
         return resultMap.toJson();
     }

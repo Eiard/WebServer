@@ -52,7 +52,7 @@ public interface NetStationService extends IService<NetStation> {
 
     /**
      * @MethodName: fuzzyQueryByStationInfo
-     * @Description: DONE : 通过 stationInfo => stationName stationAddress 模糊查询
+     * @Description: DONE : 创建订单时使用(确定收货网点)
      * @Author: 30671
      * @date: 2022/7/5
      * @param: stationInfo  既可以是网点名称 也可以是网店地址

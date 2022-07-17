@@ -57,12 +57,32 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     }
 
     @Override
-    public IPage queryOrderByOrderNumber(Integer stationId, Integer current) {
+    public IPage queryOrderByOrderNumber(Integer stationId, Integer current, String orderNumber) {
 
-        return pageMaps(PageUtils.getEmployeePage(current),
+        /**
+         * 为空则全查询
+         */
+        if (orderNumber.equals("")) {
+            return pageMaps(PageUtils.getOrdersPage(current),
+                    new LambdaQueryWrapper<Orders>()
+                            .eq(Orders::getStartPoint, stationId)
+                            .or(ordersLambdaQueryWrapper -> ordersLambdaQueryWrapper
+                                    .eq(Orders::getEndPoint, stationId)
+                            )
+            );
+        }
+
+        /**
+         * 不为空咋查询具体订单号
+         */
+        return pageMaps(PageUtils.getOrdersPage(current),
                 new LambdaQueryWrapper<Orders>()
-                        .eq(Employee::getStationId, stationId))
-                ;
+                        .eq(Orders::getStartPoint, stationId)
+                        .or(ordersLambdaQueryWrapper -> ordersLambdaQueryWrapper
+                                .eq(Orders::getEndPoint, stationId)
+                        )
+                        .eq(Orders::getOrderNumber, orderNumber)
+        );
     }
 
 }

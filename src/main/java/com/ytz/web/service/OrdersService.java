@@ -1,5 +1,6 @@
 package com.ytz.web.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Orders;
@@ -48,13 +49,14 @@ public interface OrdersService extends IService<Orders> {
 
     /**
      * @MethodName: queryOrderByOrderNumber
-     * @Description: DONE : 每个网点只能查询 发货的订单 或者 收货的订单
+     * @Description: DONE : 每个网点只能查询 发出的订单 或者 收到的订单
      * @Author: 30671
      * @date: 2022/7/17
-     * @param: stationId 发货网点 或 收货网点     Id
-     * @param: current   当前要访问的页数
-     * @return: String
+     * @param: stationId    发货网点 或 收货网点     Id
+     * @param: current      当前要访问的页数
+     * @param: orderNumber  为空则全查询   不为空则具体查询
+     * @return: IPage
      */
-    String queryOrderByOrderNumber(Integer stationId, Integer current);
+    IPage queryOrderByOrderNumber(Integer stationId, Integer current, String orderNumber);
 
 }

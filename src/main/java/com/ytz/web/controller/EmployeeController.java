@@ -75,7 +75,12 @@ public class EmployeeController {
         return new ResultMap(employeeService.submitResignation(resignReason,employeeUsername)).toJson();
     }
 
-    //员工管理
+    /**
+     * 查询在职员工
+     * @param current
+     * @param adminUsername
+     * @return
+     */
     @PostMapping("/queryInEmployee")
     String queryInEmployee(@RequestParam Integer current, @RequestParam String adminUsername) {
         IPage page = employeeService.queryInEmployee(current,netStationService.findIdByUsername(adminUsername));
@@ -84,6 +89,12 @@ public class EmployeeController {
         return resultMap.toJson();
     }
 
+    /**
+     * 查询准备离职的员工
+     * @param current
+     * @param adminUsername
+     * @return
+     */
     @PostMapping("/queryOutEmployee")
     String queryOutEmployee(@RequestParam Integer current,@RequestParam String adminUsername) {
         IPage page = employeeService.queryOutEmployee(current, netStationService.findIdByUsername(adminUsername));
@@ -92,11 +103,15 @@ public class EmployeeController {
         return resultMap.toJson();
     }
 
+    /**
+     * 重置员工密码
+     * @param employeeUsernameList
+     * @return
+     */
     @PostMapping("/resetPassword")
-    String resetPassword(@RequestParam String employeeUsernameList) {
-        System.out.println(employeeUsernameList);
-        List<String> employeeList = JsonUtils.jsonToList(employeeUsernameList, new TypeReference<List<String>>(){});
-        return new ResultMap(employeeService.resetPassword(employeeList)).toJson();
+    String resetPassword(@RequestParam List<Integer> employeeId) {
+        // List<String> employeeList = JsonUtils.jsonToList(employeeUsernameList, new TypeReference<List<String>>(){});
+        return new ResultMap(employeeService.resetPassword(employeeId)).toJson();
     }
 
     @PostMapping("/consentResignation")

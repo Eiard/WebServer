@@ -17,9 +17,12 @@ public enum OrdersEnum {
     DISPATCH_SUCCESS,
     DELIVERY_SUCCESS,
     /**
-     *
      * 创建订单成功
-     *
      **/
     CREATE_ORDER_SUCCESS,
+
+    /**
+     * 查询成功
+     */
+    QUERY_SUCCESS,
 }

@@ -128,11 +128,11 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
 
     @Override
-    public EmployeeEnum resetPassword(List<String> employeeUsernameList) {
-        for (int i=0;i<employeeUsernameList.size();i++){
+    public EmployeeEnum resetPassword(List<Integer> employeeIdList) {
+        for (Integer integer : employeeIdList) {
             lambdaUpdate()
                     .set(Employee::getEmployeePassword, "123456")
-                    .eq(Employee::getEmployeeUsername,  employeeUsernameList.get(i))
+                    .eq(Employee::getEmployeeId, integer)
                     .update();
         }
         return EmployeeEnum.RESET_PASSWORD_SUCCESS;
@@ -161,11 +161,11 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     @Override
     public EmployeeEnum consentResignation(String employUsername) {
         lambdaUpdate()
-                .set(Employee::getEmployeeName,"")
-                .set(Employee::getEmployeePhone,"")
-                .set(Employee::getIsPass,3)
-                .set(Employee::getResignReason,"")
-                .eq(Employee::getEmployeeUsername,employUsername)
+                .set(Employee::getEmployeeName, "")
+                .set(Employee::getEmployeePhone, "")
+                .set(Employee::getIsPass, 3)
+                .set(Employee::getResignReason, "")
+                .eq(Employee::getEmployeeUsername, employUsername)
                 .update();
         return EmployeeEnum.CONSENT_RESIGNATION_SUCCESS;
     }

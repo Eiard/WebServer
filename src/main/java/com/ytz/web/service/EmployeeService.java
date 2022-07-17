@@ -57,10 +57,10 @@ public interface EmployeeService extends IService<Employee> {
      * @Description: DONE : 重置员工密码，默认为123456
      * @Author: Delmore
      * @date: 2022/7/12
-     * @param: employeeId
+     * @param: employeeIdList   员工Id
      * @return: com.ytz.web.model.EmployeeEnum
      **/
-    EmployeeEnum resetPassword(List<String> employeeUsernameList);
+    EmployeeEnum resetPassword( List<Integer> employeeIdList);
 
     /**
      * @MethodName: dispatch
@@ -85,7 +85,7 @@ public interface EmployeeService extends IService<Employee> {
 
     /**
      * @MethodName: queryInEmployee
-     * @Description: DONE ： 显示在职员工信息(全查) 用于发工资
+     * @Description: DONE ： 显示在职员工信息(全查) 用于发工资 (也可用于指派派送员快件)
      * @Author: 30671
      * @date: 2022/7/15
      * @param: stationId
