@@ -46,4 +46,15 @@ public interface OrdersService extends IService<Orders> {
      **/
     OrdersEnum createOrder(Orders orderAmount);
 
+    /**
+     * @MethodName: queryOrderByOrderNumber
+     * @Description: DONE : 每个网点只能查询 发货的订单 或者 收货的订单
+     * @Author: 30671
+     * @date: 2022/7/17
+     * @param: stationId 发货网点 或 收货网点     Id
+     * @param: current   当前要访问的页数
+     * @return: String
+     */
+    String queryOrderByOrderNumber(Integer stationId, Integer current);
+
 }
