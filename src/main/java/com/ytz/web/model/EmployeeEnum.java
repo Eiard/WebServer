@@ -57,10 +57,12 @@ public enum EmployeeEnum {
     /**
      *
      * 提交离职申请成功
-     * 离职成功
+     * 同意离职申请
+     * 员工已离职
      */
-    SUBMIT_SUCCESS,
-    CONSENT_SUCCESS,
+    SUBMIT_RESIGNATION_SUCCESS,
+    CONSENT_RESIGNATION_SUCCESS,
+    IS_RESIGNED,
 
     /**
      * 清空订单数成功

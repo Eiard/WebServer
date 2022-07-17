@@ -37,4 +37,13 @@ public interface OrdersService extends IService<Orders> {
      **/
     OrdersEnum delivery(String orderNumber);
 
+    /**
+     * @MethodName: createOrder
+     * @Description: DONE ： 创建订单
+     * @Author: Delmore
+     * @date: 2022/7/14
+     * @return: com.ytz.web.model.OrdersEnum
+     **/
+    OrdersEnum createOrder(Orders orderAmount);
+
 }

@@ -128,11 +128,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
 
     @Override
-    public EmployeeEnum resetPassword(Integer employeeId) {
-        lambdaUpdate()
-                .set(Employee::getEmployeePassword, "123456")
-                .eq(Employee::getEmployeeId, employeeId)
-                .update();
+    public EmployeeEnum resetPassword(List<String> employeeUsernameList) {
+        for (int i=0;i<employeeUsernameList.size();i++){
+            lambdaUpdate()
+                    .set(Employee::getEmployeePassword, "123456")
+                    .eq(Employee::getEmployeeUsername,  employeeUsernameList.get(i))
+                    .update();
+        }
         return EmployeeEnum.RESET_PASSWORD_SUCCESS;
     }
 
@@ -153,29 +155,21 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .set(Employee::getIsPass, 2)
                 .eq(Employee::getEmployeeUsername, employeeUsername)
                 .update();
-        return EmployeeEnum.SUBMIT_SUCCESS;
+        return EmployeeEnum.SUBMIT_RESIGNATION_SUCCESS;
     }
 
     @Override
     public EmployeeEnum consentResignation(String employUsername) {
         lambdaUpdate()
-                .set(Employee::getEmployeeName, "")
-                .set(Employee::getEmployeePhone, "")
-                .set(Employee::getIsPass, 0)
-                .set(Employee::getResignReason, "")
-                .eq(Employee::getEmployeeUsername, employUsername)
+                .set(Employee::getEmployeeName,"")
+                .set(Employee::getEmployeePhone,"")
+                .set(Employee::getIsPass,3)
+                .set(Employee::getResignReason,"")
+                .eq(Employee::getEmployeeUsername,employUsername)
                 .update();
-        return EmployeeEnum.CONSENT_SUCCESS;
+        return EmployeeEnum.CONSENT_RESIGNATION_SUCCESS;
     }
 
-    @Override
-    public Integer findByUsername(String employUsername) {
-        return lambdaQuery()
-                .select(Employee::getEmployeeId)
-                .eq(Employee::getEmployeeUsername, employUsername)
-                .one()
-                .getEmployeeId();
-    }
 
     public EmployeeEnum resetAmount(Integer employeeId) {
         lambdaUpdate()
