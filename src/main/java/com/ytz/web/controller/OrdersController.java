@@ -105,4 +105,20 @@ public class OrdersController {
 
         return resultMap.toJson();
     }
+    /**
+     * @param current     页数
+     * @description: DONE : 查询需要派送的订单
+     */
+    @GetMapping("/queryUnDispatchOrder")
+    String queryUnDispatchOrder(@RequestParam Integer current) {
+        ResultMap resultMap = new ResultMap();
+
+        IPage page = ordersService.queryUnDispatchOrder(2, current);
+
+        resultMap.setData(page.getRecords());
+        resultMap.put("totalPage",page.getPages());
+
+        return resultMap.toJson();
+    }
+
 }

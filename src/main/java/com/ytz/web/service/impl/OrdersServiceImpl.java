@@ -90,4 +90,25 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         );
     }
 
+    @Override
+    public IPage queryUnDispatchOrder(Integer stationId, Integer current) {
+
+        return pageMaps(PageUtils.getOrdersPage(current),
+                new LambdaQueryWrapper<Orders>()
+                        .select(
+                                Orders::getOrderNumber,
+                                Orders::getConsignor,
+                                Orders::getConsignorPhone,
+                                Orders::getStartAddress,
+                                Orders::getRecipient,
+                                Orders::getRecipientPhone,
+                                Orders::getRecipientAddress,
+                                Orders::getCreateDate
+                        )
+                        .eq(Orders::getEndPoint, stationId)
+                        .eq(Orders::getOrderStatus, 1));
+
+    }
+
+
 }

@@ -62,4 +62,12 @@ public interface OrdersService extends IService<Orders> {
      */
     IPage queryOrderByOrderNumber(Integer stationId, Integer current, String orderNumber);
 
+    /**
+     * @MethodName: queryUnDispatchOrder
+     * @Description: DONE : 查询网点所有未指派派送员的订单
+     * @Author: 30671
+     * @date: 2022/7/18
+     * @return: IPage
+     */
+    IPage queryUnDispatchOrder(Integer stationId,Integer current);
 }
