@@ -17,4 +17,13 @@ import com.ytz.web.domain.User;
 @Deprecated
 public interface UserService extends IService<User> {
 
+    /**
+     * @MethodName: findByUsername
+     * @Description: DONE
+     * @Author: Delmore
+     * @date: 2022/7/17
+     * @param: username
+     * @return: com.ytz.web.domain.User
+     **/
+    User findByUsername(String username);
 }

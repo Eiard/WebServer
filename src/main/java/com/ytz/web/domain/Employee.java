@@ -15,7 +15,7 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: Employee
  * @author: 30671
- * @description: DONE : 工资
+ * @description: DONE : 员工
  * @date: 2022/7/15
  * @TableName employee
  * @version: 1.0

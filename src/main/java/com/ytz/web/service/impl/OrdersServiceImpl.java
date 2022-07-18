@@ -55,8 +55,4 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         return OrdersEnum.CREATE_ORDER_SUCCESS;
     }
 
-    @Override
-    public Double getFinalPrice(Double goodWeight,Integer goodType) {
-        return PriceUtils.getFinalPrice(goodWeight, goodType);
-    }
 }

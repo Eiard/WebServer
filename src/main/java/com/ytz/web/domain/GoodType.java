@@ -15,7 +15,7 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: GoodType
  * @author: 30671
- * @description: DONE : 工资
+ * @description: DONE : 货物类别
  * @date: 2022/7/15
  * @TableName good_type
  * @version: 1.0

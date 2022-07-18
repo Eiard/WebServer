@@ -17,7 +17,7 @@ import lombok.Data;
  * @package: com.ytz.web.domain
  * @className: NetStation
  * @author: 30671
- * @description: DONE : 工资
+ * @description: DONE : 网点
  * @date: 2022/7/15
  * @TableName net_station
  * @version: 1.0

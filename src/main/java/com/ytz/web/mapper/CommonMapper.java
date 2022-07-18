@@ -8,11 +8,10 @@ import org.springframework.stereotype.Repository;
  *
  * @projectName: web
  * @package: com.ytz.web.mapper
- * @className: FinanceMapper
+ * @className: CommonMapper
  * @author: Delmore
  * @description: DONE : 针对表所有人员电话的数据库操作Mapper
  * @date: 2022/7/11
- * @Entity com.ytz.web.domain.Finance
  * @version: 1.0
  */
 @Mapper
