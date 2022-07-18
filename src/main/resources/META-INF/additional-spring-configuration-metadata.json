@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "mybatis-plus.zookeeper.serverLists",
-      "type": "java.lang.String",
-      "description": "Description for mybatis-plus.zookeeper.serverLists."
-  }
-] }
