@@ -77,7 +77,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
     @Override
     public IPage queryInEmployee(Integer current, Integer stationId) {
-        return pageMaps(PageUtils.getQueryInEmployee(current),
+        return pageMaps(PageUtils.getEmployeePage(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
                                 Employee::getEmployeeId,
@@ -112,7 +112,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
     @Override
     public IPage queryOutEmployee(Integer current, Integer stationId) {
-        return pageMaps(PageUtils.getQueryInEmployee(current),
+        return pageMaps(PageUtils.getEmployeePage(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
                                 Employee::getEmployeeId,

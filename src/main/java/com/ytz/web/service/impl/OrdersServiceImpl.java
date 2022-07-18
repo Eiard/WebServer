@@ -1,5 +1,7 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Orders;
@@ -7,8 +9,7 @@ import com.ytz.web.mapper.OrdersMapper;
 import com.ytz.web.model.OrdersEnum;
 import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.IdGeneratorSnowflake;
-import com.ytz.web.utils.PriceUtils;
-import org.springframework.stereotype.Repository;
+import com.ytz.web.utils.PageUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -53,6 +54,15 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         orderAmount.setOrderNumber(Long.toString(new IdGeneratorSnowflake().snowflakeId()));
         save(orderAmount);
         return OrdersEnum.CREATE_ORDER_SUCCESS;
+    }
+
+    @Override
+    public IPage queryOrderByOrderNumber(Integer stationId, Integer current) {
+
+        return pageMaps(PageUtils.getEmployeePage(current),
+                new LambdaQueryWrapper<Orders>()
+                        .eq(Employee::getStationId, stationId))
+                ;
     }
 
 }
