@@ -8,8 +8,15 @@ import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
-import org.springframework.web.bind.annotation.*;
+import com.ytz.web.utils.TokenUtil;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * -*- coding:utf-8 -*-
@@ -35,11 +42,30 @@ public class NetStationController {
     @Resource(name = "ordersServiceImpl")
     private OrdersService ordersService;
 
-    //登录注册功能
     @PostMapping("/login")
     String login(@RequestParam String adminUsername,
-                 @RequestParam String adminPassword) {
-        return new ResultMap(netStationService.login(adminUsername, adminPassword)).toJson();
+                 @RequestParam String adminPassword,
+                 HttpSession session) {
+        ResultMap resultMap = new ResultMap();
+
+        NetStation netStation = netStationService.login(adminUsername, adminPassword);
+
+        if (netStation == null) {
+            resultMap.setEnum(NetStationEnum.LOGIN_FAILED);
+        } else if (netStation.getIsPass() == 0) {
+            resultMap.setEnum(NetStationEnum.LOGIN_UNVERIFIED);
+        } else {
+            resultMap.setEnum(NetStationEnum.LOGIN_SUCCESS);
+
+            // 根据类别生成token
+            String token = TokenUtil.makeToken(netStation.getAdminType());
+
+            // 存stationId
+            session.setAttribute(token, netStation.getStationId());
+
+            resultMap.setToken(token);
+        }
+        return resultMap.toJson();
     }
 
     @PostMapping("/sign")
@@ -55,13 +81,18 @@ public class NetStationController {
     }
 
     @PostMapping("/queryStationInform")
-    String queryAll(@RequestParam String adminUsername) {
-        return new ResultMap(NetStationEnum.QUERY_SUCCESS, netStationService.queryStationInform(adminUsername)).toJson();
+    String queryStationInform(HttpServletRequest request) {
+
+        return new ResultMap(
+                NetStationEnum.QUERY_SUCCESS,
+                netStationService.queryStationInfoById(TokenUtil.getId(request)))
+                .toJson();
     }
 
     @PostMapping("/updateStationInform")
     String update(@RequestParam String netStation,
                   @RequestParam String newPassword) {
+
         ResultMap resultMap = new ResultMap();
         try {
             resultMap.setEnum(netStationService.updateStationInform(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {

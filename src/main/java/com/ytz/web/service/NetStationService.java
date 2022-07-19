@@ -28,8 +28,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: adminPassword  密码
      * @return: com.ytz.web.model.NetStationServiceEnum
      */
-    NetStationEnum login(String adminUsername, String adminPassword);
-
+    NetStation login(String adminUsername, String adminPassword);
     /**
      * @MethodName: sign
      * @Description: DONE : 账号预注册
@@ -61,15 +60,14 @@ public interface NetStationService extends IService<NetStation> {
     List fuzzyQueryByStationInfo(String stationInfo);
 
     /**
-     * @MethodName: queryStationInform
+     * @MethodName: queryStationInfoById
      * @Description: DONE : 网点管理员查询所有信息
      * @Author: Delmore
      * @date: 2022/7/8
      * @param: adminUsername  网点账号
-     * @return: List<NetStation>
+     * @return: List
      **/
-    List queryStationInform(String adminUsername);
-
+    List queryStationInfoById(Integer stationId);
     /**
      * @MethodName: delivery
      * @Description: DONE : 通过网点Id 完成一个订单则增加数量
@@ -89,16 +87,6 @@ public interface NetStationService extends IService<NetStation> {
      * @return: boolean
      */
     boolean adminUsernameIsExist(String adminUsername);
-
-    /**
-     * @MethodName: findIdByUsername
-     * @Description: DONE ：通过用户名找ID
-     * @Author: Delmore
-     * @date: 2022/7/14
-     * @param: adminUsername
-     * @return: java.lang.Integer 网点Id
-     **/
-    Integer findIdByUsername(String adminUsername);
 
     /**
      * @MethodName: queryAllStationInform

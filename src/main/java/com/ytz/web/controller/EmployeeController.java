@@ -10,12 +10,15 @@ import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
+import com.ytz.web.utils.TokenUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -41,8 +44,28 @@ public class EmployeeController {
 
 
     @RequestMapping("/login")
-    String login(@RequestParam String employeeUsername, @RequestParam String employeePassword) {
-        return new ResultMap(employeeService.login(employeeUsername, employeePassword)).toJson();
+    String login(@RequestParam String employeeUsername
+            , @RequestParam String employeePassword
+            , HttpSession session) {
+        ResultMap resultMap = new ResultMap();
+
+        Employee employee = employeeService.login(employeeUsername, employeePassword);
+
+        if (employee == null) {
+            resultMap.setEnum(EmployeeEnum.LOGIN_FAILED);
+        } else if (employee.getIsPass() == 0) {
+            resultMap.setEnum(EmployeeEnum.LOGIN_UNVERIFIED);
+        } else {
+            resultMap.setEnum(EmployeeEnum.LOGIN_SUCCESS);
+
+            String token = TokenUtil.makeToken(employee.getEmployeeType());
+
+            session.setAttribute(token, employee.getEmployeeId());
+
+            resultMap.setToken(token);
+        }
+
+        return resultMap.toJson();
     }
 
     @RequestMapping("/sign")
@@ -78,36 +101,43 @@ public class EmployeeController {
     }
 
     /**
-     * @description: FIXME : 查询在职员工
-     *
      * @param current
-     * @param adminUsername
+     * @param request
      * @return
+     * @description: DONE : 查询在职员工
      */
     @PostMapping("/queryInEmployee")
-    String queryInEmployee(@RequestParam Integer current, @RequestParam String adminUsername) {
-        IPage page = employeeService.queryInEmployee(current, netStationService.findIdByUsername(adminUsername));
+    String queryInEmployee(@RequestParam Integer current,
+                           HttpServletRequest request) {
+
+        IPage page = employeeService.queryInEmployee(current, TokenUtil.getId(request));
+
         ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
+
         resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
     }
 
     /**
-     * @description: FIXME : 员工操作查询准备离职的员工
      * @param current
-     * @param adminUsername
+     * @param request
+     * @description: DONE : 员工操作查询准备离职的员工
      */
     @PostMapping("/queryOutEmployee")
-    String queryOutEmployee(@RequestParam Integer current, @RequestParam String adminUsername) {
-        IPage page = employeeService.queryOutEmployee(current, netStationService.findIdByUsername(adminUsername));
+    String queryOutEmployee(@RequestParam Integer current,
+                            HttpServletRequest request) {
+
+        IPage page = employeeService.queryOutEmployee(current, TokenUtil.getId(request));
+
         ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
+
         resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
     }
 
     /**
+     * @param employeeIdList 员工Id的List Json
      * @description: DONE : 重置员工密码
-     * @param employeeIdList    员工Id的List Json
      */
     @PostMapping("/resetPassword")
     String resetPassword(@RequestParam String employeeIdList) {

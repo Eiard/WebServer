@@ -19,7 +19,6 @@ import java.util.List;
  * @version: 1.0
  */
 public interface EmployeeService extends IService<Employee> {
-
     /**
      * @MethodName: login
      * @Description: DONE : 实现员工登录
@@ -27,10 +26,9 @@ public interface EmployeeService extends IService<Employee> {
      * @date: 2022/7/4
      * @param: employeeUsername  员工账号
      * @param: employeePassword  员工密码
-     * @return: com.ytz.web.model.EmployeeEnum
+     * @return: Employee
      */
-    EmployeeEnum login(String employeeUsername, String employeePassword);
-
+    Employee login(String employeeUsername, String employeePassword);
 
     /**
      * @MethodName: sign

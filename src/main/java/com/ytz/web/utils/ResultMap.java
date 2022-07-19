@@ -23,6 +23,7 @@ public class ResultMap {
      * status 状态
      * msg    信息
      * data   数据
+     * token  验证
      * Extra  额外信息
      */
 
@@ -31,11 +32,12 @@ public class ResultMap {
         this.setData("");
     }
 
-    public ResultMap(Integer status, String msg, Object data) {
+    public ResultMap(Integer status, String msg, Object data, String token) {
         this.data = new HashMap<>();
         this.setStatus(status);
         this.setMsg(msg);
         this.setData(data);
+        this.setToken(token);
     }
 
     public ResultMap(Enum status, Object data) {
@@ -50,17 +52,21 @@ public class ResultMap {
         this.setData("");
     }
 
+    public void setEnum(Enum status) {
+        this.setStatus(status.ordinal());
+        this.setMsg(status.toString());
+    }
+
+    public void setToken(String token) {
+        data.put("token", token);
+    }
+
     public void setStatus(Integer status) {
         data.put("status", status);
     }
 
     public void setMsg(String msg) {
         data.put("msg", msg);
-    }
-
-    public void setEnum(Enum status) {
-        data.put("status", status.ordinal());
-        data.put("msg", status.toString());
     }
 
     public void setData(Object data) {

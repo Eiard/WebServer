@@ -31,18 +31,14 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     private CommonService commonService;
 
     @Override
-    public NetStationEnum login(String adminUsername, String adminPassword) {
-        NetStation netStation = lambdaQuery().select(NetStation::getIsPass)
+    public NetStation login(String adminUsername, String adminPassword) {
+        return lambdaQuery()
+                .select(NetStation::getStationId,
+                        NetStation::getIsPass,
+                        NetStation::getAdminType)
                 .eq(NetStation::getAdminUsername, adminUsername)
                 .eq(NetStation::getAdminPassword, adminPassword)
                 .one();
-        if (netStation == null) {
-            return NetStationEnum.LOGIN_FAILED;
-        }
-        if (netStation.getIsPass() == 0) {
-            return NetStationEnum.LOGIN_UNVERIFIED;
-        }
-        return NetStationEnum.LOGIN_SUCCESS;
     }
 
     @Override
@@ -98,7 +94,8 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public List queryStationInform(String adminUsername) {
+    public List queryStationInfoById(Integer stationId) {
+
         return listMaps(
                 new LambdaQueryWrapper<NetStation>()
                         .select(NetStation::getStationName,
@@ -108,7 +105,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                                 NetStation::getAdminUsername,
                                 NetStation::getAdminSex,
                                 NetStation::getOrderAmount)
-                        .eq(NetStation::getAdminUsername, adminUsername)
+                        .eq(NetStation::getStationId, stationId)
         );
     }
 
@@ -129,13 +126,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         return lambdaQuery().eq(NetStation::getAdminUsername, adminUsername).exists();
     }
 
-    @Override
-    public Integer findIdByUsername(String adminUsername) {
-        return lambdaQuery()
-                .select(NetStation::getStationId)
-                .eq(NetStation::getAdminUsername, adminUsername)
-                .one().getStationId();
-    }
+
 
     @Override
     public List<NetStation> queryAllStationInform() {
