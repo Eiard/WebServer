@@ -17,7 +17,7 @@ import java.io.IOException;
  * @package: com.ytz.web.interceptors
  * @className: EmployeeInterceptor
  * @author: Delmore
- * @description: TODO :
+ * @description: DONE : (权限控制)判断请求是否是Employee
  * @date: 2022/7/17 9:15
  * @version: 1.0
  */

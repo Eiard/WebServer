@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * @package: com.ytz.web.interceptors
  * @className: CommonInterceptor
  * @author: Delmore
- * @description: TODO :
+ * @description: DONE : 所有除登录注册相关的URL
  * @date: 2022/7/18 15:55
  * @version: 1.0
  */

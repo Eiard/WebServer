@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * @package: com.ytz.web.interceptors
  * @className: EmployeeInterceptor
  * @author: Delmore
- * @description: TODO
+ * @description: DONE : (权限控制)判断请求是否是Employee
  * @date: 2022/7/18 15:55
  * @version: 1.0
  */
