@@ -40,72 +40,34 @@ public class EmployeeController {
     private OrdersService ordersService;
 
 
-    @RequestMapping("/login")
-    String login(@RequestParam String employeeUsername, @RequestParam String employeePassword) {
-        return new ResultMap(employeeService.login(employeeUsername, employeePassword)).toJson();
-    }
-
-
-    @RequestMapping("/delivery")
-    String delivery(@RequestParam String employeeUsername, @RequestParam String orderNumber) {
-
-        // 派送员送件数增加
-        Integer stationId = employeeService.delivery(employeeUsername);
-
-        // 网点送件数增加
-        netStationService.delivery(stationId);
-
-        // 订单状态更改
-        ordersService.delivery(orderNumber);
-
-        return new ResultMap(EmployeeEnum.DELIVERY_SUCCESS).toJson();
-    }
-
-    @PostMapping("/submitResignation")
-    String resign(@RequestParam String resignReason, @RequestParam String employeeUsername) {
-        return new ResultMap(employeeService.submitResignation(resignReason, employeeUsername)).toJson();
-    }
+    // @RequestMapping("/login")
+    // String login(@RequestParam String employeeUsername, @RequestParam String employeePassword) {
+    //     return new ResultMap(employeeService.login(employeeUsername, employeePassword)).toJson();
+    // }
+    //
+    //
+    // @RequestMapping("/delivery")
+    // String delivery(@RequestParam String employeeUsername, @RequestParam String orderNumber) {
+    //
+    //     // 派送员送件数增加
+    //     Integer stationId = employeeService.delivery(employeeUsername);
+    //
+    //     // 网点送件数增加
+    //     netStationService.delivery(stationId);
+    //
+    //     // 订单状态更改
+    //     ordersService.delivery(orderNumber);
+    //
+    //     return new ResultMap(EmployeeEnum.DELIVERY_SUCCESS).toJson();
+    // }
 
     /**
-     * @description: FIXME : 查询在职员工
-     *
-     * @param current
-     * @param adminUsername
-     * @return
+     * 提交申请
      */
-    @PostMapping("/queryInEmployee")
-    String queryInEmployee(@RequestParam Integer current, @RequestParam String adminUsername) {
-        IPage page = employeeService.queryInEmployee(current, netStationService.findIdByUsername(adminUsername));
-        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
-        resultMap.put("totalPage", page.getPages());
-        return resultMap.toJson();
-    }
 
-    /**
-     * @description: FIXME : 员工操作查询准备离职的员工
-     * @param current
-     * @param adminUsername
-     */
-    @PostMapping("/queryOutEmployee")
-    String queryOutEmployee(@RequestParam Integer current, @RequestParam String adminUsername) {
-        IPage page = employeeService.queryOutEmployee(current, netStationService.findIdByUsername(adminUsername));
-        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
-        resultMap.put("totalPage", page.getPages());
-        return resultMap.toJson();
-    }
-
-    /**
-     * @description: DONE : 重置员工密码
-     * @param employeeIdList    员工Id的List Json
-     */
-    @PostMapping("/resetPassword")
-    String resetPassword(@RequestParam String employeeIdList) {
-        return new ResultMap(employeeService.resetPassword(JsonUtils.jsonToList(employeeIdList, new TypeReference<List<Integer>>() {
-        }))).toJson();
-    }
-
-    @PostMapping("/consentResignation")
-    String consentResignation(@RequestParam String employeeUsername) {
-        return new ResultMap(employeeService.consentResignation(employeeUsername)).toJson();
-    }
+    // @PostMapping("/submitResignation")
+    // String resign(@RequestParam String resignReason, @RequestParam String employeeUsername) {
+    //     return new ResultMap(employeeService.submitResignation(resignReason, employeeUsername)).toJson();
+    // }
+    //
 }

@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 public class UserController {
     @Resource
     private UserService userService;
+
     @PostMapping("/login")
     Boolean login(@RequestParam String username, @RequestParam String password){
         return userService.findByUsername(username).equals(password);

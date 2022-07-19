@@ -28,13 +28,13 @@ public class GoodTypeController {
     @Resource(name = "goodTypeServiceImpl")
     private GoodTypeService goodTypeService;
 
-    @PostMapping("/getFinalPrice")
+    @GetMapping("/getFinalPrice")
     String getFinalPrice(@RequestParam Double goodWeight, @RequestParam Integer goodType) {
         Double finalPrice = goodTypeService.getFinalPrice(goodWeight, goodType);
         return new ResultMap(GoodTypeEnum.GET_PRICE_SUCCESS,finalPrice).toJson();
     }
 
-    @PostMapping("/queryAllGoodType")
+    @GetMapping("/queryAllGoodType")
     String queryAllGoodType(){
         return new ResultMap(GoodTypeEnum.QUERY_SUCCESS, goodTypeService.queryAllGoodTye()).toJson();
     }
