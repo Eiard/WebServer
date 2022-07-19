@@ -1,5 +1,7 @@
 package com.ytz.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Finance;
@@ -9,6 +11,7 @@ import com.ytz.web.model.FinanceEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.FinanceService;
 import com.ytz.web.service.NetStationService;
+import com.ytz.web.utils.PageUtils;
 import com.ytz.web.utils.SalaryUtils;
 import org.springframework.stereotype.Service;
 
@@ -121,7 +124,14 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
         return null;
     }
 
-
+    @Override
+    public IPage querySalary(Integer id, Integer typeId, Integer current) {
+        return pageMaps(PageUtils.getFinancePage(current),
+                new LambdaQueryWrapper<Finance>()
+                        .eq(Finance::getTypeId, typeId)
+                        .eq(Finance::getEmployeeId,id)
+                        .orderByDesc(Finance::getCreateDate));
+    }
 }
 
 

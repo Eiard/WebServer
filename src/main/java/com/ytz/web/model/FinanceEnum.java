@@ -21,6 +21,9 @@ public enum FinanceEnum {
     PAY_SALARY_SUCCESS,
     PAY_SALARY_ERROR,
 
-
+    /**
+     * 查询工资成功
+     */
+    QUERY_SUCCESS
 
 }

@@ -1,5 +1,6 @@
 package com.ytz.web.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Finance;
 import com.ytz.web.domain.NetStation;
@@ -67,4 +68,16 @@ public interface FinanceService extends IService<Finance> {
      */
     @Deprecated
     FinanceEnum paySalaryRoot(NetStation netStation);
+
+    /**
+     * @MethodName: queryNetStationSalary
+     * @Description: DONE : 查询网点管理员工资记录
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: netStationId 网点Id
+     * @param: current 页数
+     * @return: com.baomidou.mybatisplus.core.metadata.IPage
+     **/
+    IPage querySalary(Integer id, Integer typeId, Integer current);
+
 }
