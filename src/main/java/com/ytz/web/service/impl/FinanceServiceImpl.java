@@ -7,7 +7,7 @@ import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Finance;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.FinanceMapper;
-import com.ytz.web.model.FinanceEnum;
+import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.FinanceService;
 import com.ytz.web.service.NetStationService;
@@ -41,7 +41,7 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
     private EmployeeService employeeService;
 
     @Override
-    public FinanceEnum paySalaryAllNetStation() {
+    public StatusEnum paySalaryAllNetStation() {
 
         // 所有网点
         List<NetStation> netStations = netStationService.queryAllStation();
@@ -51,10 +51,10 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
             paySalaryOneNetStation(netStation);
         }
 
-        return FinanceEnum.PAY_SALARY_SUCCESS;
+        return StatusEnum.PAY_SALARY_SUCCESS;
     }
 
-    public FinanceEnum paySalaryOneNetStation(NetStation netStation) {
+    public StatusEnum paySalaryOneNetStation(NetStation netStation) {
         // 该网点
         // 网点管理员发工资
         paySalaryAdmin(netStation);
@@ -62,11 +62,11 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
         // 网点其他员工发工资
         paySalaryEmployee(netStation.getStationId());
 
-        return FinanceEnum.PAY_SALARY_SUCCESS;
+        return StatusEnum.PAY_SALARY_SUCCESS;
     }
 
     @Override
-    public FinanceEnum paySalaryAdmin(NetStation netStation) {
+    public StatusEnum paySalaryAdmin(NetStation netStation) {
 
         Finance finance = new Finance();
 
@@ -84,11 +84,11 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
 
         save(finance);
 
-        return FinanceEnum.PAY_SALARY_SUCCESS;
+        return StatusEnum.PAY_SALARY_SUCCESS;
     }
 
     @Override
-    public FinanceEnum paySalaryEmployee(Integer stationId) {
+    public StatusEnum paySalaryEmployee(Integer stationId) {
         List<Employee> employees = employeeService.queryActiveEmployee(stationId);
 
         List<Finance> finances = new ArrayList<>();
@@ -115,12 +115,12 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
         // 发该网点Id的所有 员工的工资
         saveBatch(finances);
 
-        return FinanceEnum.PAY_SALARY_SUCCESS;
+        return StatusEnum.PAY_SALARY_SUCCESS;
     }
 
     @Deprecated
     @Override
-    public FinanceEnum paySalaryRoot(NetStation netStation) {
+    public StatusEnum paySalaryRoot(NetStation netStation) {
         return null;
     }
 
@@ -129,7 +129,7 @@ public class FinanceServiceImpl extends ServiceImpl<FinanceMapper, Finance>
         return pageMaps(PageUtils.getFinancePage(current),
                 new LambdaQueryWrapper<Finance>()
                         .eq(Finance::getTypeId, typeId)
-                        .eq(Finance::getEmployeeId,id)
+                        .eq(Finance::getEmployeeId, id)
                         .orderByDesc(Finance::getCreateDate));
     }
 }

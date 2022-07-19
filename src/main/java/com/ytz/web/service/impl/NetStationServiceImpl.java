@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;
 import org.springframework.stereotype.Service;
@@ -42,15 +43,15 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public NetStationEnum sign(NetStation netStation) {
+    public StatusEnum sign(NetStation netStation) {
         if (lambdaQuery().eq(NetStation::getAdminUsername, netStation.getAdminUsername()).exists()) {
-            return NetStationEnum.PRE_SIGN_USERNAME_USED;
+            return StatusEnum.PRE_SIGN_USERNAME_USED;
         }
         if (commonService.phoneIsExist(netStation.getAdminPhone())) {
-            return NetStationEnum.PRE_SIGN_PHONE_USED;
+            return StatusEnum.PRE_SIGN_PHONE_USED;
         }
         save(netStation);
-        return NetStationEnum.PRE_SIGN_SUCCESS;
+        return StatusEnum.PRE_SIGN_SUCCESS;
     }
 
     @Override
@@ -77,17 +78,17 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
     @Override
-    public NetStationEnum updateStationInform(NetStation netStation, String newPassword) {
+    public StatusEnum updateStationInform(NetStation netStation, String newPassword) {
         NetStation station = lambdaQuery()
                 .select(NetStation::getAdminPassword, NetStation::getAdminPhone)
                 .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
                 .one();
         if (!(netStation.getAdminPassword().equals(station.getAdminPassword()))) {
-            return NetStationEnum.CHANCE_FAILED_PASSWORD_ERROR;
+            return StatusEnum.CHANCE_FAILED_PASSWORD_ERROR;
         }
         if (commonService.phoneIsExist(netStation.getAdminPhone())) {
             if (!(station.getAdminPhone().equals(netStation.getAdminPhone())))
-                return NetStationEnum.CHANGE_FAILED_PHONE_USED;
+                return StatusEnum.CHANGE_FAILED_PHONE_USED;
         }
         lambdaUpdate()
                 .set(NetStation::getStationName, netStation.getStationName())
@@ -98,7 +99,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 .set(NetStation::getAdminPassword, newPassword)
                 .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
                 .update();
-        return NetStationEnum.CHANGE_SUCCESS;
+        return StatusEnum.CHANGE_SUCCESS;
     }
 
 
@@ -127,25 +128,25 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
 
 
     @Override
-    public NetStationEnum resetAmount(Integer stationId) {
+    public StatusEnum resetAmount(Integer stationId) {
         lambdaUpdate()
                 .set(NetStation::getOrderAmount, 0)
                 .eq(NetStation::getStationId, stationId)
                 .update();
 
-        return NetStationEnum.RESET_AMOUNT_SUCCESS;
+        return StatusEnum.RESET_AMOUNT_SUCCESS;
     }
 
 
     @Override
-    public NetStationEnum delivery(Integer stationId) {
+    public StatusEnum delivery(Integer stationId) {
         NetStation netStation = getById(stationId);
         // 总完成订单个数加1
         lambdaUpdate()
                 .set(NetStation::getOrderAmount, netStation.getOrderAmount() + 1)
                 .eq(NetStation::getStationId, stationId)
                 .update();
-        return NetStationEnum.DELIVERY_SUCCESS;
+        return StatusEnum.DELIVERY_SUCCESS;
     }
 
 

@@ -3,6 +3,7 @@ package com.ytz.web.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.model.StatusEnum;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: netStation  网点信息
      * @return: NetStationEnum
      */
-    NetStationEnum sign(NetStation netStation);
+    StatusEnum sign(NetStation netStation);
 
     /**
      * @MethodName: queryStationVoById
@@ -68,7 +69,7 @@ public interface NetStationService extends IService<NetStation> {
      * @param: netStation  网点信息
      * @return: NetStationEnum
      */
-    NetStationEnum updateStationInform(NetStation netStation, String newPassword);
+    StatusEnum updateStationInform(NetStation netStation, String newPassword);
 
     /**
      * @MethodName: fuzzyQueryByStationVo
@@ -95,9 +96,9 @@ public interface NetStationService extends IService<NetStation> {
      * @Author: Delmore
      * @date: 2022/7/19
      * @param: stationId
-     * @return: com.ytz.web.model.NetStationEnum
+     * @return: StatusEnum
      **/
-    NetStationEnum resetAmount(Integer stationId);
+    StatusEnum resetAmount(Integer stationId);
 
 
     /**
@@ -108,6 +109,6 @@ public interface NetStationService extends IService<NetStation> {
      * @param: stationId 网点ID
      * @return: com.ytz.web.model.NetStationEnum
      **/
-    NetStationEnum delivery(Integer stationId);
+    StatusEnum delivery(Integer stationId);
 }
 

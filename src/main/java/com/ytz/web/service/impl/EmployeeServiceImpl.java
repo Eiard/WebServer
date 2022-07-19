@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.mapper.EmployeeMapper;
 import com.ytz.web.model.EmployeeEnum;
+import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.utils.PageUtils;
@@ -110,18 +111,18 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public EmployeeEnum resetPassword(List<Integer> employeeIdList) {
+    public StatusEnum resetPassword(List<Integer> employeeIdList) {
         for (Integer integer : employeeIdList) {
             lambdaUpdate()
                     .set(Employee::getEmployeePassword, "123456")
                     .eq(Employee::getEmployeeId, integer)
                     .update();
         }
-        return EmployeeEnum.RESET_PASSWORD_SUCCESS;
+        return StatusEnum.RESET_PASSWORD_SUCCESS;
     }
 
     @Override
-    public EmployeeEnum consentResignation(List<Integer> employeeIdList, Integer permit) {
+    public StatusEnum consentResignation(List<Integer> employeeIdList, Integer permit) {
         if (permit == 0) {
             // 不让离职 则将状态位搬回 并且清空离职原因
             for (Integer integer : employeeIdList) {
@@ -131,7 +132,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                         .eq(Employee::getEmployeeId, integer)
                         .update();
             }
-            return EmployeeEnum.REFUSE_RESIGNATION_SUCCESS;
+            return StatusEnum.REFUSE_RESIGNATION_SUCCESS;
         } else if (permit == 1) {
             // 允许离职 则将状态位设置为离职 清空信息
             for (Integer integer : employeeIdList) {
@@ -143,41 +144,41 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                         .eq(Employee::getEmployeeId, integer)
                         .update();
             }
-            return EmployeeEnum.CONSENT_RESIGNATION_SUCCESS;
+            return StatusEnum.CONSENT_RESIGNATION_SUCCESS;
         }
 
-        return EmployeeEnum.UNKNOWN_ERROR;
+        return StatusEnum.UNKNOWN_ERROR;
     }
 
     @Override
-    public EmployeeEnum addEmployee(Employee employee) {
+    public StatusEnum addEmployee(Employee employee) {
         if (lambdaQuery().eq(Employee::getEmployeeUsername, employee.getEmployeeUsername()).exists()) {
-            return EmployeeEnum.PRE_SIGN_USERNAME_USED;
+            return StatusEnum.PRE_SIGN_USERNAME_USED;
         }
         if (commonService.phoneIsExist(employee.getEmployeePhone())) {
-            return EmployeeEnum.PRE_SIGN_PHONE_USED;
+            return StatusEnum.PRE_SIGN_PHONE_USED;
         }
         save(employee);
-        return EmployeeEnum.PRE_SIGN_SUCCESS;
+        return StatusEnum.PRE_SIGN_SUCCESS;
     }
 
     @Override
-    public EmployeeEnum resetAmount(Integer employeeId) {
+    public StatusEnum resetAmount(Integer employeeId) {
         lambdaUpdate()
                 .set(Employee::getOrderAmount, 0)
                 .eq(Employee::getEmployeeId, employeeId)
                 .update();
-        return EmployeeEnum.RESET_AMOUNT_SUCCESS;
+        return StatusEnum.RESET_AMOUNT_SUCCESS;
     }
 
     @Override
-    public EmployeeEnum submitResignation(String resignReason, Integer employeeId) {
+    public StatusEnum submitResignation(String resignReason, Integer employeeId) {
         lambdaUpdate()
                 .set(Employee::getResignReason, resignReason)
                 .set(Employee::getIsPass, 2)
                 .eq(Employee::getEmployeeId, employeeId)
                 .update();
-        return EmployeeEnum.SUBMIT_RESIGNATION_SUCCESS;
+        return StatusEnum.SUBMIT_RESIGNATION_SUCCESS;
     }
 
 

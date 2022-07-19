@@ -1,10 +1,5 @@
 package com.ytz.web.service;
 
-import com.ytz.web.mapper.CommonMapper;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-
 /**
  * -*- coding:utf-8 -*-
  *

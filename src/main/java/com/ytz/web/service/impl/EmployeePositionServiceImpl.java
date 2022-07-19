@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.EmployeePosition;
 import com.ytz.web.service.EmployeePositionService;
 import com.ytz.web.mapper.EmployeePositionMapper;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 /**

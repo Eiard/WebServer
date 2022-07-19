@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Finance;
 import com.ytz.web.domain.NetStation;
-import com.ytz.web.model.FinanceEnum;
+import com.ytz.web.model.StatusEnum;
 
 /**
  * -*- coding:utf-8 -*-
@@ -13,7 +13,7 @@ import com.ytz.web.model.FinanceEnum;
  * @package: com.ytz.web.service
  * @className: FinanceService
  * @author: 30671
- * @description: TODO : 针对表【finance】的数据库操作Service
+ * @description: DONE : 针对表【finance】的数据库操作Service
  * @date: 2022/7/15
  * @version: 1.0
  */
@@ -26,7 +26,7 @@ public interface FinanceService extends IService<Finance> {
      * @date: 2022/7/15
      * @return: com.ytz.web.model.FinanceEnum
      */
-    FinanceEnum paySalaryAllNetStation();
+    StatusEnum paySalaryAllNetStation();
 
     /**
      * @MethodName: paySalaryPerNetStation
@@ -36,7 +36,7 @@ public interface FinanceService extends IService<Finance> {
      * @param: netStation  网点信息
      * @return: com.ytz.web.model.FinanceEnum
      */
-    FinanceEnum paySalaryOneNetStation(NetStation netStation);
+    StatusEnum paySalaryOneNetStation(NetStation netStation);
 
     /**
      * @MethodName: paySalaryAdmin
@@ -46,7 +46,7 @@ public interface FinanceService extends IService<Finance> {
      * @param: netStation  网点信息
      * @return: com.ytz.web.model.FinanceEnum
      */
-    FinanceEnum paySalaryAdmin(NetStation netStation);
+    StatusEnum paySalaryAdmin(NetStation netStation);
 
     /**
      * @MethodName: paySalaryEmployee
@@ -56,7 +56,7 @@ public interface FinanceService extends IService<Finance> {
      * @param: stationId  网点Id
      * @return: com.ytz.web.model.FinanceEnum
      */
-    FinanceEnum paySalaryEmployee(Integer stationId);
+    StatusEnum paySalaryEmployee(Integer stationId);
 
     /**
      * @MethodName: paySalaryPerNetStation
@@ -67,7 +67,7 @@ public interface FinanceService extends IService<Finance> {
      * @return: com.ytz.web.model.FinanceEnum
      */
     @Deprecated
-    FinanceEnum paySalaryRoot(NetStation netStation);
+    StatusEnum paySalaryRoot(NetStation netStation);
 
     /**
      * @MethodName: queryNetStationSalary

@@ -1,10 +1,9 @@
 package com.ytz.web.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
-import com.ytz.web.model.EmployeeEnum;
+import com.ytz.web.model.StatusEnum;
 
 import java.util.List;
 
@@ -83,8 +82,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeIdList 派送员的ListId
      * @return: EmployeeEnum
      **/
-    EmployeeEnum resetPassword(List<Integer> employeeIdList);
-
+    StatusEnum resetPassword(List<Integer> employeeIdList);
 
 
     /**
@@ -95,7 +93,7 @@ public interface EmployeeService extends IService<Employee> {
      * @param: employeeIdList 派送员的ListId
      * @return: EmployeeEnum
      **/
-    EmployeeEnum consentResignation(List<Integer> employeeIdList, Integer permit) ;
+    StatusEnum consentResignation(List<Integer> employeeIdList, Integer permit);
 
 
     /**
@@ -104,9 +102,9 @@ public interface EmployeeService extends IService<Employee> {
      * @Author: 30671
      * @date: 2022/7/16
      * @param: employee    添加的员工信息
-     * @return: EmployeeEnum
+     * @return: StatusEnum
      **/
-     EmployeeEnum addEmployee(Employee employee);
+    StatusEnum addEmployee(Employee employee);
 
     /**
      * @MethodName: resetAmount
@@ -114,9 +112,9 @@ public interface EmployeeService extends IService<Employee> {
      * @Author: 30671
      * @date: 2022/7/16
      * @param: employeeId    员工Id
-     * @return: EmployeeEnum
+     * @return: StatusEnum
      **/
-    EmployeeEnum resetAmount(Integer employeeId);
+    StatusEnum resetAmount(Integer employeeId);
 
     /**
      * @MethodName: submitResignation
@@ -125,8 +123,8 @@ public interface EmployeeService extends IService<Employee> {
      * @date: 2022/7/19
      * @param: resignReason 离职缘由
      * @param: employeeId 员工ID
-     * @return: com.ytz.web.model.EmployeeEnum
+     * @return: StatusEnum
      **/
-    EmployeeEnum submitResignation(String resignReason, Integer employeeId);
+    StatusEnum submitResignation(String resignReason, Integer employeeId);
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.Orders;
 import com.ytz.web.model.OrdersEnum;
+import com.ytz.web.model.StatusEnum;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface OrdersService extends IService<Orders> {
      * @param: employee
      * @return: com.ytz.web.model.OrdersEnum
      **/
-    OrdersEnum dispatch(List<String> orderNumber, Employee employee);
+    StatusEnum dispatch(List<String> orderNumber, Employee employee);
 
     /**
      * @MethodName: delivery
@@ -39,7 +40,7 @@ public interface OrdersService extends IService<Orders> {
      * @param: orderNumber
      * @return: com.ytz.web.model.OrdersEnum
      **/
-    OrdersEnum delivery(String orderNumber);
+    StatusEnum delivery(String orderNumber);
 
     /**
      * @MethodName: createOrder
@@ -48,7 +49,7 @@ public interface OrdersService extends IService<Orders> {
      * @date: 2022/7/14
      * @return: com.ytz.web.model.OrdersEnum
      **/
-    OrdersEnum createOrder(Orders order);
+    StatusEnum createOrder(Orders order);
 
     /**
      * @MethodName: queryOrderByOrderNumber
