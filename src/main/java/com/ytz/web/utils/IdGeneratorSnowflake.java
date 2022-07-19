@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
  * @package: com.ytz.web.utils
  * @className: IdGeneratorSnowflake
  * @author: Delmore
- * @description: TODO
+ * @description: DONE : 生成校验码(可用于验证 和 订单号生成)
  * @date: 2022/7/15 9:17
  * @version: 1.0
  */

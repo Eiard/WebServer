@@ -18,7 +18,7 @@ import java.util.List;
  * @package: com.ytz.web.config
  * @className: SecurityConfig
  * @author: Delmore
- * @description: TODO :
+ * @description: DONE : 实现拦截 过滤请求
  * @date: 2022/7/16 8:55
  * @version: 1.0
  */

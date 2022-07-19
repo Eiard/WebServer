@@ -10,7 +10,7 @@ import java.util.Map;
  * @package: com.ytz.web.utils
  * @className: ResultMap
  * @author: 30671
- * @description: 回显信息格式
+ * @description: DONE : 自定义封装信息格式
  * @date: 2022/7/3
  * @version: 1.0
  */

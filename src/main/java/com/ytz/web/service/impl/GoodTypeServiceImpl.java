@@ -16,7 +16,7 @@ import java.util.List;
  * @package: com.ytz.web.service.impl
  * @className: goodTypeServiceImpl
  * @author: 30671
- * @description: TODO : 针对表【good_type】的数据库操作Service
+ * @description: DONE : 针对表【good_type】的数据库操作Service
  * @date: 2022/7/4
  * @version: 1.0
  */

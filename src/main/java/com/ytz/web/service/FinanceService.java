@@ -60,7 +60,7 @@ public interface FinanceService extends IService<Finance> {
 
     /**
      * @MethodName: paySalaryPerNetStation
-     * @Description: TODO : Root 员工所有发工资
+     * @Description: DONE : Root 员工所有发工资
      * @Author: 30671
      * @date: 2022/7/14
      * @param: netStation  网点信息

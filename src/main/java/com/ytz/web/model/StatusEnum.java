@@ -7,11 +7,10 @@ package com.ytz.web.model;
  * @package: com.ytz.web.model
  * @className: StatusEnum
  * @author: 30671
- * @description: TODO :
+ * @description: DONE : 通信反馈状态码
  * @date: 2022/7/19
  * @version: 1.0
  */
-
 public enum StatusEnum {
     /**
      * 登录状态

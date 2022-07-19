@@ -10,7 +10,7 @@ import com.ytz.web.domain.User;
  * @package: com.ytz.web.service
  * @className: UserService
  * @author: 30671
- * @description: DONE : 针对表【user】的数据库操作Service
+ * @description: FIXME : 针对表【user】的数据库操作Service(后续选择性实现)
  * @date: 2022/7/4
  * @version: 1.0
  */
@@ -19,7 +19,7 @@ public interface UserService extends IService<User> {
 
     /**
      * @MethodName: findByUsername
-     * @Description: DONE
+     * @Description: DONE : 判断用户名是否重复
      * @Author: Delmore
      * @date: 2022/7/17
      * @param: username

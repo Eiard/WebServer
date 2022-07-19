@@ -15,9 +15,9 @@ import java.util.Map;
  *
  * @projectName: web
  * @package: com.ytz.web.utils
- * @className: FastJsonUtils
+ * @className: JsonUtils
  * @author: 30671
- * @description: JSON
+ * @description: DONE : FastJson的工具包
  * @date: 2022/4/16
  * @version: 1.0
  */
@@ -53,7 +53,6 @@ public class JsonUtils {
     private JsonUtils() {
 
     }
-
 
     /**
      * @MethodName: objectToJson

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.service.impl
  * @className: CommonServiceImpl
  * @author: 30671
- * @description: TODO : 不同service都会用到的相同操作
+ * @description: DONE : 不同service都会用到的相同操作(后续选择性实现)
  * @date: 2022/7/5
  * @version: 1.0
  */

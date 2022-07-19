@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 /**
  * @projectName: web
  * @package: com.ytz.web.controller
- * @className: UserConntrol
+ * @className: UserController
  * @author: Delmore
  * @description: DONE : 舍弃
  * @date: 2022/7/17 13:36

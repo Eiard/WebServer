@@ -26,7 +26,7 @@ import java.util.List;
  * @package: com.ytz.web.service.impl
  * @className: FinanceServiceImpl
  * @author: 30671
- * @description: TODO : 针对表【finance】的数据库操作Service实现
+ * @description: DONE : 针对表【finance】的数据库操作Service实现
  * @date: 2022/7/5
  * @version: 1.0
  */
