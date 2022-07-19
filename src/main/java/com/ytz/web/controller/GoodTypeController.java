@@ -1,10 +1,7 @@
 package com.ytz.web.controller;
 
-import com.ytz.web.model.GoodTypeEnum;
-import com.ytz.web.model.OrdersEnum;
+import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.GoodTypeService;
-import com.ytz.web.service.OrdersService;
-import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +28,11 @@ public class GoodTypeController {
     @GetMapping("/getFinalPrice")
     String getFinalPrice(@RequestParam Double goodWeight, @RequestParam Integer goodType) {
         Double finalPrice = goodTypeService.getFinalPrice(goodWeight, goodType);
-        return new ResultMap(GoodTypeEnum.GET_PRICE_SUCCESS,finalPrice).toJson();
+        return new ResultMap(StatusEnum.GET_PRICE_SUCCESS,finalPrice).toJson();
     }
 
     @GetMapping("/queryAllGoodType")
     String queryAllGoodType(){
-        return new ResultMap(GoodTypeEnum.QUERY_SUCCESS, goodTypeService.queryAllGoodTye()).toJson();
+        return new ResultMap(StatusEnum.QUERY_SUCCESS, goodTypeService.queryAllGoodTye()).toJson();
     }
 }

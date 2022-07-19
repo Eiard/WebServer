@@ -2,6 +2,7 @@ package com.ytz.web.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ytz.web.domain.Employee;
+import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.FinanceService;
 import com.ytz.web.service.NetStationService;
@@ -59,16 +60,16 @@ public class EmployeeController {
         Employee employee = employeeService.login(employeeUsername, employeePassword);
 
         if (employee == null) {
-            resultMap.setEnum(EmployeeEnum.LOGIN_FAILED);
+            resultMap.setEnum(StatusEnum.LOGIN_FAILED);
         } else if (employee.getIsPass() == 0) {
-            resultMap.setEnum(EmployeeEnum.LOGIN_UNVERIFIED);
+            resultMap.setEnum(StatusEnum.LOGIN_UNVERIFIED);
         } else if (employee.getIsPass() == 3) {
-            resultMap.setEnum(EmployeeEnum.LOGIN_UN_EMPLOYEE);
+            resultMap.setEnum(StatusEnum.LOGIN_UN_VALID);
         } else {
             String token = TokenUtil.makeToken(employee.getEmployeeType());
             session.setAttribute(token, employee.getEmployeeId());
             resultMap.setToken(token);
-            resultMap.setEnum(EmployeeEnum.LOGIN_SUCCESS);
+            resultMap.setEnum(StatusEnum.LOGIN_SUCCESS);
         }
         return resultMap.toJson();
     }
@@ -96,7 +97,7 @@ public class EmployeeController {
         // 订单状态更改
         ordersService.delivery(orderNumber);
 
-        return new ResultMap(EmployeeEnum.DELIVERY_SUCCESS).toJson();
+        return new ResultMap(StatusEnum.DELIVERY_SUCCESS).toJson();
     }
 
 
@@ -129,7 +130,7 @@ public class EmployeeController {
         ResultMap resultMap = new ResultMap();
         Employee employee = employeeService.getById(TokenUtil.getId(request));
         IPage page = financeService.querySalary(employee.getEmployeeId(), employee.getEmployeeType(),current);
-        resultMap.setEnum(FinanceEnum.QUERY_SUCCESS);
+        resultMap.setEnum(StatusEnum.QUERY_SUCCESS);
         return resultMap.toJson();
     }
 

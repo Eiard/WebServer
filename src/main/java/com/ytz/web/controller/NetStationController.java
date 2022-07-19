@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.domain.Orders;
-import com.ytz.web.model.EmployeeEnum;
-import com.ytz.web.model.FinanceEnum;
-import com.ytz.web.model.NetStationEnum;
-import com.ytz.web.model.OrdersEnum;
+import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.FinanceService;
 import com.ytz.web.service.NetStationService;
@@ -72,13 +69,13 @@ public class NetStationController {
         NetStation netStation = netStationService.login(adminUsername, adminPassword);
 
         if (netStation == null) {
-            resultMap.setEnum(NetStationEnum.LOGIN_FAILED);
+            resultMap.setEnum(StatusEnum.LOGIN_FAILED);
         } else if (netStation.getIsPass() == 0) {
-            resultMap.setEnum(NetStationEnum.LOGIN_UNVERIFIED);
+            resultMap.setEnum(StatusEnum.LOGIN_UNVERIFIED);
         } else if (netStation.getIsPass() == 3) {
-            resultMap.setEnum(NetStationEnum.LOGIN_UN_EMPLOYEE);
+            resultMap.setEnum(StatusEnum.LOGIN_UN_VALID);
         } else {
-            resultMap.setEnum(NetStationEnum.LOGIN_SUCCESS);
+            resultMap.setEnum(StatusEnum.LOGIN_SUCCESS);
 
             // 根据类别生成token
             String token = TokenUtil.makeToken(netStation.getAdminType());
@@ -106,7 +103,7 @@ public class NetStationController {
             resultMap.setEnum(netStationService.sign(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
             })));
         } catch (Exception e) {
-            resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
+            resultMap.setEnum(StatusEnum.FORMAT_ERROR);
         }
         return resultMap.toJson();
     }
@@ -123,7 +120,7 @@ public class NetStationController {
     String queryStationVoById(HttpServletRequest request) {
 
         return new ResultMap(
-                NetStationEnum.QUERY_SUCCESS,
+                StatusEnum.QUERY_SUCCESS,
                 netStationService.queryStationVoById(TokenUtil.getId(request)))
                 .toJson();
     }
@@ -149,7 +146,7 @@ public class NetStationController {
                             }),
                             newPassword));
         } catch (Exception e) {
-            resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
+            resultMap.setEnum(StatusEnum.FORMAT_ERROR);
         }
         return resultMap.toJson();
     }
@@ -170,7 +167,7 @@ public class NetStationController {
 
         IPage page = employeeService.queryActiveEmployeeVo(current, TokenUtil.getId(request));
 
-        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
+        ResultMap resultMap = new ResultMap(StatusEnum.QUERY_SUCCESS, page.getRecords());
 
         resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
@@ -191,7 +188,7 @@ public class NetStationController {
 
         IPage page = employeeService.queryPreResignationEmployeeVo(current, TokenUtil.getId(request));
 
-        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
+        ResultMap resultMap = new ResultMap(StatusEnum.QUERY_SUCCESS, page.getRecords());
 
         resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
@@ -251,7 +248,7 @@ public class NetStationController {
             resultMap.setEnum(employeeService.addEmployee(employeeObj));
 
         } catch (Exception e) {
-            resultMap.setEnum(EmployeeEnum.FORMAT_ERROR);
+            resultMap.setEnum(StatusEnum.FORMAT_ERROR);
         }
         return resultMap.toJson();
     }
@@ -287,7 +284,7 @@ public class NetStationController {
      */
     @PostMapping("/fuzzyQueryByStationVo")
     String fuzzyQueryByStationVo(@RequestParam String stationInfo) {
-        return new ResultMap(NetStationEnum.QUERY_SUCCESS
+        return new ResultMap(StatusEnum.QUERY_SUCCESS
                 , netStationService.fuzzyQueryByStationVo(stationInfo))
                 .toJson();
     }
@@ -323,7 +320,7 @@ public class NetStationController {
 
         } catch (Exception e) {
 
-            resultMap.setEnum(OrdersEnum.FORMAT_ERROR);
+            resultMap.setEnum(StatusEnum.FORMAT_ERROR);
         }
         return resultMap.toJson();
     }
@@ -342,7 +339,7 @@ public class NetStationController {
     String queryOrderByOrderNumber(@RequestParam Integer current,
                                    @RequestParam String orderNumber,
                                    HttpServletRequest request) {
-        ResultMap resultMap = new ResultMap(OrdersEnum.QUERY_SUCCESS);
+        ResultMap resultMap = new ResultMap(StatusEnum.QUERY_SUCCESS);
 
         IPage page = ordersService.queryOrderByOrderNumber(TokenUtil.getId(request), current, orderNumber);
 
@@ -362,7 +359,7 @@ public class NetStationController {
      */
     @PostMapping("/queryActiveEmployeeDispatch")
     String queryActiveEmployeeDispatch(HttpServletRequest request) {
-        return new ResultMap(OrdersEnum.QUERY_SUCCESS, employeeService.queryActiveEmployee(TokenUtil.getId(request))).toJson();
+        return new ResultMap(StatusEnum.QUERY_SUCCESS, employeeService.queryActiveEmployee(TokenUtil.getId(request))).toJson();
     }
 
 
@@ -378,7 +375,7 @@ public class NetStationController {
     @PostMapping("/queryUnDispatchOrder")
     String queryUnDispatchOrder(@RequestParam Integer current,
                                 HttpServletRequest request) {
-        ResultMap resultMap = new ResultMap(OrdersEnum.QUERY_SUCCESS);
+        ResultMap resultMap = new ResultMap(StatusEnum.QUERY_SUCCESS);
         IPage page = ordersService.queryUnDispatchOrder(TokenUtil.getId(request), current);
         resultMap.setData(page.getRecords());
         resultMap.put("totalPage", page.getPages());
@@ -399,7 +396,7 @@ public class NetStationController {
         ResultMap resultMap = new ResultMap();
         NetStation netStation = netStationService.getById(TokenUtil.getId(request));
         IPage page = financeService.querySalary(netStation.getStationId(), netStation.getAdminType(),current);
-        resultMap.setEnum(FinanceEnum.QUERY_SUCCESS);
+        resultMap.setEnum(StatusEnum.QUERY_SUCCESS);
         return resultMap.toJson();
     }
 }

@@ -1,6 +1,6 @@
 package com.ytz.web.controller;
 
-import com.ytz.web.model.FinanceEnum;
+import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.FinanceService;
 import com.ytz.web.utils.ResultMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +38,6 @@ public class FinanceController {
     @PostMapping("/paySalaryAllRoot")
     public String paySalaryAllRoot() {
 
-        return new ResultMap(FinanceEnum.PAY_SALARY_SUCCESS).toJson();
+        return new ResultMap(StatusEnum.PAY_SALARY_SUCCESS).toJson();
     }
 }
