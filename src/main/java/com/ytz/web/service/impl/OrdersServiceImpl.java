@@ -66,7 +66,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
         /**
          * 为空则全查询
          */
-        if (orderNumber== null || orderNumber.equals("")) {
+        if (orderNumber == null || orderNumber.equals("")) {
             return pageMaps(PageUtils.getOrdersPage(current),
                     new LambdaQueryWrapper<Orders>()
                             .eq(Orders::getStartPoint, stationId)
@@ -81,10 +81,11 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
          */
         return pageMaps(PageUtils.getOrdersPage(current),
                 new LambdaQueryWrapper<Orders>()
-                        .eq(Orders::getStartPoint, stationId)
-                        .or(ordersLambdaQueryWrapper -> ordersLambdaQueryWrapper
-                                .eq(Orders::getEndPoint, stationId)
-                        )
+                        .and(ordersLambdaQueryWrapper -> ordersLambdaQueryWrapper
+                                .eq(Orders::getStartPoint, stationId)
+                                .or(o1 -> o1
+                                        .eq(Orders::getEndPoint, stationId)
+                                ))
                         .eq(Orders::getOrderNumber, orderNumber)
         );
     }
@@ -111,7 +112,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
 
 
     @Override
-    public IPage queryOrderByEmployId(Integer employeeId,Integer current){
+    public IPage queryOrderByEmployId(Integer employeeId, Integer current) {
         return pageMaps(PageUtils.getOrdersPage(current),
                 new LambdaQueryWrapper<Orders>()
                         .select(Orders::getOrderNumber,
@@ -120,7 +121,11 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
                                 Orders::getRecipientAddress,
                                 Orders::getOrderStatus
                         )
-                        .eq(Orders::getSenderId,employeeId));
+                        .eq(Orders::getSenderId, employeeId)
+                        .eq(Orders::getOrderStatus, 2)
+                        .eq(Orders::getIsDeleted, 0)
+        )
+                ;
     }
 
 
