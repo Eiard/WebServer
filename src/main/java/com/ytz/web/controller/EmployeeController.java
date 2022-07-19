@@ -129,7 +129,9 @@ public class EmployeeController {
                        HttpServletRequest request) {
         ResultMap resultMap = new ResultMap();
         Employee employee = employeeService.getById(TokenUtil.getId(request));
-        IPage page = financeService.querySalary(employee.getEmployeeId(), employee.getEmployeeType(),current);
+        IPage page = financeService.querySalary(employee.getEmployeeId(), employee.getEmployeeType(), current);
+        resultMap.setData(page.getRecords());
+        resultMap.put("totalPage", page.getPages());
         resultMap.setEnum(StatusEnum.QUERY_SUCCESS);
         return resultMap.toJson();
     }

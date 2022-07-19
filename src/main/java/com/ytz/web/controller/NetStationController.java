@@ -396,6 +396,8 @@ public class NetStationController {
         ResultMap resultMap = new ResultMap();
         NetStation netStation = netStationService.getById(TokenUtil.getId(request));
         IPage page = financeService.querySalary(netStation.getStationId(), netStation.getAdminType(),current);
+        resultMap.setData(page.getRecords());
+        resultMap.put("totalPage", page.getPages());
         resultMap.setEnum(StatusEnum.QUERY_SUCCESS);
         return resultMap.toJson();
     }

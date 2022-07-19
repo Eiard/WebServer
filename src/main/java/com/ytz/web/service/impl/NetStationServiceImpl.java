@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ytz.web.domain.NetStation;
 import com.ytz.web.mapper.NetStationMapper;
-import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.model.StatusEnum;
 import com.ytz.web.service.CommonService;
 import com.ytz.web.service.NetStationService;

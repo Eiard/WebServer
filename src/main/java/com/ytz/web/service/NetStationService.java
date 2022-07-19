@@ -2,7 +2,6 @@ package com.ytz.web.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.NetStation;
-import com.ytz.web.model.NetStationEnum;
 import com.ytz.web.model.StatusEnum;
 
 import java.util.List;
