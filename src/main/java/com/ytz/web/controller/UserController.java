@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.controller
  * @className: UserController
  * @author: Delmore
- * @description: DONE : 舍弃
+ * @description: FIXME : 舍弃(后续选择性实现)
  * @date: 2022/7/17 13:36
  * @version: 1.0
  */
