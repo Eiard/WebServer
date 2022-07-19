@@ -1,12 +1,13 @@
 package com.ytz.web.config;
 
-import com.ytz.web.domain.Employee;
 import com.ytz.web.interceptors.CommonInterceptor;
 import com.ytz.web.interceptors.EmployeeInterceptor;
 import com.ytz.web.interceptors.NetStationInterceptor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -45,16 +46,14 @@ public class MySecurityConfig implements WebMvcConfigurer {
         List<String> commonInclude = new ArrayList<>();
         commonInclude.add("/public/**/*.html");
         commonInclude.add("/user/*");
-        commonInclude.add("/orders/*");
-        commonInclude.add("/goodType/*");
         commonInclude.add("/employee/*");
         commonInclude.add("/netStation/*");
+        commonInclude.add("/orders/*");
 
         List<String> commonExclude = new ArrayList<>();
         commonExclude.add("/netStation/login");
         commonExclude.add("/netStation/sign");
         commonExclude.add("/employee/login");
-
         /**
          * @Description: DONE : 没有登录的页面拦截
          **/
@@ -67,11 +66,7 @@ public class MySecurityConfig implements WebMvcConfigurer {
         netStationInclude.add("/public/netStation/*.html");
 
 
-
         List<String> netStationExclude = new ArrayList<>();
-
-
-
 
 
         /**
@@ -83,18 +78,12 @@ public class MySecurityConfig implements WebMvcConfigurer {
                 .excludePathPatterns(netStationExclude);
 
 
-
-
-
-
-
-
         /**
          * @Description: DONE : 判断token是否是网点管理员 让他局限在网点管理员的操作
          **/
-       registry.addInterceptor(employeeInterceptor)
-               .addPathPatterns()
-               .excludePathPatterns();
+        registry.addInterceptor(employeeInterceptor)
+                .addPathPatterns()
+                .excludePathPatterns();
     }
 
     @Override
