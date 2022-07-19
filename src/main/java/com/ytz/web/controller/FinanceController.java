@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.controller
  * @className: FinanceController
  * @author: 30671
- * @description: TODO : 负责发工资和工资查询
+ * @description: DONE : 负责发工资
  * @date: 2022/7/14
  * @version: 1.0
  */

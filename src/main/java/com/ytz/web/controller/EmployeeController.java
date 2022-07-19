@@ -1,8 +1,11 @@
 package com.ytz.web.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.EmployeeEnum;
+import com.ytz.web.model.FinanceEnum;
 import com.ytz.web.service.EmployeeService;
+import com.ytz.web.service.FinanceService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.ResultMap;
@@ -36,6 +39,9 @@ public class EmployeeController {
 
     @Resource(name = "ordersServiceImpl")
     private OrdersService ordersService;
+
+    @Resource(name = "financeServiceImpl")
+    private FinanceService financeService;
 
     /**
      * @MethodName: login
@@ -110,4 +116,23 @@ public class EmployeeController {
                              HttpServletRequest request) {
         return new ResultMap(employeeService.submitResignation(resignReason, TokenUtil.getId(request))).toJson();
     }
+
+    /**
+     * @MethodName: querySalary
+     * @Description: DONE ：查询工资记录
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: request
+     * @return: java.lang.String
+     **/
+    @PostMapping("querySalary")
+    String querySalary(@RequestParam Integer current,
+                       HttpServletRequest request) {
+        ResultMap resultMap = new ResultMap();
+        Employee employee = employeeService.getById(TokenUtil.getId(request));
+        IPage page = financeService.querySalary(employee.getEmployeeId(), employee.getEmployeeType(),current);
+        resultMap.setEnum(FinanceEnum.QUERY_SUCCESS);
+        return resultMap.toJson();
+    }
+
 }

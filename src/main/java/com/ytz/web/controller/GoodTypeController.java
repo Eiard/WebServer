@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.controller
  * @className: GoodTypeController
  * @author: 30671
- * @description: TODO : 获取货物类别信息
+ * @description: DONE : 获取货物类别信息
  * @date: 2022/7/15
  * @version: 1.0
  */
