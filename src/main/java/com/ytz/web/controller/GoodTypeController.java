@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @package: com.ytz.web.controller
  * @className: GoodTypeController
  * @author: 30671
- * @description: DONE : 获取货物类别信息
+ * @description: TODO : 获取货物类别信息
  * @date: 2022/7/15
  * @version: 1.0
  */
@@ -28,13 +28,13 @@ public class GoodTypeController {
     @Resource(name = "goodTypeServiceImpl")
     private GoodTypeService goodTypeService;
 
-    @GetMapping("/getFinalPrice")
+    @PostMapping("/getFinalPrice")
     String getFinalPrice(@RequestParam Double goodWeight, @RequestParam Integer goodType) {
         Double finalPrice = goodTypeService.getFinalPrice(goodWeight, goodType);
         return new ResultMap(GoodTypeEnum.GET_PRICE_SUCCESS,finalPrice).toJson();
     }
 
-    @GetMapping("/queryAllGoodType")
+    @PostMapping("/queryAllGoodType")
     String queryAllGoodType(){
         return new ResultMap(GoodTypeEnum.QUERY_SUCCESS, goodTypeService.queryAllGoodTye()).toJson();
     }

@@ -1,5 +1,6 @@
 package com.ytz.web.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ytz.web.domain.Employee;
@@ -19,57 +20,18 @@ import java.util.List;
  * @version: 1.0
  */
 public interface EmployeeService extends IService<Employee> {
-    /**
-     * @MethodName: login
-     * @Description: DONE : 实现员工登录
-     * @Author: 30671
-     * @date: 2022/7/4
-     * @param: employeeUsername  员工账号
-     * @param: employeePassword  员工密码
-     * @return: Employee
-     */
-    Employee login(String employeeUsername, String employeePassword);
+
 
     /**
-     * @MethodName: sign
-     * @Description: DONE : 实现员工注册
-     * @Author: 30671
-     * @date: 2022/7/4
-     * @param: employee   员工信息
-     * @return: com.ytz.web.model.EmployeeEnum
-     */
-    EmployeeEnum sign(Employee employee);
-
-    /**
-     * @MethodName: delivery
-     * @Description: DONE : 派送完成
-     * @Author: 30671
-     * @date: 2022/7/4
-     * @param: employeeUsername   员工账号
-     * @return: stationId 网点Id
-     */
-    Integer delivery(String employeeUsername);
-
-    /**
-     * @MethodName: resetPassword
-     * @Description: DONE : 重置员工密码，默认为123456
-     * @Author: Delmore
-     * @date: 2022/7/12
-     * @param: employeeIdList   员工Id
-     * @return: com.ytz.web.model.EmployeeEnum
-     **/
-    EmployeeEnum resetPassword(List<Integer> employeeIdList);
-
-    /**
-     * @MethodName: queryInEmployee
+     * @MethodName: queryActiveEmployee
      * @Description: DONE ： 显示在职员工信息（分页）
      * @Author: Delmore
      * @date: 2022/7/12
      * @param: current
      * @param: stationId
-     * @return: IPage 分页数据
+     * @return: IPage 在职员工的Vo
      **/
-    IPage queryInEmployee(Integer current, Integer stationId);
+    IPage queryActiveEmployeeVo(Integer current, Integer stationId);
 
     /**
      * @MethodName: queryInEmployee
@@ -77,66 +39,51 @@ public interface EmployeeService extends IService<Employee> {
      * @Author: 30671
      * @date: 2022/7/15
      * @param: stationId
-     * @return: java.util.List 在职员工的信息
+     * @return: List 在职员工的对象
      **/
-    List<Employee> queryInEmployee(Integer stationId);
+    List<Employee> queryActiveEmployee(Integer stationId);
 
     /**
-     * @MethodName: queryOutEmployee
-     * @Description: DONE : 显示离职员工信息（分页）
-     * @Author: Delmore
-     * @date: 2022/7/13
-     * @param: current
-     * @return: java.util.List
-     **/
-    IPage queryOutEmployee(Integer current, Integer stationId);
-
-    /**
-     * @MethodName: employeeUsernameIsExist
-     * @Description: DONE : 员工用户名存在
+     * @MethodName: queryPreResignationEmployeeVo
+     * @Description: DONE ： 查询预辞职的员工信息
      * @Author: 30671
-     * @date: 2022/7/11
-     * @param: employeeUsername  员工用户名
-     * @return: boolean
-     */
-    boolean employeeUsernameIsExist(String employeeUsername);
+     * @date: 2022/7/13
+     * @param: stationId
+     * @return: List 预辞职的员工信息
+     **/
+    IPage queryPreResignationEmployeeVo(Integer current, Integer stationId);
+
 
     /**
-     * @MethodName: submitResignation
-     * @Description: FIXME : 员工提交离职申请
-     * @Author: Delmore
-     * @date: 2022/7/14
-     * @return: com.ytz.web.model.EmployeeEnum
+     * @MethodName: resetPassword
+     * @Description: DONE ： 重置员工密码
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: employeeIdList 派送员的ListId
+     * @return: EmployeeEnum
      **/
-    EmployeeEnum submitResignation(String resignReason, String employeeUsername);
+    EmployeeEnum resetPassword(List<Integer> employeeIdList);
+
+
 
     /**
      * @MethodName: consentResignation
-     * @Description: FIXME : 同意离职申请
-     * @Author: Delmore
-     * @date: 2022/7/14
-     * @return: com.ytz.web.model.NetStationEnum
+     * @Description: DONE ： 审批离职申请
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: employeeIdList 派送员的ListId
+     * @return: EmployeeEnum
      **/
-    EmployeeEnum consentResignation(String employUsername);
+    EmployeeEnum consentResignation(List<Integer> employeeIdList, Integer permit) ;
 
 
     /**
-     * @MethodName: resetAmount
-     * @Description: DONE : 更新该月的处理订单数量
+     * @MethodName: addEmployee
+     * @Description: DONE ： 给网点添加一个员工
      * @Author: 30671
      * @date: 2022/7/16
-     * @param: employeeId  员工用Id
-     * @return: boolean
-     */
-    EmployeeEnum resetAmount(Integer employeeId);
-
-    /**
-     * @MethodName: queryNetStationEmployeeForDispatch
-     * @Description: DONE : 用于指派时查询 绑定派送员和订单的派送员信息
-     * @Author: 30671
-     * @date: 2022/7/17
-     * @param: stationId  网点Id
-     * @return: boolean
-     */
-    List queryNetStationEmployeeForDispatch(Integer stationId);
+     * @param: employee    添加的员工信息
+     * @return: EmployeeEnum
+     **/
+     EmployeeEnum addEmployee(Employee employee);
 }

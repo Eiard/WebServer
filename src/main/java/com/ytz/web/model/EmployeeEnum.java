@@ -62,6 +62,7 @@ public enum EmployeeEnum {
      */
     SUBMIT_RESIGNATION_SUCCESS,
     CONSENT_RESIGNATION_SUCCESS,
+    REFUSE_RESIGNATION_SUCCESS,
     IS_RESIGNED,
 
     /**

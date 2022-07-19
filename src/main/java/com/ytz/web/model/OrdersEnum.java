@@ -25,4 +25,9 @@ public enum OrdersEnum {
      * 查询成功
      */
     QUERY_SUCCESS,
+
+    /**
+     * Json格式错误
+     */
+    FORMAT_ERROR,
 }

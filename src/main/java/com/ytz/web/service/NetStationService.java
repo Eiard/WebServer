@@ -26,18 +26,40 @@ public interface NetStationService extends IService<NetStation> {
      * @date: 2022/7/4
      * @param: adminUsername  账号
      * @param: adminPassword  密码
-     * @return: com.ytz.web.model.NetStationServiceEnum
+     * @return: NetStation
      */
     NetStation login(String adminUsername, String adminPassword);
+
     /**
      * @MethodName: sign
      * @Description: DONE : 账号预注册
      * @Author: 30671
      * @date: 2022/7/4
      * @param: netStation  网点信息
-     * @return: com.ytz.web.model.NetStationServiceEnum
+     * @return: NetStationEnum
      */
     NetStationEnum sign(NetStation netStation);
+
+    /**
+     * @MethodName: queryStationVoById
+     * @Description: DONE : 网点管理员查询个人信息
+     * @Author: Delmore
+     * @date: 2022/7/8
+     * @param: stationId  网点Id
+     * @return: List
+     **/
+    List queryStationVoById(Integer stationId);
+
+    /**
+     * @MethodName: queryStationVoById
+     * @Description: DONE : 网点管理员查询个人对象
+     * @Author: Delmore
+     * @date: 2022/7/8
+     * @param: stationId  网点Id
+     * @return: NetStation
+     **/
+    NetStation queryStationById(Integer stationId);
+
 
     /**
      * @MethodName: updateStationInform
@@ -45,66 +67,20 @@ public interface NetStationService extends IService<NetStation> {
      * @Author: Delmore
      * @date: 2022/7/5
      * @param: netStation  网点信息
-     * @return: com.ytz.web.model.NetStationServiceEnum
+     * @return: NetStationEnum
      */
     NetStationEnum updateStationInform(NetStation netStation, String newPassword);
 
     /**
-     * @MethodName: fuzzyQueryByStationInfo
-     * @Description: DONE : 创建订单时使用(确定收货网点)
-     * @Author: 30671
-     * @date: 2022/7/5
-     * @param: stationInfo  既可以是网点名称 也可以是网店地址
-     * @return: List<NetStation>
-     */
-    List fuzzyQueryByStationInfo(String stationInfo);
-
-    /**
-     * @MethodName: queryStationInfoById
-     * @Description: DONE : 网点管理员查询所有信息
+     * @MethodName: fuzzyQueryByStationVo
+     * @Description: DONE : 查询网点信息(用于创建订单)
      * @Author: Delmore
-     * @date: 2022/7/8
-     * @param: adminUsername  网点账号
-     * @return: List
-     **/
-    List queryStationInfoById(Integer stationId);
-    /**
-     * @MethodName: delivery
-     * @Description: DONE : 通过网点Id 完成一个订单则增加数量
-     * @Author: 30671
-     * @date: 2022/7/11
-     * @param: stationId  网点Id
-     * @return: com.ytz.web.model.NetStationServiceEnum
-     */
-    NetStationEnum delivery(Integer stationId);
-
-    /**
-     * @MethodName: adminUsernameIsExist
-     * @Description: DONE : 用户名存在
-     * @Author: 30671
      * @date: 2022/7/5
-     * @param: adminUsername  用户名
-     * @return: boolean
+     * @param: netStation  网点信息
+     * @return: List
      */
-    boolean adminUsernameIsExist(String adminUsername);
+    List fuzzyQueryByStationVo(String stationInfo);
 
-    /**
-     * @MethodName: queryAllStationInform
-     * @Description: DONE : 查询所有网点信息(用于网点管理员发工资)
-     * @Author: 30671
-     * @date: 2022/7/15
-     * @return: List<NetStation>
-     */
-    List<NetStation> queryAllStationInform();
 
-    /**
-     * @MethodName: resetAmount
-     * @Description: DONE : 更新该月的处理订单数量
-     * @Author: 30671
-     * @date: 2022/7/16
-     * @param: employeeId  网点Id
-     * @return: NetStationEnum
-     */
-    NetStationEnum resetAmount(Integer stationId);
 }
 

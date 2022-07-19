@@ -34,44 +34,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
 
     @Override
-    public Employee login(String employeeUsername, String employeePassword) {
-        return lambdaQuery()
-                .select(Employee::getEmployeeId,
-                        Employee::getIsPass,
-                        Employee::getEmployeeType)
-                .eq(Employee::getEmployeeUsername, employeeUsername)
-                .eq(Employee::getEmployeePassword, employeePassword)
-                .one();
-    }
-
-    @Override
-    public EmployeeEnum sign(Employee employee) {
-        if (employeeUsernameIsExist(employee.getEmployeeUsername())) {
-            return EmployeeEnum.PRE_SIGN_USERNAME_USED;
-        }
-        if (commonService.phoneIsExist(employee.getEmployeePhone())) {
-            return EmployeeEnum.PRE_SIGN_PHONE_USED;
-        }
-        save(employee);
-        return EmployeeEnum.PRE_SIGN_SUCCESS;
-    }
-
-    @Override
-    public Integer delivery(String employeeUsername) {
-        Employee employee = lambdaQuery()
-                .select(Employee::getStationId,
-                        Employee::getOrderAmount)
-                .eq(Employee::getEmployeeUsername, employeeUsername)
-                .one();
-        lambdaUpdate()
-                .set(Employee::getOrderAmount, employee.getOrderAmount() + 1)
-                .eq(Employee::getEmployeeUsername, employeeUsername)
-                .update();
-        return employee.getStationId();
-    }
-
-    @Override
-    public IPage queryInEmployee(Integer current, Integer stationId) {
+    public IPage queryActiveEmployeeVo(Integer current, Integer stationId) {
         return pageMaps(PageUtils.getEmployeePage(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
@@ -84,17 +47,21 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                                 Employee::getCreateDate
                         )
                         .eq(Employee::getStationId, stationId)
-                        .eq(Employee::getIsPass, 1));
+                        .eq(Employee::getIsPass, 1)
+                        .or(netStationLambdaQueryWrapper -> {
+                            netStationLambdaQueryWrapper.eq(Employee::getIsPass, 2);
+                        }));
     }
 
     @Override
-    public List<Employee> queryInEmployee(Integer stationId) {
+    public List<Employee> queryActiveEmployee(Integer stationId) {
         return lambdaQuery()
                 .select(
                         Employee::getEmployeeId,
                         Employee::getEmployeeName,
                         Employee::getEmployeeType,
-                        Employee::getOrderAmount
+                        Employee::getOrderAmount,
+                        Employee::getEmployeePhone
                 )
                 .eq(Employee::getStationId, stationId)
                 .eq(Employee::getIsPass, 1)
@@ -104,9 +71,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                 .list();
     }
 
-
     @Override
-    public IPage queryOutEmployee(Integer current, Integer stationId) {
+    public IPage queryPreResignationEmployeeVo(Integer current, Integer stationId) {
         return pageMaps(PageUtils.getEmployeePage(current),
                 new LambdaQueryWrapper<Employee>()
                         .select(
@@ -121,7 +87,6 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                         .eq(Employee::getIsPass, 2));
     }
 
-
     @Override
     public EmployeeEnum resetPassword(List<Integer> employeeIdList) {
         for (Integer integer : employeeIdList) {
@@ -134,56 +99,44 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public boolean employeeUsernameIsExist(String employeeUsername) {
-        return lambdaQuery().eq(Employee::getEmployeeUsername, employeeUsername).exists();
+    public EmployeeEnum consentResignation(List<Integer> employeeIdList, Integer permit) {
+        if (permit == 0) {
+            // 不让离职 则将状态位搬回 并且清空离职原因
+            for (Integer integer : employeeIdList) {
+                lambdaUpdate()
+                        .set(Employee::getIsPass, 1)
+                        .set(Employee::getResignReason, "")
+                        .eq(Employee::getEmployeeId, integer)
+                        .update();
+            }
+            return EmployeeEnum.REFUSE_RESIGNATION_SUCCESS;
+        } else if (permit == 1) {
+            // 允许离职 则将状态位设置为离职 清空信息
+            for (Integer integer : employeeIdList) {
+                lambdaUpdate()
+                        .set(Employee::getEmployeeName, "")
+                        .set(Employee::getEmployeePhone, "")
+                        .set(Employee::getIsPass, 3)
+                        .set(Employee::getResignReason, "")
+                        .eq(Employee::getEmployeeId, integer)
+                        .update();
+            }
+            return EmployeeEnum.CONSENT_RESIGNATION_SUCCESS;
+        }
+
+        return EmployeeEnum.UNKNOWN_ERROR;
     }
 
     @Override
-    public EmployeeEnum submitResignation(String resignReason, String employeeUsername) {
-        lambdaUpdate()
-                .set(Employee::getResignReason, resignReason)
-                .set(Employee::getIsPass, 2)
-                .eq(Employee::getEmployeeUsername, employeeUsername)
-                .update();
-        return EmployeeEnum.SUBMIT_RESIGNATION_SUCCESS;
+    public EmployeeEnum addEmployee(Employee employee) {
+        if (lambdaQuery().eq(Employee::getEmployeeUsername, employee.getEmployeeUsername()).exists()) {
+            return EmployeeEnum.PRE_SIGN_USERNAME_USED;
+        }
+        if (commonService.phoneIsExist(employee.getEmployeePhone())) {
+            return EmployeeEnum.PRE_SIGN_PHONE_USED;
+        }
+        save(employee);
+        return EmployeeEnum.PRE_SIGN_SUCCESS;
     }
 
-    @Override
-    public EmployeeEnum consentResignation(String employUsername) {
-        lambdaUpdate()
-                .set(Employee::getEmployeeName, "")
-                .set(Employee::getEmployeePhone, "")
-                .set(Employee::getIsPass, 3)
-                .set(Employee::getResignReason, "")
-                .eq(Employee::getEmployeeUsername, employUsername)
-                .update();
-        return EmployeeEnum.CONSENT_RESIGNATION_SUCCESS;
-    }
-
-
-    public EmployeeEnum resetAmount(Integer employeeId) {
-        lambdaUpdate()
-                .set(Employee::getOrderAmount, 0)
-                .eq(Employee::getEmployeeId, employeeId)
-                .update();
-
-        return EmployeeEnum.RESET_AMOUNT_SUCCESS;
-    }
-
-    @Override
-    public List queryNetStationEmployeeForDispatch(Integer stationId) {
-
-        return listMaps(new LambdaQueryWrapper<Employee>()
-                .select(
-                        Employee::getEmployeeId,
-                        Employee::getEmployeeName,
-                        Employee::getEmployeePhone
-                )
-                .eq(Employee::getStationId, stationId)
-                .eq(Employee::getIsPass, 1)
-                .or(netStationLambdaQueryWrapper -> {
-                    netStationLambdaQueryWrapper.eq(Employee::getIsPass, 2);
-                }))
-                ;
-    }
 }

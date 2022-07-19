@@ -55,19 +55,18 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     }
 
     @Override
-    public OrdersEnum createOrder(Orders orderAmount) {
-        orderAmount.setOrderNumber(Long.toString(new IdGeneratorSnowflake().snowflakeId()));
-        save(orderAmount);
+    public OrdersEnum createOrder(Orders order) {
+        order.setOrderNumber(Long.toString(new IdGeneratorSnowflake().snowflakeId()));
+        save(order);
         return OrdersEnum.CREATE_ORDER_SUCCESS;
     }
 
     @Override
     public IPage queryOrderByOrderNumber(Integer stationId, Integer current, String orderNumber) {
-
         /**
          * 为空则全查询
          */
-        if (orderNumber.equals("")) {
+        if (orderNumber== null || orderNumber.equals("")) {
             return pageMaps(PageUtils.getOrdersPage(current),
                     new LambdaQueryWrapper<Orders>()
                             .eq(Orders::getStartPoint, stationId)

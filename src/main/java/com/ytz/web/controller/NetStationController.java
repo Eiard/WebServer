@@ -1,8 +1,13 @@
 package com.ytz.web.controller;
 
 import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.ytz.web.domain.Employee;
 import com.ytz.web.domain.NetStation;
+import com.ytz.web.domain.Orders;
+import com.ytz.web.model.EmployeeEnum;
 import com.ytz.web.model.NetStationEnum;
+import com.ytz.web.model.OrdersEnum;
 import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * -*- coding:utf-8 -*-
@@ -42,6 +48,16 @@ public class NetStationController {
     @Resource(name = "ordersServiceImpl")
     private OrdersService ordersService;
 
+    /**
+     * @MethodName: login
+     * @Description: DONE : 实现网点管理员登录
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: adminUsername  账号
+     * @param: adminPassword  密码
+     * @param: session        会议
+     * @return: String
+     */
     @PostMapping("/login")
     String login(@RequestParam String adminUsername,
                  @RequestParam String adminPassword,
@@ -68,6 +84,14 @@ public class NetStationController {
         return resultMap.toJson();
     }
 
+    /**
+     * @MethodName: sign
+     * @Description: DONE : 实现网点预注册
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: netStation  网点的对象Json
+     * @return: String
+     */
     @PostMapping("/sign")
     String sign(@RequestParam String netStation) {
         ResultMap resultMap = new ResultMap();
@@ -80,27 +104,279 @@ public class NetStationController {
         return resultMap.toJson();
     }
 
-    @PostMapping("/queryStationInform")
-    String queryStationInform(HttpServletRequest request) {
+    /**
+     * @MethodName: queryStationVoById
+     * @Description: DONE : 查询网点个人信息
+     * @Author: 30671
+     * @date: 2022/7/19
+     * @param: request  请求
+     * @return: String
+     */
+    @PostMapping("/queryStationVoById")
+    String queryStationVoById(HttpServletRequest request) {
 
         return new ResultMap(
                 NetStationEnum.QUERY_SUCCESS,
-                netStationService.queryStationInfoById(TokenUtil.getId(request)))
+                netStationService.queryStationVoById(TokenUtil.getId(request)))
                 .toJson();
     }
 
+    /**
+     * @MethodName: updateStationInform
+     * @Description: DONE : 更新网点个人信息
+     * @Author: 30671
+     * @date: 2022/7/5
+     * @param: netStation  网点信息的对象Json
+     * @param: newPassword 新密码
+     * @return: String
+     */
     @PostMapping("/updateStationInform")
-    String update(@RequestParam String netStation,
-                  @RequestParam String newPassword) {
+    String updateStationInform(@RequestParam String netStation,
+                               @RequestParam String newPassword) {
 
         ResultMap resultMap = new ResultMap();
         try {
-            resultMap.setEnum(netStationService.updateStationInform(JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
-            }), newPassword));
+            resultMap.setEnum
+                    (netStationService.updateStationInform(
+                            JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+                            }),
+                            newPassword));
         } catch (Exception e) {
             resultMap.setEnum(NetStationEnum.FORMAT_ERROR);
         }
         return resultMap.toJson();
     }
+
+
+    /**
+     * @MethodName: queryActiveEmployee
+     * @Description: DONE : 查询在职员工信息
+     * @Author: 30671
+     * @date: 2022/7/4
+     * @param: current  页数
+     * @param: request  请求
+     * @return: String
+     */
+    @PostMapping("/queryActiveEmployee")
+    String queryActiveEmployee(@RequestParam Integer current,
+                               HttpServletRequest request) {
+
+        IPage page = employeeService.queryActiveEmployeeVo(current, TokenUtil.getId(request));
+
+        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
+
+        resultMap.put("totalPage", page.getPages());
+        return resultMap.toJson();
+    }
+
+    /**
+     * @MethodName: queryPreResignationEmployeeVo
+     * @Description: DONE : 查询预离职的员工信息(已经提交离职申请的员工)
+     * @Author: 30671
+     * @date: 2022/7/6
+     * @param: current  页数
+     * @param: request  请求
+     * @return: String
+     */
+    @PostMapping("/queryPreResignationEmployeeVo")
+    String queryPreResignationEmployeeVo(@RequestParam Integer current,
+                                         HttpServletRequest request) {
+
+        IPage page = employeeService.queryPreResignationEmployeeVo(current, TokenUtil.getId(request));
+
+        ResultMap resultMap = new ResultMap(NetStationEnum.QUERY_SUCCESS, page.getRecords());
+
+        resultMap.put("totalPage", page.getPages());
+        return resultMap.toJson();
+    }
+
+    /**
+     * @MethodName: resetPassword
+     * @Description: DONE : 重置派送员密码
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: employeeIdList  派送员Id的List
+     * @return: String
+     */
+    @PostMapping("/resetPassword")
+    String resetPassword(@RequestParam String employeeIdList) {
+        return new ResultMap(employeeService.resetPassword(JsonUtils.jsonToList(employeeIdList, new TypeReference<List<Integer>>() {
+        }))).toJson();
+    }
+
+    /**
+     * @MethodName: consentResignation
+     * @Description: DONE : 审批是否同意派送员离职
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: employeeIdList  派送员Id的List
+     * @return: String
+     */
+    @PostMapping("/consentResignation")
+    String consentResignation(@RequestParam String employeeIdList, @RequestParam Integer permit) {
+        return new ResultMap(
+                employeeService.consentResignation(
+                        JsonUtils.jsonToList(employeeIdList, new TypeReference<List<Integer>>() {
+                        }),
+                        permit)).toJson();
+    }
+
+    /**
+     * @MethodName: addEmployee
+     * @Description: DONE : 网点管理员添加一个派送员
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: employee  派送员的信息
+     * @param: request   请求
+     * @return: String
+     */
+    @RequestMapping("/addEmployee")
+    String addEmployee(@RequestParam String employee,
+                       HttpServletRequest request) {
+        ResultMap resultMap = new ResultMap();
+
+        try {
+            Employee employeeObj = JsonUtils.jsonToObject(employee, new TypeReference<Employee>() {
+            });
+
+            employeeObj.setStationId(TokenUtil.getId(request));
+
+            resultMap.setEnum(employeeService.addEmployee(employeeObj));
+
+        } catch (Exception e) {
+            resultMap.setEnum(EmployeeEnum.FORMAT_ERROR);
+        }
+        return resultMap.toJson();
+    }
+
+    /**
+     * @MethodName: dispatch
+     * @Description: DONE : 将多个订单号绑定员工
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: orderNumber 订单号List的Json
+     * @param: employee 包含员工Id 姓名 手机号
+     * @return: String
+     */
+    @PostMapping("/dispatch")
+    String dispatch(@RequestParam String orderNumber, @RequestParam String employee) {
+        return new ResultMap(
+                ordersService.dispatch(
+                        JsonUtils.jsonToList(orderNumber, new TypeReference<List<String>>() {
+                        }),
+                        JsonUtils.jsonToObject(employee, new TypeReference<Employee>() {
+                        })
+                )).toJson();
+    }
+
+
+    /**
+     * @MethodName: fuzzyQueryByStationVo
+     * @Description: DONE : 模糊查询收件网点信息
+     * @Author: Delmore
+     * @date: 2022/7/13
+     * @param: stationInfo 模糊查询的字段
+     * @return: String
+     */
+    @PostMapping("/fuzzyQueryByStationVo")
+    String fuzzyQueryByStationVo(@RequestParam String stationInfo) {
+        return new ResultMap(NetStationEnum.QUERY_SUCCESS
+                , netStationService.fuzzyQueryByStationVo(stationInfo))
+                .toJson();
+    }
+
+    /**
+     * @MethodName: createOrder
+     * @Description: DONE : 创建一个订单
+     * @Author: Delmore
+     * @date: 2022/7/13
+     * @param: stationInfo 模糊查询的字段
+     * @param: orderJson 订单的Json
+     * @param: request   请求
+     * @return: String
+     */
+    @PostMapping("/createOrder")
+    String createOrder(@RequestParam String orderJson,
+                       HttpServletRequest request) {
+
+        ResultMap resultMap = new ResultMap();
+
+        Orders order;
+        try {
+
+            order = JsonUtils.jsonToObject(orderJson, new TypeReference<Orders>() {
+            });
+
+            NetStation netStation = netStationService.queryStationById(TokenUtil.getId(request));
+
+            order.setStartPoint(netStation.getStationId());
+            order.setStartAddress(netStation.getStationAddress());
+
+            resultMap.setEnum(ordersService.createOrder(order));
+
+        } catch (Exception e) {
+
+            resultMap.setEnum(OrdersEnum.FORMAT_ERROR);
+        }
+        return resultMap.toJson();
+    }
+
+    /**
+     * @MethodName: queryOrderByOrderNumber
+     * @Description: DONE : 查询订单Vo
+     * @Author: Delmore
+     * @date: 2022/7/13
+     * @param: current       页数
+     * @param: orderNumber   具体订单号或者为空
+     * @param: request       请求
+     * @return: String
+     */
+    @PostMapping("/queryOrderByOrderNumber")
+    String queryOrderByOrderNumber(@RequestParam Integer current,
+                                   @RequestParam String orderNumber,
+                                   HttpServletRequest request) {
+        ResultMap resultMap = new ResultMap(OrdersEnum.QUERY_SUCCESS);
+
+        IPage page = ordersService.queryOrderByOrderNumber(TokenUtil.getId(request), current, orderNumber);
+
+        resultMap.setData(page.getRecords());
+        resultMap.put("totalPage", page.getPages());
+        return resultMap.toJson();
+    }
+
+
+    /**
+     * @MethodName: queryActiveEmployeeDispatch
+     * @Description: DONE : 查询出在职员工信息(用于指派) (和发工资)
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: request       请求
+     * @return: String
+     */
+    @PostMapping("/queryActiveEmployeeDispatch")
+    String queryActiveEmployeeDispatch(HttpServletRequest request) {
+        return new ResultMap(OrdersEnum.QUERY_SUCCESS, employeeService.queryActiveEmployee(TokenUtil.getId(request))).toJson();
+    }
+
+
+    /**
+     * @MethodName: queryActiveEmployeeDispatch
+     * @Description: DONE : 查询需要指派的订单
+     * @Author: 30671
+     * @date: 2022/7/13
+     * @param: current       页数
+     * @param: request       请求
+     * @return: String
+     */
+    @PostMapping("/queryUnDispatchOrder")
+    String queryUnDispatchOrder(@RequestParam Integer current,
+                                HttpServletRequest request) {
+        ResultMap resultMap = new ResultMap();
+        IPage page = ordersService.queryUnDispatchOrder(TokenUtil.getId(request), current);
+        resultMap.setData(page.getRecords());
+        resultMap.put("totalPage", page.getPages());
+        return resultMap.toJson();
+    }
+
 
 }

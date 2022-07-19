@@ -43,7 +43,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
 
     @Override
     public NetStationEnum sign(NetStation netStation) {
-        if (adminUsernameIsExist(netStation.getAdminUsername())) {
+        if (lambdaQuery().eq(NetStation::getAdminUsername, netStation.getAdminUsername()).exists()) {
             return NetStationEnum.PRE_SIGN_USERNAME_USED;
         }
         if (commonService.phoneIsExist(netStation.getAdminPhone())) {
@@ -51,6 +51,29 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         }
         save(netStation);
         return NetStationEnum.PRE_SIGN_SUCCESS;
+    }
+
+    @Override
+    public List queryStationVoById(Integer stationId) {
+
+        return listMaps(
+                new LambdaQueryWrapper<NetStation>()
+                        .select(NetStation::getStationName,
+                                NetStation::getStationAddress,
+                                NetStation::getAdminName,
+                                NetStation::getAdminPhone,
+                                NetStation::getAdminUsername,
+                                NetStation::getAdminSex,
+                                NetStation::getOrderAmount)
+                        .eq(NetStation::getStationId, stationId)
+        );
+    }
+
+    @Override
+    public NetStation queryStationById(Integer stationId) {
+        return lambdaQuery()
+                .eq(NetStation::getStationId, stationId)
+                .one();
     }
 
     @Override
@@ -78,8 +101,9 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
         return NetStationEnum.CHANGE_SUCCESS;
     }
 
+
     @Override
-    public List fuzzyQueryByStationInfo(String stationInfo) {
+    public List fuzzyQueryByStationVo(String stationInfo) {
         return listMaps(
                 new LambdaQueryWrapper<NetStation>()
                         .select(NetStation::getStationId,
@@ -93,63 +117,5 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                         }));
     }
 
-    @Override
-    public List queryStationInfoById(Integer stationId) {
 
-        return listMaps(
-                new LambdaQueryWrapper<NetStation>()
-                        .select(NetStation::getStationName,
-                                NetStation::getStationAddress,
-                                NetStation::getAdminName,
-                                NetStation::getAdminPhone,
-                                NetStation::getAdminUsername,
-                                NetStation::getAdminSex,
-                                NetStation::getOrderAmount)
-                        .eq(NetStation::getStationId, stationId)
-        );
-    }
-
-
-    @Override
-    public NetStationEnum delivery(Integer stationId) {
-        NetStation netStation = getById(stationId);
-        // 总完成订单个数加1
-        lambdaUpdate()
-                .set(NetStation::getOrderAmount, netStation.getOrderAmount() + 1)
-                .eq(NetStation::getStationId, stationId)
-                .update();
-        return NetStationEnum.DELIVERY_SUCCESS;
-    }
-
-    @Override
-    public boolean adminUsernameIsExist(String adminUsername) {
-        return lambdaQuery().eq(NetStation::getAdminUsername, adminUsername).exists();
-    }
-
-
-
-    @Override
-    public List<NetStation> queryAllStationInform() {
-        return lambdaQuery()
-                .select(
-                        NetStation::getStationId,
-                        NetStation::getAdminName,
-                        NetStation::getAdminType,
-                        NetStation::getOrderAmount
-                )
-                .eq(NetStation::getIsPass, 1)
-                .or(netStationLambdaQueryWrapper -> {
-                    netStationLambdaQueryWrapper.eq(NetStation::getIsPass, 2);
-                })
-                .list();
-    }
-
-    public NetStationEnum resetAmount(Integer stationId) {
-        lambdaUpdate()
-                .set(NetStation::getOrderAmount, 0)
-                .eq(NetStation::getStationId, stationId)
-                .update();
-
-        return NetStationEnum.RESET_AMOUNT_SUCCESS;
-    }
 }

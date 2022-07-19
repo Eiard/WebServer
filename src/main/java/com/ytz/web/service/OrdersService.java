@@ -48,7 +48,7 @@ public interface OrdersService extends IService<Orders> {
      * @date: 2022/7/14
      * @return: com.ytz.web.model.OrdersEnum
      **/
-    OrdersEnum createOrder(Orders orderAmount);
+    OrdersEnum createOrder(Orders order);
 
     /**
      * @MethodName: queryOrderByOrderNumber
