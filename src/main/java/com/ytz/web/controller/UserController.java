@@ -16,6 +16,7 @@ import javax.annotation.Resource;
  * @date: 2022/7/17 13:36
  * @version: 1.0
  */
+@Deprecated
 @RestController
 @RequestMapping("/user")
 public class UserController {
