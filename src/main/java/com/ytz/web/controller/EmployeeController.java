@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @projectName: web
@@ -89,17 +90,26 @@ public class EmployeeController {
     @PostMapping("/delivery")
     String delivery(@RequestParam String orderNumber,
                     HttpServletRequest request) {
+        ResultMap resultMap = new ResultMap();
+        try {
+            List<String> orderNumbers = JsonUtils.jsonToList(orderNumber, new TypeReference<List<String>>() {
+            });
+            Integer id = TokenUtil.getId(request);
+            for (String orderNumb : orderNumbers) {
+                // 派送员送件数增加
+                Integer stationId = employeeService.delivery(id);
 
-        // 派送员送件数增加
-        Integer stationId = employeeService.delivery(TokenUtil.getId(request));
+                // 网点送件数增加
+                netStationService.delivery(stationId);
 
-        // 网点送件数增加
-        netStationService.delivery(stationId);
-
-        // 订单状态更改
-        ordersService.delivery(orderNumber);
-
-        return new ResultMap(StatusEnum.DELIVERY_SUCCESS).toJson();
+                // 订单状态更改
+                ordersService.delivery(orderNumb);
+            }
+            resultMap.setEnum(StatusEnum.DELIVERY_SUCCESS);
+        } catch (Exception e) {
+            resultMap.setEnum(StatusEnum.FORMAT_ERROR);
+        }
+        return resultMap.toJson();
     }
 
 
@@ -148,20 +158,24 @@ public class EmployeeController {
      * @return: java.lang.String
      **/
     @PostMapping("/updateEmployeeInform")
-    String updateEmployeeInform(@RequestParam String employee,
-                                @RequestParam String newPassword){
+    String updateEmployeeInform(@RequestParam String employeeJson,
+                                @RequestParam String newPassword,
+                                HttpServletRequest request) {
+
         ResultMap resultMap = new ResultMap();
         try {
+            Employee employee = JsonUtils.jsonToObject(employeeJson, new TypeReference<Employee>() {
+            });
+            employee.setEmployeeId(TokenUtil.getId(request));
             resultMap.setEnum
-                    (employeeService.updateEmployeeInform(
-                            JsonUtils.jsonToObject(employee, new TypeReference<Employee>() {
-                            }),
+                    (employeeService.updateEmployeeInform(employee,
                             newPassword));
         } catch (Exception e) {
             resultMap.setEnum(StatusEnum.FORMAT_ERROR);
         }
         return resultMap.toJson();
     }
+
     /**
      * @MethodName: queryEmployeeVoById
      * @Description: DONE ： 查询员工个人信息
@@ -171,7 +185,7 @@ public class EmployeeController {
      * @return: java.lang.String
      **/
     @PostMapping("/queryEmployeeVoById")
-    String queryEmployeeVoById(HttpServletRequest request){
+    String queryEmployeeVoById(HttpServletRequest request) {
         return new ResultMap(
                 StatusEnum.QUERY_SUCCESS,
                 employeeService.queryEmployeeVoById(TokenUtil.getId(request)))
@@ -181,7 +195,7 @@ public class EmployeeController {
 
     /**
      * @MethodName: queryOrderByEmployId
-     * @Description:  DONE : 查询员工信息
+     * @Description: DONE : 查询员工信息
      * @Author: Delmore
      * @date: 2022/7/19
      * @param: current 页数
@@ -190,12 +204,12 @@ public class EmployeeController {
      **/
     @PostMapping("/queryOrderByEmployId")
     String queryOrderByEmployId(@RequestParam Integer current,
-                                HttpServletRequest request){
+                                HttpServletRequest request) {
         ResultMap resultMap = new ResultMap();
-        IPage page = ordersService.queryOrderByEmployId(TokenUtil.getId(request),current);
+        IPage page = ordersService.queryOrderByEmployId(TokenUtil.getId(request), current);
+        resultMap.setEnum(StatusEnum.QUERY_SUCCESS);
         resultMap.setData(page.getRecords());
         resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
     }
-
 }

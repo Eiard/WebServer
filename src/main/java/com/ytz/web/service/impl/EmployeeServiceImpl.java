@@ -183,10 +183,12 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     @Override
     public StatusEnum updateEmployeeInform(Employee employee, String newPassword) {
         Employee emp = getById(employee.getEmployeeId());
+        System.out.println(emp.getEmployeePhone());
+        System.out.println(employee.getEmployeePhone());
         if (!(employee.getEmployeePassword().equals(emp.getEmployeePassword()))) {
             return StatusEnum.CHANCE_FAILED_PASSWORD_ERROR;
         }
-        if (commonService.phoneIsExist(emp.getEmployeePhone())) {
+        if (commonService.phoneIsExist(employee.getEmployeePhone())) {
             if (!(emp.getEmployeePhone().equals(employee.getEmployeePhone())))
                 return StatusEnum.CHANGE_FAILED_PHONE_USED;
         }

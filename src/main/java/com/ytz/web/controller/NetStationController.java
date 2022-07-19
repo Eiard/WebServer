@@ -136,14 +136,16 @@ public class NetStationController {
      */
     @PostMapping("/updateStationInform")
     String updateStationInform(@RequestParam String netStation,
-                               @RequestParam String newPassword) {
+                               @RequestParam String newPassword,
+                               HttpServletRequest request) {
 
         ResultMap resultMap = new ResultMap();
         try {
+            NetStation station = JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
+            });
+            station.setStationId(TokenUtil.getId(request));
             resultMap.setEnum
-                    (netStationService.updateStationInform(
-                            JsonUtils.jsonToObject(netStation, new TypeReference<NetStation>() {
-                            }),
+                    (netStationService.updateStationInform(station,
                             newPassword));
         } catch (Exception e) {
             resultMap.setEnum(StatusEnum.FORMAT_ERROR);

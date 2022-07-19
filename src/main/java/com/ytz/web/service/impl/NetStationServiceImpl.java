@@ -78,10 +78,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
 
     @Override
     public StatusEnum updateStationInform(NetStation netStation, String newPassword) {
-        NetStation station = lambdaQuery()
-                .select(NetStation::getAdminPassword, NetStation::getAdminPhone)
-                .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
-                .one();
+        NetStation station = getById(netStation.getStationId());
         if (!(netStation.getAdminPassword().equals(station.getAdminPassword()))) {
             return StatusEnum.CHANCE_FAILED_PASSWORD_ERROR;
         }
@@ -96,7 +93,7 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
                 .set(NetStation::getAdminPhone, netStation.getAdminPhone())
                 .set(NetStation::getAdminSex, netStation.getAdminSex())
                 .set(NetStation::getAdminPassword, newPassword)
-                .eq(NetStation::getAdminUsername, netStation.getAdminUsername())
+                .eq(NetStation::getStationId, netStation.getStationId())
                 .update();
         return StatusEnum.CHANGE_SUCCESS;
     }
