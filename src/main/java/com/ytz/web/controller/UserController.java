@@ -16,11 +16,14 @@ import javax.annotation.Resource;
  * @date: 2022/7/17 13:36
  * @version: 1.0
  */
+@Deprecated
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Resource
     private UserService userService;
+
+
     @PostMapping("/login")
     Boolean login(@RequestParam String username, @RequestParam String password){
         return userService.findByUsername(username).equals(password);
