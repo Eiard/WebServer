@@ -109,7 +109,5 @@ public interface NetStationService extends IService<NetStation> {
      * @return: com.ytz.web.model.NetStationEnum
      **/
     NetStationEnum delivery(Integer stationId);
-
-
 }
 

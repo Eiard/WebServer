@@ -378,7 +378,7 @@ public class NetStationController {
     @PostMapping("/queryUnDispatchOrder")
     String queryUnDispatchOrder(@RequestParam Integer current,
                                 HttpServletRequest request) {
-        ResultMap resultMap = new ResultMap();
+        ResultMap resultMap = new ResultMap(OrdersEnum.QUERY_SUCCESS);
         IPage page = ordersService.queryUnDispatchOrder(TokenUtil.getId(request), current);
         resultMap.setData(page.getRecords());
         resultMap.put("totalPage", page.getPages());
