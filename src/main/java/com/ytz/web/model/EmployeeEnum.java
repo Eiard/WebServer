@@ -24,7 +24,7 @@ public enum EmployeeEnum {
     LOGIN_SUCCESS,
     LOGIN_FAILED,
     LOGIN_UNVERIFIED,
-
+    LOGIN_UN_EMPLOYEE,
 
     /**
      * 注册员工(预注册后需要让系统管理员审核) 审核完后激活

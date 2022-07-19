@@ -14,7 +14,10 @@ import com.ytz.web.service.OrdersService;
 import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import com.ytz.web.utils.TokenUtil;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +70,8 @@ public class NetStationController {
             resultMap.setEnum(NetStationEnum.LOGIN_FAILED);
         } else if (netStation.getIsPass() == 0) {
             resultMap.setEnum(NetStationEnum.LOGIN_UNVERIFIED);
+        } else if (netStation.getIsPass() == 3) {
+            resultMap.setEnum(NetStationEnum.LOGIN_UN_EMPLOYEE);
         } else {
             resultMap.setEnum(NetStationEnum.LOGIN_SUCCESS);
 
@@ -356,7 +361,6 @@ public class NetStationController {
     }
 
 
-
     /**
      * @MethodName: queryActiveEmployeeDispatch
      * @Description: DONE : 查询需要指派的订单
@@ -366,7 +370,7 @@ public class NetStationController {
      * @param: request       请求
      * @return: String
      */
-    @PostMapping ("/queryUnDispatchOrder")
+    @PostMapping("/queryUnDispatchOrder")
     String queryUnDispatchOrder(@RequestParam Integer current,
                                 HttpServletRequest request) {
         ResultMap resultMap = new ResultMap();
@@ -375,9 +379,6 @@ public class NetStationController {
         resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
     }
-
-
-
 
 
 }
