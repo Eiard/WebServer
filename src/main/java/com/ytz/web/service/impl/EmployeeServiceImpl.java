@@ -68,11 +68,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                                 Employee::getOrderAmount,
                                 Employee::getCreateDate
                         )
-                        .eq(Employee::getStationId, stationId)
-                        .eq(Employee::getIsPass, 1)
-                        .or(netStationLambdaQueryWrapper -> {
-                            netStationLambdaQueryWrapper.eq(Employee::getIsPass, 2);
-                        }));
+                        .and(netStationLambdaQueryWrapper -> {
+                            netStationLambdaQueryWrapper.eq(Employee::getIsPass, 1)
+                                    .or(o1 -> {
+                                        o1.eq(Employee::getIsPass, 2);
+                                    });
+                        })
+                        .eq(Employee::getStationId, stationId));
     }
 
     @Override
@@ -85,11 +87,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
                         Employee::getOrderAmount,
                         Employee::getEmployeePhone
                 )
-                .eq(Employee::getStationId, stationId)
-                .eq(Employee::getIsPass, 1)
-                .or(netStationLambdaQueryWrapper -> {
-                    netStationLambdaQueryWrapper.eq(Employee::getIsPass, 2);
+                .and(netStationLambdaQueryWrapper -> {
+                    netStationLambdaQueryWrapper.eq(Employee::getIsPass, 1)
+                            .or(o1 -> {
+                                o1.eq(Employee::getIsPass, 2);
+                            });
                 })
+                .eq(Employee::getStationId, stationId)
                 .list();
     }
 

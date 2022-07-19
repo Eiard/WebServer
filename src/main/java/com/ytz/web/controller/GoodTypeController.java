@@ -35,4 +35,5 @@ public class GoodTypeController {
     String queryAllGoodType(){
         return new ResultMap(StatusEnum.QUERY_SUCCESS, goodTypeService.queryAllGoodTye()).toJson();
     }
+
 }
