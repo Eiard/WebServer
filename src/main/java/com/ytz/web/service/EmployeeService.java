@@ -23,6 +23,27 @@ public interface EmployeeService extends IService<Employee> {
 
 
     /**
+     * @MethodName: login
+     * @Description: DONE : 实现员工登录
+     * @Author: 30671
+     * @date: 2022/7/4
+     * @param: employeeUsername  员工账号
+     * @param: employeePassword  员工密码
+     * @return: com.ytz.web.model.EmployeeEnum
+     */
+    Employee login(String employeeUsername, String employeePassword);
+
+    /**
+     * @MethodName: delivery
+     * @Description: DONE ：订单完成员工订单数加1
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: employeeId
+     * @return: java.lang.Integer  网点Id
+     **/
+    Integer delivery(Integer employeeId);
+
+    /**
      * @MethodName: queryActiveEmployee
      * @Description: DONE ： 显示在职员工信息（分页）
      * @Author: Delmore
@@ -34,7 +55,7 @@ public interface EmployeeService extends IService<Employee> {
     IPage queryActiveEmployeeVo(Integer current, Integer stationId);
 
     /**
-     * @MethodName: queryInEmployee
+     * @MethodName: queryActiveEmployee
      * @Description: DONE ： 显示在职员工信息(全查) 用于发工资 (也可用于指派派送员快件)
      * @Author: 30671
      * @date: 2022/7/15
@@ -86,4 +107,26 @@ public interface EmployeeService extends IService<Employee> {
      * @return: EmployeeEnum
      **/
      EmployeeEnum addEmployee(Employee employee);
+
+    /**
+     * @MethodName: resetAmount
+     * @Description: DONE ： 发完工资后重置订单数
+     * @Author: 30671
+     * @date: 2022/7/16
+     * @param: employeeId    员工Id
+     * @return: EmployeeEnum
+     **/
+    EmployeeEnum resetAmount(Integer employeeId);
+
+    /**
+     * @MethodName: submitResignation
+     * @Description: DONE : 员工提交离职申请
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: resignReason 离职缘由
+     * @param: employeeId 员工ID
+     * @return: com.ytz.web.model.EmployeeEnum
+     **/
+    EmployeeEnum submitResignation(String resignReason, Integer employeeId);
+
 }

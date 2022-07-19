@@ -118,4 +118,36 @@ public class NetStationServiceImpl extends ServiceImpl<NetStationMapper, NetStat
     }
 
 
+
+
+    @Override
+    public List<NetStation> queryAllStation() {
+        return lambdaQuery().select().list();
+    }
+
+
+    @Override
+    public NetStationEnum resetAmount(Integer stationId) {
+        lambdaUpdate()
+                .set(NetStation::getOrderAmount, 0)
+                .eq(NetStation::getStationId, stationId)
+                .update();
+
+        return NetStationEnum.RESET_AMOUNT_SUCCESS;
+    }
+
+
+    @Override
+    public NetStationEnum delivery(Integer stationId) {
+        NetStation netStation = getById(stationId);
+        // 总完成订单个数加1
+        lambdaUpdate()
+                .set(NetStation::getOrderAmount, netStation.getOrderAmount() + 1)
+                .eq(NetStation::getStationId, stationId)
+                .update();
+        return NetStationEnum.DELIVERY_SUCCESS;
+    }
+
+
+
 }

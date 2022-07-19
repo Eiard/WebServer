@@ -34,6 +34,28 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
 
 
     @Override
+    public Employee login(String employeeUsername, String employeePassword) {
+        return lambdaQuery()
+                .eq(Employee::getEmployeeUsername, employeeUsername)
+                .eq(Employee::getEmployeePassword, employeePassword)
+                .one();
+
+    }
+
+    @Override
+    public Integer delivery(Integer employeeId) {
+        Employee employee = getById(employeeId);
+
+        lambdaUpdate()
+                .set(Employee::getOrderAmount, employee.getOrderAmount() + 1)
+                .eq(Employee::getEmployeeId, employeeId)
+                .update();
+
+        return employee.getStationId();
+    }
+
+
+    @Override
     public IPage queryActiveEmployeeVo(Integer current, Integer stationId) {
         return pageMaps(PageUtils.getEmployeePage(current),
                 new LambdaQueryWrapper<Employee>()
@@ -138,5 +160,25 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         save(employee);
         return EmployeeEnum.PRE_SIGN_SUCCESS;
     }
+
+    @Override
+    public EmployeeEnum resetAmount(Integer employeeId) {
+        lambdaUpdate()
+                .set(Employee::getOrderAmount, 0)
+                .eq(Employee::getEmployeeId, employeeId)
+                .update();
+        return EmployeeEnum.RESET_AMOUNT_SUCCESS;
+    }
+
+    @Override
+    public EmployeeEnum submitResignation(String resignReason, Integer employeeId) {
+        lambdaUpdate()
+                .set(Employee::getResignReason, resignReason)
+                .set(Employee::getIsPass, 2)
+                .eq(Employee::getEmployeeId, employeeId)
+                .update();
+        return EmployeeEnum.SUBMIT_RESIGNATION_SUCCESS;
+    }
+
 
 }

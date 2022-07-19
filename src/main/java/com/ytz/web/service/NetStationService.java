@@ -60,7 +60,6 @@ public interface NetStationService extends IService<NetStation> {
      **/
     NetStation queryStationById(Integer stationId);
 
-
     /**
      * @MethodName: updateStationInform
      * @Description: DONE : 账号更新信息
@@ -80,6 +79,36 @@ public interface NetStationService extends IService<NetStation> {
      * @return: List
      */
     List fuzzyQueryByStationVo(String stationInfo);
+
+    /**
+     * @MethodName: queryAllStationInform
+     * @Description: DONE : 查询所有网点
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @return: java.util.List<com.ytz.web.domain.NetStation> 所有网点的list集合
+     **/
+    List<NetStation> queryAllStation();
+
+    /**
+     * @MethodName: resetAmount
+     * @Description: DONE ：重置网点订单数
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: stationId
+     * @return: com.ytz.web.model.NetStationEnum
+     **/
+    NetStationEnum resetAmount(Integer stationId);
+
+
+    /**
+     * @MethodName: delivery
+     * @Description: DONE ：订单完成，网点订单数量加1
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: stationId 网点ID
+     * @return: com.ytz.web.model.NetStationEnum
+     **/
+    NetStationEnum delivery(Integer stationId);
 
 
 }

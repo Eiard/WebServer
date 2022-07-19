@@ -27,6 +27,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     public User findByUsername(String username) {
        return lambdaQuery().select().eq(User::getUserUsername,username).one();
     }
+
 }
 
 
