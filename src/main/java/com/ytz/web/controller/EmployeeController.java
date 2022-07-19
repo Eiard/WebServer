@@ -1,5 +1,6 @@
 package com.ytz.web.controller;
 
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ytz.web.domain.Employee;
 import com.ytz.web.model.StatusEnum;
@@ -7,6 +8,7 @@ import com.ytz.web.service.EmployeeService;
 import com.ytz.web.service.FinanceService;
 import com.ytz.web.service.NetStationService;
 import com.ytz.web.service.OrdersService;
+import com.ytz.web.utils.JsonUtils;
 import com.ytz.web.utils.ResultMap;
 import com.ytz.web.utils.TokenUtil;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -133,6 +135,64 @@ public class EmployeeController {
         resultMap.setData(page.getRecords());
         resultMap.put("totalPage", page.getPages());
         resultMap.setEnum(StatusEnum.QUERY_SUCCESS);
+        return resultMap.toJson();
+    }
+
+    /**
+     * @MethodName: updateEmployeeInform
+     * @Description: DONE ：修改个人信息
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: employee 员工信息
+     * @param: newPassword 新密码
+     * @return: java.lang.String
+     **/
+    @PostMapping("/updateEmployeeInform")
+    String updateEmployeeInform(@RequestParam String employee,
+                                @RequestParam String newPassword){
+        ResultMap resultMap = new ResultMap();
+        try {
+            resultMap.setEnum
+                    (employeeService.updateEmployeeInform(
+                            JsonUtils.jsonToObject(employee, new TypeReference<Employee>() {
+                            }),
+                            newPassword));
+        } catch (Exception e) {
+            resultMap.setEnum(StatusEnum.FORMAT_ERROR);
+        }
+        return resultMap.toJson();
+    }
+    /**
+     * @MethodName: queryEmployeeVoById
+     * @Description: DONE ： 查询员工个人信息
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: request 请求
+     * @return: java.lang.String
+     **/
+    @PostMapping("/queryEmployeeVoById")
+    String queryEmployeeVoById(HttpServletRequest request){
+        return new ResultMap(
+                StatusEnum.QUERY_SUCCESS,
+                employeeService.queryEmployeeVoById(TokenUtil.getId(request)))
+                .toJson();
+    }
+    /**
+     * @MethodName: queryOrderByEmployId
+     * @Description:  DONE : 查询员工信息
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: current 页数
+     * @param: request 请求
+     * @return: java.lang.String
+     **/
+    @PostMapping("/queryOrderByEmployId")
+    String queryOrderByEmployId(@RequestParam Integer current,
+                                HttpServletRequest request){
+        ResultMap resultMap = new ResultMap();
+        IPage page = ordersService.queryOrderByEmployId(TokenUtil.getId(request),current);
+        resultMap.setData(page.getRecords());
+        resultMap.put("totalPage", page.getPages());
         return resultMap.toJson();
     }
 

@@ -180,5 +180,38 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return StatusEnum.SUBMIT_RESIGNATION_SUCCESS;
     }
 
+    @Override
+    public StatusEnum updateEmployeeInform(Employee employee, String newPassword) {
+        Employee emp = getById(employee.getEmployeeId());
+        if (!(employee.getEmployeePassword().equals(emp.getEmployeePassword()))) {
+            return StatusEnum.CHANCE_FAILED_PASSWORD_ERROR;
+        }
+        if (commonService.phoneIsExist(emp.getEmployeePhone())) {
+            if (!(emp.getEmployeePhone().equals(employee.getEmployeePhone())))
+                return StatusEnum.CHANGE_FAILED_PHONE_USED;
+        }
+        lambdaUpdate()
+                .set(Employee::getEmployeeName, employee.getEmployeeName())
+                .set(Employee::getEmployeeSex, employee.getEmployeeSex())
+                .set(Employee::getEmployeePassword, newPassword)
+                .set(Employee::getEmployeePhone, employee.getEmployeePhone())
+                .eq(Employee::getEmployeeId, employee.getEmployeeId())
+                .update();
+        return StatusEnum.CHANGE_SUCCESS;
+    }
+
+    @Override
+    public List queryEmployeeVoById(Integer employeeId) {
+        return listMaps(
+                new LambdaQueryWrapper<Employee>()
+                        .select(Employee::getEmployeeId,
+                                Employee::getEmployeeName,
+                                Employee::getEmployeeSex,
+                                Employee::getEmployeeUsername,
+                                Employee::getEmployeePhone,
+                                Employee::getStationId)
+                        .eq(Employee::getEmployeeId, employeeId)
+        );
+    }
 
 }

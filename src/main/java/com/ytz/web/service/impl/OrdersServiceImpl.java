@@ -110,4 +110,18 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders>
     }
 
 
+    @Override
+    public IPage queryOrderByEmployId(Integer employeeId,Integer current){
+        return pageMaps(PageUtils.getOrdersPage(current),
+                new LambdaQueryWrapper<Orders>()
+                        .select(Orders::getOrderNumber,
+                                Orders::getRecipient,
+                                Orders::getRecipientPhone,
+                                Orders::getRecipientAddress,
+                                Orders::getOrderStatus
+                        )
+                        .eq(Orders::getSenderId,employeeId));
+    }
+
+
 }

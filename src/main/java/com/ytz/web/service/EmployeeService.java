@@ -127,4 +127,25 @@ public interface EmployeeService extends IService<Employee> {
      **/
     StatusEnum submitResignation(String resignReason, Integer employeeId);
 
+    /**
+     * @MethodName: updateEmployeeInform
+     * @Description: DONE : 修改个人信息
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: employee 员工信息
+     * @param: newPassword 新密码
+     * @return: com.ytz.web.model.NetStationEnum
+     **/
+    StatusEnum updateEmployeeInform(Employee employee, String newPassword);
+
+    /**
+     * @MethodName: queryEmployeeVoById
+     * @Description: DONE : 查询员工信息
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: employeeId 员工Id
+     * @return: java.util.List
+     **/
+    List queryEmployeeVoById(Integer employeeId);
+
 }

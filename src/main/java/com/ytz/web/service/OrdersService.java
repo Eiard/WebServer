@@ -70,4 +70,16 @@ public interface OrdersService extends IService<Orders> {
      * @return: IPage
      */
     IPage queryUnDispatchOrder(Integer stationId,Integer current);
+
+
+    /**
+     * @MethodName: queryOrderByEmployId
+     * @Description: DONE : 查询需要派送的订单
+     * @Author: Delmore
+     * @date: 2022/7/19
+     * @param: employeeId 员工Id
+     * @return: com.baomidou.mybatisplus.core.metadata.IPage
+     **/
+    IPage queryOrderByEmployId(Integer employeeId,Integer current);
+
 }
