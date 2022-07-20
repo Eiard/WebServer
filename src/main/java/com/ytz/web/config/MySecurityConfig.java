@@ -44,16 +44,25 @@ public class MySecurityConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         List<String> commonInclude = new ArrayList<>();
-        commonInclude.add("/public/**/*.html");
-        commonInclude.add("/user/*");
-        commonInclude.add("/employee/*");
-        commonInclude.add("/netStation/*");
-        commonInclude.add("/orders/*");
+        commonInclude.add("/**");
 
         List<String> commonExclude = new ArrayList<>();
+        // 静态资源
+        commonExclude.add("/css/**");
+        commonExclude.add("/fonts/**");
+        commonExclude.add("/image/**");
+        commonExclude.add("/js/**");
+        commonExclude.add("/layout/**");
+        commonExclude.add("/layui/**");
+        // 页面
+        commonExclude.add("/login.html");
+        // URL
         commonExclude.add("/netStation/login");
         commonExclude.add("/netStation/sign");
         commonExclude.add("/employee/login");
+        commonExclude.add("/finance/**");
+        commonExclude.add("/goodType/**");
+
         /**
          * @Description: DONE : 没有登录的页面拦截
          **/
@@ -62,12 +71,15 @@ public class MySecurityConfig implements WebMvcConfigurer {
                 .excludePathPatterns(commonExclude);
 
 
-        List<String> netStationInclude = new ArrayList<>();
-        netStationInclude.add("/public/netStation/*.html");
 
+        List<String> netStationInclude = new ArrayList<>();
+        netStationInclude.add("/public/netStation/**");
+        netStationInclude.add("/netStation/**");
 
         List<String> netStationExclude = new ArrayList<>();
-
+        netStationExclude.add("/netStation/login");
+        netStationExclude.add("/netStation/sign");
+        netStationExclude.add("/employee/login");
 
         /**
          * @Description: DONE : 登陆完成后 判断token是否是网点管理员 让他局限在网点管理员的操作
@@ -78,12 +90,21 @@ public class MySecurityConfig implements WebMvcConfigurer {
                 .excludePathPatterns(netStationExclude);
 
 
+        List<String> employeeInclude = new ArrayList<>();
+        employeeInclude.add("/public/employee/*.html");
+        employeeInclude.add("/employee/**");
+
+        List<String> employeeExclude = new ArrayList<>();
+        employeeExclude.add("/netStation/login");
+        employeeExclude.add("/netStation/sign");
+        employeeExclude.add("/employee/login");
+
         /**
          * @Description: DONE : 判断token是否是网点管理员 让他局限在网点管理员的操作
          **/
         registry.addInterceptor(employeeInterceptor)
-                .addPathPatterns()
-                .excludePathPatterns();
+                .addPathPatterns(employeeInclude)
+                .excludePathPatterns(employeeExclude);
     }
 
     @Override
